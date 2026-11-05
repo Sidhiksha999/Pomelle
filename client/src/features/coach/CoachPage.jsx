@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useCurrentTheme } from '../../components/hooks/useCurrentTheme';
 import { useHashParam } from '../../components/hooks/useHashRoute';
 import { checkHealth } from './api';
+import Icon from '../../components/Icon';
 import CoachNotice from './CoachNotice';
 import MindMapPanel from './mindmap/MindMapPanel';
 import FlashcardsPanel from './flashcards/FlashcardsPanel';
@@ -26,9 +27,20 @@ export default function CoachPage() {
     if (param === 'cards' || param === 'map') setTab(param);
   }, [param]);
   const [health, setHealth] = useState(null); // null while checking
+  const [waking, setWaking] = useState(false); // the first check failed, still trying
 
   const refreshHealth = useCallback(() => {
-    checkHealth().then(setHealth);
+    let cancelled = false; // stop updating if the page is left mid-check
+    setHealth(null);
+    setWaking(false);
+    checkHealth({ onWaiting: () => !cancelled && setWaking(true) }).then((result) => {
+      if (cancelled) return;
+      setHealth(result);
+      setWaking(false);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(refreshHealth, [refreshHealth]);
@@ -48,6 +60,12 @@ export default function CoachPage() {
         <p className="coach-hero__intro">{copy.intro}</p>
       </header>
 
+      {waking && (
+        <p className="coach-waking" role="status">
+          <Icon name="refresh" />
+          Waking up the coach’s server… on the free plan this can take up to a minute.
+        </p>
+      )}
       {health && (!health.reachable || !health.hasKey) && <CoachNotice health={health} onRecheck={refreshHealth} />}
 
       <div className="coach-tabs" role="tablist" aria-label="Coach tools">

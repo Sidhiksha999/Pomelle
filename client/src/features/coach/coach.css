@@ -1071,3 +1071,25 @@ code {
 [data-theme='minimalist'] .coach-notice {
   border-left: 1px solid var(--accent);
 }
+
+/* Shown while the health check is retrying (the free server waking up) */
+.coach-waking {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 640px;
+  color: var(--ink-muted);
+}
+
+.coach-waking svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  animation: coach-spin 1.6s linear infinite;
+}
+
+@keyframes coach-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

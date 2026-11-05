@@ -1,5 +1,6 @@
 import { useCurrentTheme } from '../../components/hooks/useCurrentTheme';
 import Icon from '../../components/Icon';
+import { IS_LOCAL_SERVER } from './api';
 
 /**
  * Shown when the AI isn't available: either the server isn't running, or it
@@ -12,7 +13,7 @@ export default function CoachNotice({ health, onRecheck }) {
   return (
     <aside className="card coach-notice" role="status">
       <p className="coach-notice__lead">{offline ? voice.coach.offline : voice.coach.needsKey}</p>
-      {offline ? (
+      {offline && IS_LOCAL_SERVER && (
         <ol className="coach-notice__steps">
           <li>
             Open a second terminal in the <code>pomelle/server</code> folder.
@@ -21,7 +22,14 @@ export default function CoachNotice({ health, onRecheck }) {
             Run <code>npm install</code> (first time only), then <code>npm run dev</code>.
           </li>
         </ol>
-      ) : (
+      )}
+      {offline && !IS_LOCAL_SERVER && (
+        <ol className="coach-notice__steps">
+          <li>The server may be restarting or still waking up. Wait a minute, then press Check again.</li>
+          <li>Everything else in Pomelle keeps working in the meantime, and your maps and decks are saved.</li>
+        </ol>
+      )}
+      {!offline && (
         <ol className="coach-notice__steps">
           <li>
             Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">aistudio.google.com/apikey</a>.

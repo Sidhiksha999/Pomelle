@@ -82,13 +82,39 @@ export async function postCoach(path, body) {
   return data;
 }
 
-/** { reachable, hasKey } — whether the server is running and has a Gemini key. */
-export async function checkHealth() {
+/** Is the API on this computer (local development) rather than on the web? */
+export const IS_LOCAL_SERVER = /\/\/(localhost|127\.0\.0\.1)(:|\/|$)/.test(API_URL);
+
+const HEALTH_PATIENCE_MS = 70000; // a sleeping free server can take about a minute to wake
+const HEALTH_RETRY_MS = 5000;
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** One look at /api/health. Returns { reachable, hasKey }, or null if it didn't answer properly. */
+async function pingHealth() {
   try {
-    const response = await fetch(`${API_URL}/api/health`);
+    const response = await fetch(`${API_URL}/api/health`, { cache: 'no-store' });
+    if (!response.ok) return null; // e.g. the host's "starting up" page
     const data = await response.json();
-    return { reachable: Boolean(data?.ok), hasKey: Boolean(data?.hasKey) };
+    return data?.ok ? { reachable: true, hasKey: Boolean(data.hasKey) } : null;
   } catch {
-    return { reachable: false, hasKey: false };
+    return null;
+  }
+}
+
+/**
+ * { reachable, hasKey }: whether the server is running and has a Gemini key.
+ * Keeps trying for about a minute, because a server that is waking up or
+ * restarting doesn't answer straight away. `onWaiting` is called after the
+ * first failed try, so the page can say "waking up…".
+ */
+export async function checkHealth({ onWaiting } = {}) {
+  const giveUpAt = Date.now() + HEALTH_PATIENCE_MS;
+  for (let attempt = 1; ; attempt += 1) {
+    const result = await pingHealth();
+    if (result) return result;
+    if (Date.now() + HEALTH_RETRY_MS > giveUpAt) return { reachable: false, hasKey: false };
+    if (attempt === 1) onWaiting?.();
+    await wait(HEALTH_RETRY_MS);
   }
 }
