@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import Header from './components/Header';
 import SettingsDialog from './components/SettingsDialog';
 import CelebrationLayer from './components/CelebrationLayer';
+import ErrorBoundary from './components/ErrorBoundary';
 import TimerPage from './features/timer/TimerPage';
 import StatsPage from './features/stats/StatsPage';
 import CoachPage from './features/coach/CoachPage';
+import MethodsPage from './features/methods/MethodsPage';
 import { useCurrentTheme } from './components/hooks/useCurrentTheme';
 import { useHashRoute } from './components/hooks/useHashRoute';
 import { useThemeEffects } from './themes/useThemeEffects';
@@ -14,6 +16,7 @@ import MusicDock from './features/music/MusicDock';
 
 const PAGES = {
   timer: TimerPage,
+  methods: MethodsPage,
   coach: CoachPage,
   stats: StatsPage,
 };
@@ -58,7 +61,9 @@ export default function App() {
       <div className="app-shell">
         <Header route={route} onOpenSettings={() => setSettingsOpen(true)} />
         <main id="main" ref={mainRef} tabIndex={-1} className="app-main">
-          <Page />
+          <ErrorBoundary resetKey={route}>
+            <Page />
+          </ErrorBoundary>
         </main>
       </div>
       {/* The music player lives outside the pages so it never stops on navigation. */}

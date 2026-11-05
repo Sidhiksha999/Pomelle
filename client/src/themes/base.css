@@ -179,6 +179,15 @@ body::before {
   outline: none;
 }
 
+/* Shown by ErrorBoundary when a page crashes */
+.page-error {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  max-width: 560px;
+  margin-top: 40px;
+}
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;

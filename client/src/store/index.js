@@ -6,6 +6,7 @@ import statsReducer, { statsInitialState } from './statsSlice';
 import coachReducer, { coachInitialState } from './coachSlice';
 import flashcardsReducer, { flashcardsInitialState } from './flashcardsSlice';
 import musicReducer, { musicInitialState } from './musicSlice';
+import methodsReducer, { methodsInitialState } from './methodsSlice';
 import { loadState, saveState, mergeSaved } from './persist';
 
 // Load whatever was saved last time and merge it over the defaults.
@@ -19,6 +20,7 @@ const preloadedState = {
   coach: mergeSaved(coachInitialState, saved?.coach),
   flashcards: mergeSaved(flashcardsInitialState, saved?.flashcards),
   music: mergeSaved(musicInitialState, saved?.music),
+  methods: mergeSaved(methodsInitialState, saved?.methods),
 };
 
 export const store = configureStore({
@@ -30,6 +32,7 @@ export const store = configureStore({
     coach: coachReducer,
     flashcards: flashcardsReducer,
     music: musicReducer,
+    methods: methodsReducer,
   },
   preloadedState,
 });
@@ -54,6 +57,7 @@ function snapshot() {
       presets: state.music.presets,
       fadeOnBreaks: state.music.fadeOnBreaks,
     },
+    methods: { ...state.methods, feynmanStatus: 'idle', feynmanError: null },
   };
 }
 

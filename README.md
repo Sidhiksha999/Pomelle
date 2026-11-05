@@ -2,7 +2,7 @@
 
 A Pomodoro study companion with five little worlds to study in: **Jolly**, **Makeup**, **Cat**, **Aesthetic** and **Minimalist**.
 
-> **Build status:** Stages 1–4 of 6 are done: the theme system, the timer, tasks, stats, the AI coach and music. The study-methods library and the final polish come next.
+> **Build status:** Stages 1–5 of 6 are done: the theme system, the timer, tasks, stats, the AI coach, music and the study-methods library. Final polish and onboarding come next.
 
 ## Features so far
 
@@ -19,6 +19,19 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Spotify**: paste a playlist, album or track link. Full songs play when you're logged in to Spotify in the same browser; otherwise Spotify plays 30-second previews.
   - **Ambient mixer**: rain, thunder, forest, ocean, café, fireplace, wind, typing, white and brown noise, each with its own volume. Includes ready-made mixes ("Rainy library"…), your own saved mixes and a sleep timer.
   - **Quieter during breaks** (on by default): sounds and YouTube drop to 30% while a break runs; Spotify pauses and resumes afterwards.
+- **Study-methods library** (the *Methods* link): 13 methods (Pomodoro, 52/17, Ultradian, Flowtime, Kaizen, Shu-Ha-Ri, Feynman, Active recall, Cornell notes, SQ3R, Blurting, Time-blocking, Eisenhower matrix), each with its origin, steps, what it's best for and an intensity meter. Press *Study with this method* for a guided session:
+  - **Pomodoro, 52/17, Ultradian**: set the main timer to that rhythm and start.
+  - **Flowtime**: a stopwatch; when focus fades, you get a break sized to match.
+  - **Kaizen**: one tiny daily step, a 10-minute timer, a streak, and a "1% better tomorrow" note.
+  - **Shu-Ha-Ri**: track each skill through follow → break → go beyond, with prompts and notes per stage.
+  - **Feynman**: explain a topic in plain words; the AI scores clarity, accuracy and completeness, lists gaps and jargon, and shows a simpler version.
+  - **Active recall**: study a flashcard deck with spaced repetition.
+  - **Cornell notes**: a three-part page that covers your notes for self-quizzing.
+  - **SQ3R**: a five-step walkthrough with a timer and fields for each step.
+  - **Blurting**: hide your notes, write what you remember, then see which key terms you missed.
+  - **Time-blocking**: plan today on a timeline and start any block as a focus session.
+  - **Eisenhower matrix**: sort everything into four boxes (drag and drop or menus) and send items to your tasks.
+  - Timed steps in guided sessions count toward your stats.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
 - Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
 
@@ -93,19 +106,19 @@ pomelle/
 │   ├── index.html
 │   └── src/
 │       ├── components/     shared pieces: header, theme picker, settings, icons, hooks
-│       ├── features/       one folder per feature (timer, tasks, stats, quotes, coach, music)
+│       ├── features/       one folder per feature (timer, tasks, stats, quotes, coach, music, methods)
 │       ├── themes/         everything that makes each theme its own world
 │       │   ├── index.js    the theme registry (names, voice, cursors, icons)
 │       │   ├── base.css    shared foundations that read the theme variables
 │       │   ├── sounds.js   completion chimes, made with the Web Audio API
 │       │   └── jolly/ makeup/ cat/ aesthetic/ minimalist/
-│       ├── data/           quotes and jokes, music suggestions and mixes
+│       ├── data/           quotes and jokes, music suggestions and mixes, study methods
 │       └── store/          Redux Toolkit slices + localStorage saving
 └── server/                 the Express API: the only code that talks to Gemini
     ├── index.js            routes, error handling, /api/health
     ├── gemini.js           calls Gemini (JSON mode + schema), retries, fallbacks
     ├── cache.js            remembers recent answers
-    ├── routes/             POST /api/mindmap, POST /api/flashcards
+    ├── routes/             POST /api/mindmap, /api/flashcards, /api/feynman
     └── prompts/            the prompts and response schemas (easy to tune)
 ```
 
@@ -138,6 +151,14 @@ Open `client/src/data/quotes.js` and add a line to the theme's `quotes` or `joke
 ### Change the music suggestions or mixes
 
 Open `client/src/data/music.js`. `YOUTUBE_SUGGESTIONS` and `SPOTIFY_SUGGESTIONS` are plain lists of names and links, and `BUILT_IN_PRESETS` are the ready-made mixes (each sound's volume from 0 to 1). Live streams sometimes end; if one stops working, replace its link.
+
+### Add a study method
+
+1. Add an entry to `METHODS` in `client/src/data/methods.js`: name, origin, steps, what it's best for, category and difficulty (1–5).
+2. Draw its illustration in `client/src/features/methods/MethodArt.jsx` (an SVG on a 120×90 canvas, keyed by the method's id).
+3. Give it a guided session:
+   - If it's just a timer rhythm, add `rhythm: { focusMinutes, shortMinutes, longMinutes, longBreakEvery }` and map it to `RhythmGuide` in `client/src/features/methods/guides/index.js`.
+   - Otherwise write a component in `client/src/features/methods/guides/` and register it there. `MethodTimer` gives you a ready-made step timer (`countsAsFocus` adds it to stats).
 
 ### Add a new theme
 

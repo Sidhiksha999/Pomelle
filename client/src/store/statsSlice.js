@@ -18,6 +18,21 @@ const statsSlice = createSlice({
     clearHistory(state) {
       state.sessions = [];
     },
+    /**
+     * A focus session from a guided study method (Flowtime, Cornell notes…),
+     * which runs its own timer instead of the main Pomodoro timer.
+     */
+    logFocusSession: {
+      reducer(state, action) {
+        state.sessions.push(action.payload);
+        if (state.sessions.length > MAX_SESSIONS) {
+          state.sessions.splice(0, state.sessions.length - MAX_SESSIONS);
+        }
+      },
+      prepare({ minutes, subject = '', taskId = null }) {
+        return { payload: { at: Date.now(), minutes: Math.max(1, Math.round(minutes)), subject, taskId } };
+      },
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(completeSession, (state, action) => {
@@ -36,6 +51,6 @@ const statsSlice = createSlice({
   },
 });
 
-export const { clearHistory } = statsSlice.actions;
+export const { clearHistory, logFocusSession } = statsSlice.actions;
 
 export default statsSlice.reducer;

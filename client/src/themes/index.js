@@ -100,6 +100,12 @@ export const THEMES = [
         clear: 'Wipe the scoreboard',
         clearConfirm: 'Wipe every session from the scoreboard? This can’t be undone.',
       },
+      methods: {
+        title: 'Study superpowers',
+        intro: 'Thirteen ways to study smarter. Pick one, then practise it right here.',
+        studyWith: 'Try it now!',
+        back: 'All methods',
+      },
       music: {
         title: 'Tunes',
         idle: 'Tunes',
@@ -190,6 +196,12 @@ export const THEMES = [
         unsorted: 'Nude (no subject)',
         clear: 'Remove all looks',
         clearConfirm: 'Remove your entire glow report? This can’t be undone.',
+      },
+      methods: {
+        title: 'The technique collection',
+        intro: 'Every method is a different look. Find the one that suits you, then wear it.',
+        studyWith: 'Wear this method',
+        back: 'Back to the collection',
       },
       music: {
         title: 'Soundtrack',
@@ -282,6 +294,12 @@ export const THEMES = [
         clear: 'Tear out the pages',
         clearConfirm: 'Tear every page out of the cat’s diary? This can’t be undone.',
       },
+      methods: {
+        title: 'Tricks the cat knows',
+        intro: 'Thirteen ways to hunt down knowledge. Pick one and the cat will walk you through it.',
+        studyWith: 'Study with this one',
+        back: 'All the tricks',
+      },
       music: {
         title: 'Cat radio',
         idle: 'Cat radio',
@@ -373,6 +391,12 @@ export const THEMES = [
         clear: 'erase the record',
         clearConfirm: 'erase every session from the record? this can’t be undone.',
       },
+      methods: {
+        title: 'ways of studying',
+        intro: 'thirteen gentle methods. choose one, and practise it slowly.',
+        studyWith: 'study with this',
+        back: 'all methods',
+      },
       music: {
         title: 'sounds',
         idle: 'sounds',
@@ -450,6 +474,12 @@ export const THEMES = [
         unsorted: 'No subject',
         clear: 'Clear history',
         clearConfirm: 'Clear all session history? This cannot be undone.',
+      },
+      methods: {
+        title: 'Methods',
+        intro: 'Thirteen study methods with guided sessions.',
+        studyWith: 'Start',
+        back: 'Methods',
       },
       music: {
         title: 'Audio',

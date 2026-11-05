@@ -6,6 +6,7 @@ import cors from 'cors';
 import { AppError, hasKey, MODEL } from './gemini.js';
 import mindmapRoute from './routes/mindmap.js';
 import flashcardsRoute from './routes/flashcards.js';
+import feynmanRoute from './routes/feynman.js';
 
 const app = express();
 const PORT = Number(process.env.PORT) || 8787;
@@ -21,6 +22,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/mindmap', mindmapRoute);
 app.use('/api/flashcards', flashcardsRoute);
+app.use('/api/feynman', feynmanRoute);
 
 app.use('/api', (req, res) => {
   res.status(404).json({ error: 'NOT_FOUND', message: 'No such API route.' });

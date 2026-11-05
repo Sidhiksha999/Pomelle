@@ -1,0 +1,218 @@
+// The study-methods library.
+//
+// HOW TO ADD A METHOD
+// 1. Add an entry below (id, name, origin, steps, bestFor, category, difficulty).
+// 2. Draw its little illustration in features/methods/MethodArt.jsx (keyed by id).
+// 3. Write its guided session in features/methods/guides/ and register it in
+//    features/methods/guides/index.js. A method that is just a timer rhythm
+//    can set `rhythm` instead and reuse the RhythmGuide.
+
+export const CATEGORIES = [
+  { id: 'focus', label: 'Focus & time' },
+  { id: 'memory', label: 'Remembering' },
+  { id: 'understanding', label: 'Understanding' },
+  { id: 'planning', label: 'Planning' },
+];
+
+export const METHODS = [
+  {
+    id: 'pomodoro',
+    name: 'Pomodoro',
+    tagline: '25 minutes on, 5 minutes off.',
+    origin: 'Francesco Cirillo, Italy, late 1980s. Named after his tomato-shaped kitchen timer.',
+    steps: [
+      'Pick one task and silence everything else.',
+      'Work on it for 25 minutes without switching.',
+      'Take a 5-minute break: stand up, look away from screens.',
+      'After four rounds, take a longer 15–30 minute break.',
+    ],
+    bestFor: 'Getting started on things you are avoiding, and keeping a steady pace all day.',
+    category: 'focus',
+    difficulty: 1,
+    rhythm: { focusMinutes: 25, shortMinutes: 5, longMinutes: 15, longBreakEvery: 4 },
+  },
+  {
+    id: '52-17',
+    name: '52 / 17',
+    tagline: 'Long focus, generous rest.',
+    origin: 'From a 2014 productivity study by the time-tracking company DeskTime, which looked at how its most productive users worked.',
+    steps: [
+      'Work with full attention for 52 minutes.',
+      'Take a real 17-minute break, away from your desk.',
+      'Repeat. Treat the break as part of the work, not a reward.',
+    ],
+    bestFor: 'Deep tasks that need warm-up time, like writing or problem sets.',
+    category: 'focus',
+    difficulty: 2,
+    rhythm: { focusMinutes: 52, shortMinutes: 17, longMinutes: 17, longBreakEvery: 12 },
+  },
+  {
+    id: 'ultradian',
+    name: 'Ultradian cycles',
+    tagline: 'Ride your natural 90-minute waves.',
+    origin: 'Based on sleep researcher Nathaniel Kleitman’s idea of a ~90-minute “basic rest-activity cycle” that continues through the day.',
+    steps: [
+      'Start a 90-minute block on one demanding task.',
+      'Notice the dip near the end (yawning, wandering mind). That’s the cycle ending.',
+      'Rest for about 20 minutes: walk, nap, snack. No phone scrolling.',
+      'Do at most three or four cycles a day.',
+    ],
+    bestFor: 'Big, hard sessions when you have long free stretches (exam season, weekends).',
+    category: 'focus',
+    difficulty: 4,
+    rhythm: { focusMinutes: 90, shortMinutes: 20, longMinutes: 30, longBreakEvery: 3 },
+  },
+  {
+    id: 'flowtime',
+    name: 'Flowtime',
+    tagline: 'Work until focus fades, then rest in proportion.',
+    origin: 'Described by Zoë Read-Bivens in 2016 as a gentler, flexible alternative to fixed Pomodoro timers.',
+    steps: [
+      'Start a stopwatch and work on one task.',
+      'Keep going for as long as you are genuinely focused.',
+      'When your attention slips, stop the clock.',
+      'Rest for about a fifth of the time you worked (minimum 5 minutes).',
+    ],
+    bestFor: 'People who hate being interrupted mid-flow by a fixed timer.',
+    category: 'focus',
+    difficulty: 2,
+  },
+  {
+    id: 'kaizen',
+    name: 'Kaizen',
+    tagline: 'One tiny improvement, every single day.',
+    origin: 'Japanese 改善, “change for the better”. Made famous by post-war Japanese manufacturing, especially Toyota.',
+    steps: [
+      'Choose a step so small it feels almost silly (one page, one problem).',
+      'Do it for just 10 minutes today.',
+      'Write one thing you could do 1% better tomorrow.',
+      'Repeat daily. The streak matters more than the size.',
+    ],
+    bestFor: 'Building a habit from zero, or restarting after a break.',
+    category: 'planning',
+    difficulty: 1,
+  },
+  {
+    id: 'shuhari',
+    name: 'Shu-Ha-Ri',
+    tagline: 'Follow, then break, then go beyond.',
+    origin: 'Japanese 守破離, a model of mastery from martial arts and the tea ceremony.',
+    steps: [
+      'Shu (follow): copy a worked example or the textbook method exactly.',
+      'Ha (break): vary it. Change the numbers, compare sources, find the edge cases.',
+      'Ri (go beyond): create your own problem or teach it in your own way.',
+      'Move up a stage only when the current one feels easy.',
+    ],
+    bestFor: 'Skills: maths methods, coding, languages, music, anything with technique.',
+    category: 'understanding',
+    difficulty: 3,
+  },
+  {
+    id: 'feynman',
+    name: 'Feynman technique',
+    tagline: 'If you can’t explain it simply, you don’t understand it yet.',
+    origin: 'Named after physicist Richard Feynman, famous for explaining hard ideas in plain words.',
+    steps: [
+      'Pick one concept and write its name at the top.',
+      'Explain it in simple words, as if teaching someone younger.',
+      'Spot where you got stuck or used jargon. Those are your gaps.',
+      'Go back to the source, fix the gaps, and explain it again more simply.',
+    ],
+    bestFor: 'Checking real understanding before an exam, especially for theory.',
+    category: 'understanding',
+    difficulty: 3,
+  },
+  {
+    id: 'active-recall',
+    name: 'Active recall + spaced repetition',
+    tagline: 'Pull it out of your head, at growing intervals.',
+    origin: 'Built on Hermann Ebbinghaus’s 1880s forgetting curve and decades of “testing effect” research.',
+    steps: [
+      'Turn your notes into questions (flashcards).',
+      'Answer from memory before looking.',
+      'Rate how well you knew it.',
+      'Review hard cards soon and easy cards later.',
+    ],
+    bestFor: 'Facts, vocabulary, definitions, formulas: anything you must remember.',
+    category: 'memory',
+    difficulty: 2,
+  },
+  {
+    id: 'cornell',
+    name: 'Cornell notes',
+    tagline: 'Notes that turn into a quiz.',
+    origin: 'Created by Walter Pauk at Cornell University in the 1950s.',
+    steps: [
+      'Take notes in the big right-hand column during the lecture or reading.',
+      'Afterwards, write cue questions and keywords in the left column.',
+      'Write a 2–3 sentence summary at the bottom.',
+      'Cover the notes and answer the cues from memory.',
+    ],
+    bestFor: 'Lectures and textbook chapters you will need to revise later.',
+    category: 'memory',
+    difficulty: 2,
+  },
+  {
+    id: 'sq3r',
+    name: 'SQ3R',
+    tagline: 'Survey, Question, Read, Recite, Review.',
+    origin: 'Francis P. Robinson, Ohio State University, in his 1946 book “Effective Study”.',
+    steps: [
+      'Survey: skim headings, pictures and summaries (5 min).',
+      'Question: turn headings into questions.',
+      'Read: read actively to answer them.',
+      'Recite: say or write the answers without looking.',
+      'Review: go over everything once more.',
+    ],
+    bestFor: 'Dense textbook chapters and long readings.',
+    category: 'understanding',
+    difficulty: 3,
+  },
+  {
+    id: 'blurting',
+    name: 'Blurting',
+    tagline: 'Write everything you remember. Then check.',
+    origin: 'A popular revision technique among UK GCSE and A-level students, rooted in free-recall research.',
+    steps: [
+      'Read your notes on a topic once.',
+      'Hide them and write down everything you remember, fast.',
+      'Reveal the notes and compare.',
+      'Study what you missed, then blurt again tomorrow.',
+    ],
+    bestFor: 'Finding out quickly what you actually remember about a topic.',
+    category: 'memory',
+    difficulty: 2,
+  },
+  {
+    id: 'time-blocking',
+    name: 'Time-blocking',
+    tagline: 'Give every hour a job.',
+    origin: 'Long used by writers and executives; popularised for students by Cal Newport’s “Deep Work” (2016).',
+    steps: [
+      'List what needs doing today.',
+      'Give each task its own block of time on your day plan.',
+      'Leave buffer blocks for surprises and breaks.',
+      'Work block by block; if one overruns, re-plan rather than give up.',
+    ],
+    bestFor: 'Busy days with classes, work and study competing for time.',
+    category: 'planning',
+    difficulty: 2,
+  },
+  {
+    id: 'eisenhower',
+    name: 'Eisenhower matrix',
+    tagline: 'Urgent isn’t the same as important.',
+    origin: 'Attributed to US President Dwight D. Eisenhower, later spread by Stephen Covey’s “7 Habits”.',
+    steps: [
+      'Write down everything on your mind.',
+      'Sort each item: important? urgent?',
+      'Do important+urgent now, schedule important+not urgent.',
+      'Delegate or shrink urgent+unimportant; drop the rest.',
+    ],
+    bestFor: 'Feeling overwhelmed and not knowing where to start.',
+    category: 'planning',
+    difficulty: 1,
+  },
+];
+
+export const getMethod = (id) => METHODS.find((m) => m.id === id);

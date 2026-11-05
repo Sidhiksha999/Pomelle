@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useCurrentTheme } from '../../components/hooks/useCurrentTheme';
+import { useHashParam } from '../../components/hooks/useHashRoute';
 import { checkHealth } from './api';
 import CoachNotice from './CoachNotice';
 import MindMapPanel from './mindmap/MindMapPanel';
@@ -18,7 +19,12 @@ const TABS = [
 export default function CoachPage() {
   const { voice } = useCurrentTheme();
   const copy = voice.coach;
-  const [tab, setTab] = useState('map');
+  // #/coach/cards opens straight on the flashcards tab.
+  const param = useHashParam();
+  const [tab, setTab] = useState(param === 'cards' ? 'cards' : 'map');
+  useEffect(() => {
+    if (param === 'cards' || param === 'map') setTab(param);
+  }, [param]);
   const [health, setHealth] = useState(null); // null while checking
 
   const refreshHealth = useCallback(() => {
