@@ -6,9 +6,16 @@ import { cacheKey, getCached, setCached } from './cache.js';
 
 // The main model, then backups that are tried if it is busy or unavailable.
 // "gemini-flash-latest" and "gemini-flash-lite-latest" always point at
-// Google's current Flash models.
+// Google's current Flash models. The "lite" models give slightly simpler
+// answers but are often free when the bigger ones are overloaded.
 export const MODEL = process.env.GEMINI_MODEL?.trim() || 'gemini-3.5-flash';
-const FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest', 'gemini-3.5-flash'].filter((m) => m !== MODEL);
+const FALLBACK_MODELS = [
+  'gemini-flash-latest',
+  'gemini-3.5-flash-lite',
+  'gemini-3.1-flash-lite',
+  'gemini-flash-lite-latest',
+  'gemini-3.5-flash',
+].filter((m) => m !== MODEL);
 
 // Created only when a key exists, so the server can still start without one.
 // The SDK's own retries are switched off (attempts: 1) because we retry
@@ -117,7 +124,9 @@ export async function generateJson({ task, system, prompt, schema, temperature =
       // Stop if there isn't enough time left for another full attempt.
       if (Date.now() - started > TIME_BUDGET_MS - 20000) break;
       console.warn(`[gemini] ${model} failed (${error.status ?? error.name}), trying again…`);
-      await wait(800 * (index + 1) + Math.random() * 300);
+      // A short pause that grows a little each time, but never past 2.5s,
+      // so there's time to try every backup model within the budget.
+      await wait(Math.min(800 * (index + 1), 2500) + Math.random() * 300);
     }
   }
   throw explain(lastError);
