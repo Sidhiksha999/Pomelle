@@ -1,0 +1,462 @@
+/* ===========================================================
+   MAKEUP — blush, rose gold, nude, berry and champagne.
+   Elegant serif headlines, glossy surfaces, sparkles.
+   =========================================================== */
+
+[data-theme='makeup'] {
+  /* Palette */
+  --bg: #fbefea;
+  --surface: #fff8f4;
+  --surface-2: #f8e3dc;
+  --ink: #3a1f27;
+  --ink-muted: #7a5560;
+  --primary: #8c2f4e; /* berry: AA with white text */
+  --primary-ink: #ffffff;
+  --blush: #f2b8c6;
+  --rose-gold: #b76e79;
+  --champagne: #f3dfc1;
+  --nude: #e6c3ae;
+  --line: #d9b2b0;
+  --focus: #8c2f4e;
+  --selection: #f2b8c6;
+
+  /* Type */
+  --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-digits: 'Playfair Display', Georgia, serif;
+  --font-button: 'DM Sans', system-ui, sans-serif;
+  --display-weight: 500;
+  --digits-weight: 500;
+  --btn-weight: 500;
+  --btn-tracking: 0.04em;
+
+  /* Shape */
+  --radius-card: 20px;
+  --radius-btn: 999px;
+  --radius-input: 12px;
+  --border-card: 1px solid #d9a9a6;
+  --btn-border: 1px solid #c99197;
+  --btn-bg: #fff8f4;
+  --btn-ink: var(--ink);
+  --primary-border: #6e2039;
+  --input-border: 1px solid #c99197;
+  --icon-stroke: 1.6;
+
+  /* Depth: rose-tinted glow plus a glossy inner highlight */
+  --shadow-card: 0 14px 34px -14px rgba(140, 47, 78, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-btn: 0 8px 18px -10px rgba(140, 47, 78, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --shadow-btn-active: 0 3px 8px -4px rgba(140, 47, 78, 0.5);
+  --shadow-dialog: 0 30px 60px -20px rgba(140, 47, 78, 0.45);
+  --backdrop: rgba(58, 31, 39, 0.35);
+
+  /* Motion: glossy ease-out */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 500ms;
+  --dur-slow: 650ms;
+  --btn-hover-transform: translateY(-2px);
+  --btn-active-transform: translateY(0) scale(0.98);
+  --dialog-from: translateY(16px) scale(0.98);
+
+  /* Details */
+  --scroll-track: #fbefea;
+  --scroll-thumb: #d79aa5;
+  --grain-opacity: 0.03;
+}
+
+[data-theme='makeup'] body {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(242, 184, 198, 0.45), transparent 38%),
+    radial-gradient(circle at 88% 82%, rgba(243, 223, 193, 0.6), transparent 42%);
+}
+
+/* ---------- Header ---------- */
+[data-theme='makeup'] .brand__name {
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--primary);
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Primary buttons: berry lipstick with a gloss sweep ---------- */
+[data-theme='makeup'] .btn--primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #a23a5d, #8c2f4e 55%, #74243f);
+}
+[data-theme='makeup'] .btn--primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.9s var(--ease);
+}
+[data-theme='makeup'] .btn--primary:hover::after {
+  transform: translateX(120%);
+}
+
+/* ---------- Mode tabs: delicate pills ---------- */
+[data-theme='makeup'] .mode-tab {
+  border: 1px solid #d3a2a6;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+[data-theme='makeup'] .mode-tab[aria-pressed='true'] {
+  background: var(--blush);
+  border-color: var(--rose-gold);
+  color: var(--ink);
+}
+
+/* ---------- Compact mirror face ---------- */
+.face.makeup-face {
+  aspect-ratio: 300 / 320;
+}
+.mk-outline {
+  stroke: #8f5560;
+  stroke-width: 1.5;
+}
+.mk-case-ring {
+  filter: drop-shadow(0 16px 22px rgba(140, 47, 78, 0.28));
+}
+.mk-inner-rim {
+  fill: #fbe8e0;
+  stroke: rgba(143, 85, 96, 0.4);
+  stroke-width: 1;
+}
+.mk-reflection {
+  fill: rgba(255, 255, 255, 0.55);
+  animation: mirror-glint 7s ease-in-out infinite;
+}
+.makeup-face.is-running .mk-reflection {
+  animation-duration: 4.5s;
+}
+.mk-track {
+  fill: none;
+  stroke: #f4d6dd;
+  stroke-width: 14;
+}
+.mk-progress {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s var(--ease);
+}
+.mk-progress-sheen {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s var(--ease);
+}
+.mk-tip-sparkle {
+  fill: #ffffff;
+  stroke: #b76e79;
+  stroke-width: 0.8;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+.makeup-face__center {
+  top: 6%;
+}
+[data-theme='makeup'] .face__digits {
+  font-size: clamp(3.2rem, 14vw, 4.6rem);
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+[data-theme='makeup'] .face__mode {
+  order: -1;
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.makeup-face__lipstick {
+  position: absolute;
+  height: auto;
+  bottom: -4%;
+  left: -10%;
+  width: 15%;
+  transform: rotate(-14deg);
+  filter: drop-shadow(4px 10px 10px rgba(140, 47, 78, 0.25));
+}
+.makeup-face__sparkle {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+}
+.makeup-face__sparkle--1 {
+  top: 10%;
+  right: 2%;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+.makeup-face__sparkle--2 {
+  top: 26%;
+  right: -6%;
+  width: 16px;
+  height: 16px;
+  animation: twinkle 2.6s ease-in-out 1.1s infinite;
+}
+.makeup-face.is-celebrating .mk-case-ring {
+  animation: compact-glow 1.2s var(--ease) 2;
+}
+
+/* ---------- Makeup art colors ---------- */
+.mk-sparkle path {
+  fill: #fffaf3;
+  stroke: #b76e79;
+  stroke-width: 1;
+}
+.mk-bullet {
+  fill: #8c2f4e;
+}
+.mk-bullet-shine,
+.mk-case-shine,
+.mk-polish-shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.mk-collar {
+  fill: #f3dfc1;
+  stroke: #9e5a64;
+  stroke-width: 1.5;
+}
+.mk-case {
+  fill: #b76e79;
+  stroke: #7d4450;
+  stroke-width: 1.5;
+}
+.mk-bristles {
+  fill: #e6c3ae;
+  stroke: #9e5a64;
+  stroke-width: 1.5;
+}
+.mk-bristles-tip {
+  fill: #f2b8c6;
+}
+.mk-ferrule {
+  fill: #e9bcae;
+  stroke: #9e5a64;
+  stroke-width: 1.5;
+}
+.mk-handle {
+  fill: #3a1f27;
+}
+.mk-polish-cap {
+  fill: #3a1f27;
+}
+.mk-polish-neck {
+  fill: #e9bcae;
+}
+.mk-polish-bottle {
+  fill: #d4587c;
+  stroke: #8c2f4e;
+  stroke-width: 2;
+}
+.mk-perfume-bulb {
+  fill: #f2b8c6;
+  stroke: #9e5a64;
+  stroke-width: 1.5;
+}
+.mk-perfume-tube {
+  fill: none;
+  stroke: #9e5a64;
+  stroke-width: 2;
+}
+.mk-perfume-cap {
+  fill: #e9bcae;
+  stroke: #9e5a64;
+  stroke-width: 1.5;
+}
+.mk-perfume-bottle {
+  fill: rgba(243, 223, 193, 0.85);
+  stroke: #9e5a64;
+  stroke-width: 1.5;
+}
+.mk-perfume-facet {
+  fill: none;
+  stroke: rgba(158, 90, 100, 0.35);
+  stroke-width: 1;
+}
+.mk-perfume-label {
+  fill: #fff8f4;
+  stroke: #b76e79;
+  stroke-width: 1;
+}
+.mk-palette-case {
+  fill: #3a1f27;
+}
+.mk-pan {
+  stroke: #e9bcae;
+  stroke-width: 2.5;
+}
+.mk-pan-shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ---------- Backdrop: vanity items around the edges ---------- */
+.mk-blush-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+.mk-blush-glow--1 {
+  top: 30%;
+  right: -120px;
+  width: 300px;
+  height: 300px;
+  background: rgba(242, 184, 198, 0.35);
+}
+.mk-blush-glow--2 {
+  bottom: -80px;
+  left: 30%;
+  width: 260px;
+  height: 160px;
+  background: rgba(243, 223, 193, 0.5);
+}
+.mk-deco {
+  position: absolute;
+  filter: drop-shadow(0 12px 14px rgba(140, 47, 78, 0.18));
+}
+.mk-deco--perfume {
+  top: 92px;
+  left: -14px;
+  width: 92px;
+  transform: rotate(-10deg);
+}
+.mk-deco--brush {
+  top: 12%;
+  right: 3%;
+  width: 34px;
+  transform: rotate(28deg);
+}
+.mk-deco--polish {
+  bottom: 6%;
+  right: 7%;
+  width: 62px;
+  transform: rotate(12deg);
+}
+.mk-deco--palette {
+  bottom: 3%;
+  left: 3%;
+  width: 130px;
+  transform: rotate(-6deg);
+}
+.mk-twinkle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.mk-twinkle--1 { top: 18%; left: 22%; }
+.mk-twinkle--2 { top: 60%; right: 14%; animation-delay: 0.8s; width: 12px; height: 12px; }
+.mk-twinkle--3 { bottom: 22%; left: 12%; animation-delay: 1.6s; }
+.mk-twinkle--4 { top: 8%; right: 38%; animation-delay: 2.2s; width: 12px; height: 12px; }
+.mk-twinkle--5 { bottom: 10%; right: 32%; animation-delay: 1.2s; width: 14px; height: 14px; }
+
+@media (max-width: 899px) {
+  .mk-deco--brush,
+  .mk-deco--perfume,
+  .mk-deco--polish {
+    display: none;
+  }
+  .mk-deco--palette {
+    width: 90px;
+    opacity: 0.6;
+  }
+}
+
+/* ---------- Quote card: a vanity mirror note ---------- */
+[data-theme='makeup'] .quote-card {
+  padding: 28px 24px 22px;
+  border: 1px solid #d9a9a6;
+  background:
+    linear-gradient(#fff8f4, #fff8f4) padding-box,
+    linear-gradient(135deg, #e9bcae, #b76e79, #f3d3c4) border-box;
+  border: 2px solid transparent;
+}
+[data-theme='makeup'] .quote-card::after {
+  /* a lipstick kiss mark in the corner */
+  content: '';
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  width: 44px;
+  height: 26px;
+  opacity: 0.35;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 26'%3E%3Cpath d='M2 12C8 2 16 2 22 8c6-6 14-6 20 4-6 10-14 13-20 13S8 22 2 12z' fill='%238C2F4E'/%3E%3Cpath d='M4 12q18 4 36 0' stroke='%23fff8f4' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat center / contain;
+  transform: rotate(-12deg);
+}
+[data-theme='makeup'] .quote-card__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+[data-theme='makeup'] .quote-card__text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+[data-theme='makeup'] .quote-card__text.is-new {
+  animation: gloss-in 0.8s var(--ease);
+}
+
+/* ---------- Session dots: tiny eyeshadow pans ---------- */
+[data-theme='makeup'] .session-dot {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e9bcae;
+  background: #fbe8e0;
+  box-shadow: inset 0 1px 2px rgba(58, 31, 39, 0.2);
+}
+[data-theme='makeup'] .session-dot.is-done {
+  background: radial-gradient(circle at 35% 30%, #f2b8c6, #b76e79 70%);
+}
+
+/* ---------- Celebration: shimmer + sparkles ---------- */
+.makeup-shimmer__sweep {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 240, 245, 0.75) 48%, rgba(243, 223, 193, 0.6) 52%, transparent 62%);
+  animation: shimmer-sweep 1.6s var(--ease) both;
+}
+.makeup-shimmer__sparkle {
+  position: absolute;
+  opacity: 0;
+  animation: sparkle-pop 1.4s var(--ease) both;
+}
+
+@keyframes twinkle {
+  0%, 100% { transform: scale(0.6) rotate(0); opacity: 0.4; }
+  50% { transform: scale(1) rotate(45deg); opacity: 1; }
+}
+@keyframes mirror-glint {
+  0%, 100% { transform: translateX(-30px); opacity: 0.4; }
+  50% { transform: translateX(160px); opacity: 0.9; }
+}
+@keyframes compact-glow {
+  50% { filter: drop-shadow(0 0 26px rgba(242, 184, 198, 0.95)); }
+}
+@keyframes gloss-in {
+  from { opacity: 0; filter: blur(4px); transform: translateY(6px); }
+}
+@keyframes shimmer-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+@keyframes sparkle-pop {
+  0% { opacity: 0; transform: scale(0) rotate(0); }
+  40% { opacity: 1; transform: scale(1.1) rotate(60deg); }
+  100% { opacity: 0; transform: scale(0.4) rotate(120deg); }
+}

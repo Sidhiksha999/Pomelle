@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="jolly">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pomelle — a Pomodoro study companion with five little worlds." />
+    <meta name="theme-color" content="#FFF6DC" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='18' fill='%23FFC93C' stroke='%232B1B0E' stroke-width='4'/%3E%3C/svg%3E" />
+
+    <!-- All five themes' fonts load up front so switching themes is instant. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500;700&family=Patrick+Hand&family=Varela+Round&family=Caveat:wght@500;700&family=Special+Elite&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@100;200;400;500&display=swap"
+    />
+
+    <!--
+      Apply the saved theme before React loads, so the page never flashes
+      the wrong colors on refresh.
+    -->
+    <script>
+      try {
+        var saved = JSON.parse(localStorage.getItem('pomelle:v1') || '{}');
+        if (saved.theme && saved.theme.current) {
+          document.documentElement.setAttribute('data-theme', saved.theme.current);
+        }
+      } catch (e) {}
+    </script>
+    <title>Pomelle</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

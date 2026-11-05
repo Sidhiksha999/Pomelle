@@ -1,0 +1,422 @@
+/* ===========================================================
+   JOLLY — warm, bright, festive. Stickers, chunky borders,
+   springy motion and a sun who can't sit still.
+   =========================================================== */
+
+[data-theme='jolly'] {
+  /* Palette */
+  --bg: #fff6dc;
+  --surface: #ffffff;
+  --surface-2: #fff0c2;
+  --ink: #2b1b0e;
+  --ink-muted: #6b5340;
+  --primary: #b8311b; /* deep tomato: AA with white text */
+  --primary-ink: #ffffff;
+  --sunny: #ffc93c;
+  --tomato: #e8432c;
+  --sky: #4fb3f6;
+  --mint: #7fd8b4;
+  --line: #2b1b0e;
+  --focus: #1f7fc4;
+  --selection: #ffc93c;
+
+  /* Type */
+  --font-display: 'Fredoka', 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --font-digits: 'Fredoka', system-ui, sans-serif;
+  --font-button: 'Fredoka', system-ui, sans-serif;
+  --display-weight: 600;
+  --digits-weight: 600;
+  --btn-weight: 600;
+  --btn-size: 1.05rem;
+
+  /* Shape */
+  --radius-card: 22px;
+  --radius-btn: 999px;
+  --radius-input: 14px;
+  --border-card: 3px solid var(--ink);
+  --btn-border: 3px solid var(--ink);
+  --btn-bg: #ffffff;
+  --btn-ink: var(--ink);
+  --input-border: 3px solid var(--ink);
+  --icon-stroke: 2.4;
+
+  /* Depth: hard offset "sticker" shadows */
+  --shadow-card: 5px 6px 0 var(--ink);
+  --shadow-btn: 0 5px 0 var(--ink);
+  --shadow-btn-active: 0 1px 0 var(--ink);
+  --shadow-dialog: 8px 10px 0 var(--ink);
+  --backdrop: rgba(43, 27, 14, 0.4);
+
+  /* Motion: springy and bouncy */
+  --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur: 380ms;
+  --dur-slow: 520ms;
+  --btn-hover-transform: translateY(-3px) rotate(-1.5deg);
+  --btn-active-transform: translateY(4px);
+  --dialog-from: scale(0.85) rotate(-3deg);
+
+  /* Details */
+  --scroll-track: #fff6dc;
+  --scroll-thumb: #e8432c;
+  --grain-opacity: 0.05;
+}
+
+/* Soft dotted paper under everything */
+[data-theme='jolly'] body {
+  background-image: radial-gradient(rgba(43, 27, 14, 0.09) 1.2px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+/* ---------- Header ---------- */
+[data-theme='jolly'] .brand__name {
+  font-weight: 700;
+  font-size: 1.9rem;
+  color: var(--primary);
+  text-shadow: 2px 2px 0 var(--sunny);
+  transform: rotate(-3deg);
+}
+
+/* ---------- Mode tabs: little stickers ---------- */
+[data-theme='jolly'] .mode-tab {
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 3px 0 var(--ink);
+}
+[data-theme='jolly'] .mode-tab:nth-child(2) {
+  transform: rotate(1.5deg);
+}
+[data-theme='jolly'] .mode-tab:nth-child(3) {
+  transform: rotate(-1.5deg);
+}
+[data-theme='jolly'] .mode-tab[aria-pressed='true'] {
+  background: var(--sunny);
+  transform: rotate(-2deg) scale(1.06);
+}
+
+/* ---------- Timer face ---------- */
+.jolly-face__shadow {
+  fill: var(--ink);
+}
+.jolly-face__plate {
+  fill: #ffffff;
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+.jolly-face__track {
+  fill: none;
+  stroke: #ffe6a3;
+  stroke-width: 24;
+  stroke-dasharray: 10 9;
+}
+.jolly-face__progress {
+  fill: none;
+  stroke: var(--tomato);
+  stroke-width: 24;
+  stroke-linecap: round;
+  transition:
+    stroke-dashoffset 0.6s var(--ease),
+    stroke 0.4s;
+}
+.jolly-face.is-break .jolly-face__progress {
+  stroke: var(--mint);
+}
+.jolly-face__tick {
+  fill: var(--sky);
+}
+.jolly-face__tick:nth-child(3n) {
+  fill: var(--tomato);
+}
+[data-theme='jolly'] .face__digits {
+  font-size: clamp(3.4rem, 15vw, 5rem);
+  color: var(--ink);
+}
+[data-theme='jolly'] .face__mode {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 12px;
+  background: var(--sunny);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  transform: rotate(-3deg);
+}
+
+/* ---------- The sun mascot ---------- */
+.jolly-sun {
+  position: absolute;
+  top: -6%;
+  right: -8%;
+  width: 34%;
+  transform-origin: 50% 80%;
+  animation: sun-bob 3.2s ease-in-out infinite;
+}
+.jolly-sun svg {
+  overflow: visible;
+}
+.sun-ray {
+  fill: var(--sunny);
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.sun-ray--alt {
+  fill: var(--tomato);
+}
+.sun-disc {
+  fill: var(--sunny);
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+.sun-cheek {
+  fill: #ff9eb0;
+}
+.sun-ink {
+  fill: var(--ink);
+}
+.sun-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.sun-mouth {
+  fill: var(--primary);
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.jolly-sun__rays {
+  transform-origin: 60px 60px;
+}
+.jolly-sun[data-mood='focused'] .jolly-sun__rays {
+  animation: sun-spin 24s linear infinite;
+}
+.jolly-sun[data-mood='giggly'] {
+  animation: sun-giggle 0.9s var(--ease) infinite;
+}
+.jolly-sun[data-mood='party'] {
+  animation: sun-party 0.8s var(--ease) 3;
+}
+.jolly-sun[data-mood='party'] .jolly-sun__rays {
+  animation: sun-spin 1.6s linear infinite;
+}
+.jolly-sun[data-mood='sleepy'] {
+  animation: sun-doze 4s ease-in-out infinite;
+}
+.jolly-sun__z text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  fill: var(--ink);
+  animation: z-float 2.4s ease-in-out infinite;
+}
+.jolly-sun__z text:last-child {
+  font-size: 13px;
+  animation-delay: 0.8s;
+}
+
+@keyframes sun-bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-8px) rotate(4deg); }
+}
+@keyframes sun-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes sun-giggle {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(-14px) scale(0.94, 1.06); }
+  60% { transform: translateY(0) scale(1.08, 0.92); }
+}
+@keyframes sun-party {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  40% { transform: translateY(-36px) rotate(-12deg) scale(1.1); }
+  70% { transform: translateY(0) scale(1.12, 0.9); }
+}
+@keyframes sun-doze {
+  0%, 100% { transform: rotate(8deg) translateY(4px); }
+  50% { transform: rotate(14deg) translateY(8px); }
+}
+@keyframes z-float {
+  0% { opacity: 0; transform: translate(0, 6px); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translate(6px, -10px); }
+}
+
+/* ---------- Session dots: candy buttons ---------- */
+[data-theme='jolly'] .session-dot {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--ink);
+  background: #fff;
+}
+[data-theme='jolly'] .session-dot.is-done {
+  background: var(--tomato);
+  animation: dot-pop 0.5s var(--ease);
+}
+[data-theme='jolly'] .session-dot.is-done:nth-child(2n) {
+  background: var(--sky);
+}
+@keyframes dot-pop {
+  0% { transform: scale(0.3); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Quote card: a sticker with tape ---------- */
+[data-theme='jolly'] .quote-card {
+  transform: rotate(2deg);
+  background: #fff;
+}
+[data-theme='jolly'] .quote-card::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 96px;
+  height: 26px;
+  background: rgba(127, 216, 180, 0.85);
+  border: 2px solid var(--ink);
+  transform: translateX(-50%) rotate(-4deg);
+}
+[data-theme='jolly'] .quote-card.is-joke {
+  background: #e6f5ff;
+  transform: rotate(-1.5deg);
+}
+[data-theme='jolly'] .quote-card__label {
+  display: inline-block;
+  padding: 2px 12px;
+  background: var(--sunny);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  transform: rotate(-2deg);
+}
+[data-theme='jolly'] .quote-card__text {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.3;
+}
+[data-theme='jolly'] .quote-card__text.is-new {
+  animation: quote-boing 0.55s var(--ease);
+}
+@keyframes quote-boing {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- Backdrop doodles ---------- */
+.jolly-blob {
+  position: absolute;
+}
+.jolly-blob path {
+  fill: currentColor;
+}
+.jolly-blob--sky {
+  top: -140px;
+  right: -120px;
+  width: 420px;
+  color: rgba(79, 179, 246, 0.22);
+  animation: blob-wobble 14s ease-in-out infinite;
+}
+.jolly-blob--mint {
+  bottom: -160px;
+  left: -140px;
+  width: 460px;
+  color: rgba(127, 216, 180, 0.3);
+  animation: blob-wobble 17s ease-in-out infinite reverse;
+}
+.jolly-doodle {
+  position: absolute;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: doodle-float 6s var(--ease) infinite;
+}
+.jolly-doodle--star1 {
+  top: 22%;
+  left: 3%;
+  width: 34px;
+  fill: var(--sunny);
+}
+.jolly-doodle--star2 {
+  bottom: 14%;
+  right: 6%;
+  width: 26px;
+  fill: var(--tomato);
+  animation-delay: -2s;
+}
+.jolly-doodle--squiggle1 {
+  top: 12%;
+  right: 30%;
+  width: 90px;
+  stroke: var(--sky);
+  animation-delay: -1s;
+}
+.jolly-doodle--squiggle2 {
+  bottom: 30%;
+  left: 40%;
+  width: 70px;
+  stroke: var(--tomato);
+  animation-delay: -3s;
+}
+.jolly-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+}
+.jolly-dot--1 { top: 40%; right: 4%; background: var(--mint); }
+.jolly-dot--2 { top: 70%; left: 8%; background: var(--sunny); width: 10px; height: 10px; }
+.jolly-dot--3 { top: 8%; left: 30%; background: var(--tomato); }
+.jolly-dot--4 { bottom: 6%; left: 62%; background: var(--sky); width: 10px; height: 10px; }
+
+@keyframes blob-wobble {
+  0%, 100% { transform: rotate(0) scale(1); }
+  50% { transform: rotate(12deg) scale(1.06); }
+}
+@keyframes doodle-float {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-10px) rotate(6deg); }
+}
+
+@media (max-width: 719px) {
+  .jolly-doodle--squiggle1,
+  .jolly-doodle--squiggle2,
+  .jolly-dot--4 {
+    display: none;
+  }
+}
+
+/* ---------- Confetti ---------- */
+.confetti {
+  position: absolute;
+  top: -24px;
+  width: var(--size);
+  height: calc(var(--size) * 0.55);
+  background: var(--color);
+  border: 1.5px solid var(--ink);
+  animation: confetti-fall var(--duration) cubic-bezier(0.25, 0.6, 0.5, 1) var(--delay) both;
+}
+.confetti--circle {
+  height: var(--size);
+  border-radius: 50%;
+}
+.confetti--ribbon {
+  height: calc(var(--size) * 1.6);
+  width: calc(var(--size) * 0.4);
+  border-radius: 4px;
+}
+@keyframes confetti-fall {
+  0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translate(var(--drift), 105vh) rotate(var(--spin)); opacity: 0; }
+}

@@ -1,0 +1,380 @@
+/*
+ * base.css — shared foundations for every theme.
+ *
+ * Each theme file (jolly.css, makeup.css…) only sets CSS variables and adds
+ * its own personality on top. Everything here reads those variables, so a
+ * theme switch is just changing data-theme on <html>.
+ */
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dialog {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- Page ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  cursor: var(--cursor, auto);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+button,
+[role='button'],
+label,
+select,
+summary,
+input[type='checkbox'],
+input[type='radio'],
+input[type='range'] {
+  cursor: var(--cursor-pointer, pointer);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight, 600);
+  line-height: 1.15;
+  letter-spacing: var(--display-tracking, 0);
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--ink);
+}
+
+/* Paper / film grain. The pattern is noise from an SVG filter; each theme
+   chooses how strong it is with --grain-opacity. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: var(--grain-opacity, 0);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Scrollbars ---------- */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: var(--scroll-radius, 999px);
+  border: 3px solid var(--scroll-track);
+}
+
+/* ---------- Focus (keyboard users must always see where they are) ---------- */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--focus-radius, 6px);
+}
+
+/* ---------- Helpers ---------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2000;
+  padding: 10px 16px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-btn);
+  transform: translateY(-160%);
+  transition: transform 0.2s;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ---------- App shell ---------- */
+.app-shell {
+  position: relative;
+  z-index: 1; /* above the theme backdrops */
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 16px 64px;
+}
+
+@media (min-width: 720px) {
+  .app-shell {
+    padding: 0 32px 80px;
+  }
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px; /* comfortable touch target */
+  padding: 10px 20px;
+  border: var(--btn-border);
+  border-radius: var(--radius-btn);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font-family: var(--font-button, var(--font-body));
+  font-weight: var(--btn-weight, 700);
+  font-size: var(--btn-size, 1rem);
+  letter-spacing: var(--btn-tracking, 0);
+  text-transform: var(--btn-case, none);
+  box-shadow: var(--shadow-btn);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.btn:hover {
+  transform: var(--btn-hover-transform, translateY(-1px));
+}
+
+.btn:active {
+  transform: var(--btn-active-transform, translateY(1px));
+  box-shadow: var(--shadow-btn-active, var(--shadow-btn));
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: var(--primary-ink);
+  border-color: var(--primary-border, var(--ink));
+}
+
+.btn--quiet {
+  background: transparent;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.btn--small {
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+/* Round icon-only buttons */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: var(--btn-border);
+  border-radius: var(--radius-icon-btn, 50%);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  box-shadow: var(--shadow-btn);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+.icon-btn:hover {
+  transform: var(--btn-hover-transform, translateY(-1px));
+}
+.icon-btn:active {
+  transform: var(--btn-active-transform, translateY(1px));
+  box-shadow: var(--shadow-btn-active, var(--shadow-btn));
+}
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.icon-btn[aria-pressed='true'] {
+  background: var(--primary);
+  color: var(--primary-ink);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  position: relative;
+  background: var(--surface);
+  color: var(--ink);
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+}
+
+/* ---------- Form controls ---------- */
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field__label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.field__hint {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  background: var(--input-bg, var(--surface));
+  color: var(--ink);
+  border: var(--input-border, 2px solid var(--line));
+  border-radius: var(--radius-input, 10px);
+}
+
+.input:focus-visible {
+  outline-offset: 1px;
+}
+
+input[type='range'] {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+}
+
+/* ---------- Native <dialog> ---------- */
+.dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-dialog, var(--shadow-card));
+  overflow: auto;
+}
+
+.dialog::backdrop {
+  background: var(--backdrop, rgba(0, 0, 0, 0.35));
+}
+
+.dialog[open] {
+  animation: dialog-in var(--dur-slow) var(--ease) both;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: var(--dialog-from, translateY(12px));
+  }
+}
+
+.dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 20px 8px;
+}
+
+.dialog__body {
+  padding: 8px 20px 24px;
+}
+
+/* ---------- Reduced motion ----------
+   Applies when the user turns it on in settings, or when the OS asks for it
+   and the setting is "system". Decorative animations stop completely. */
+[data-motion='reduced'] *,
+[data-motion='reduced'] *::before,
+[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

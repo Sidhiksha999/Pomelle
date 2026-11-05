@@ -1,0 +1,179 @@
+/* ===========================================================
+   MINIMALIST — pure black, off-white, one thin accent line.
+   One typeface. No decoration. Opacity transitions only.
+   =========================================================== */
+
+[data-theme='minimalist'] {
+  /* Palette */
+  --bg: #000000;
+  --surface: #000000;
+  --surface-2: #0b0b0b;
+  --ink: #edeae4;
+  --ink-muted: #8a877f;
+  --primary: #edeae4;
+  --primary-ink: #000000;
+  --accent: #ff4d1a; /* the one accent line */
+  --line: #2a2a2a;
+  --focus: #edeae4;
+  --selection: #333333;
+
+  /* Type: a single family */
+  --font-display: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-body: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-digits: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-button: 'IBM Plex Mono', ui-monospace, monospace;
+  --display-weight: 400;
+  --digits-weight: 100;
+  --btn-weight: 400;
+  --btn-size: 0.8rem;
+  --btn-tracking: 0.16em;
+  --btn-case: uppercase;
+
+  /* Shape */
+  --radius-card: 0;
+  --radius-btn: 0;
+  --radius-icon-btn: 0;
+  --radius-input: 0;
+  --border-card: 1px solid var(--line);
+  --btn-border: 1px solid var(--line);
+  --btn-bg: transparent;
+  --btn-ink: var(--ink);
+  --primary-border: var(--ink);
+  --input-border: 1px solid var(--line);
+  --icon-stroke: 1.2;
+  --focus-radius: 0;
+
+  /* Depth: none */
+  --shadow-card: none;
+  --shadow-btn: none;
+  --shadow-btn-active: none;
+  --shadow-dialog: none;
+  --backdrop: rgba(0, 0, 0, 0.8);
+
+  /* Motion: opacity only */
+  --ease: linear;
+  --dur: 200ms;
+  --dur-slow: 200ms;
+  --btn-hover-transform: none;
+  --btn-active-transform: none;
+  --dialog-from: none;
+
+  /* Details */
+  --scroll-track: #000000;
+  --scroll-thumb: #2a2a2a;
+  --scroll-radius: 0;
+  --grain-opacity: 0;
+}
+
+[data-theme='minimalist'] body {
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+[data-theme='minimalist'] .btn:hover,
+[data-theme='minimalist'] .icon-btn:hover {
+  border-color: var(--ink);
+}
+[data-theme='minimalist'] .btn--primary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+[data-theme='minimalist'] .btn--primary:hover {
+  opacity: 0.7;
+}
+
+/* ---------- Header ---------- */
+[data-theme='minimalist'] .brand__name {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ---------- Layout: left-aligned, generous whitespace ---------- */
+[data-theme='minimalist'] .timer-page {
+  grid-template-columns: 1fr;
+  padding-top: 8vh;
+}
+[data-theme='minimalist'] .timer-stage {
+  align-items: flex-start;
+  gap: 40px;
+}
+@media (min-width: 900px) {
+  [data-theme='minimalist'] .timer-stage {
+    margin-left: 8%;
+  }
+}
+
+[data-theme='minimalist'] .mode-tab {
+  border: none;
+  background: transparent;
+  padding: 4px 0;
+  margin-right: 24px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  transition: opacity var(--dur), color var(--dur);
+}
+[data-theme='minimalist'] .mode-tab[aria-pressed='true'] {
+  color: var(--ink);
+}
+
+/* ---------- Face ---------- */
+[data-theme='minimalist'] .timer-face-wrap {
+  width: min(100%, 440px);
+  padding: 0;
+}
+.min-track {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.min-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+[data-theme='minimalist'] .face__digits {
+  font-size: clamp(4rem, 19vw, 7rem);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+[data-theme='minimalist'] .face__mode {
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+[data-theme='minimalist'] .timer-status {
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+/* ---------- Session dots: short hairlines ---------- */
+[data-theme='minimalist'] .session-dot {
+  width: 24px;
+  height: 1px;
+  border: none;
+  border-radius: 0;
+  background: var(--line);
+}
+[data-theme='minimalist'] .session-dot.is-done {
+  background: var(--ink);
+}
+
+/* ---------- Celebration ---------- */
+.min-celebration__line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  animation: min-fade 1.6s linear both;
+}
+@keyframes min-fade {
+  0%, 100% { opacity: 0; }
+  30%, 70% { opacity: 1; }
+}

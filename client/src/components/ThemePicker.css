@@ -1,0 +1,132 @@
+.theme-picker {
+  position: relative;
+}
+
+.theme-picker__toggle img {
+  width: 22px;
+  height: 22px;
+}
+
+.theme-picker__menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 50;
+  width: min(320px, calc(100vw - 32px));
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+  animation: menu-in var(--dur) var(--ease) both;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.theme-picker__option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px;
+  border: 2px solid transparent;
+  border-radius: calc(var(--radius-card) * 0.6);
+  background: transparent;
+  text-align: left;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.theme-picker__option:hover {
+  background: var(--surface-2);
+}
+
+.theme-picker__option[aria-pressed='true'] {
+  border-color: var(--ink);
+}
+
+.theme-picker__swatch {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Each option previews its own theme's personality a little */
+.theme-picker__option[data-option='jolly'] .theme-picker__swatch { transform: rotate(-4deg); border-radius: 50%; }
+.theme-picker__option[data-option='makeup'] .theme-picker__swatch { border-radius: 50% 50% 14px 14px; }
+.theme-picker__option[data-option='cat'] .theme-picker__swatch { border-radius: 48% 52% 44% 56% / 54% 44% 56% 46%; }
+.theme-picker__option[data-option='aesthetic'] .theme-picker__swatch { border-radius: 2px; transform: rotate(2deg); }
+.theme-picker__option[data-option='minimalist'] .theme-picker__swatch { border-radius: 0; border-color: #2a2a2a; }
+
+.theme-picker__text {
+  display: grid;
+  gap: 2px;
+}
+
+.theme-picker__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+.theme-picker__tagline {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  line-height: 1.3;
+}
+
+/* ---------- The color wipe between themes ---------- */
+.theme-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  background: var(--wipe-color);
+  pointer-events: none;
+}
+
+.theme-wipe.is-cover {
+  animation: wipe-cover 520ms cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+.theme-wipe.is-reveal {
+  animation: wipe-reveal 420ms ease-out both;
+}
+
+.theme-wipe__emblem {
+  width: 84px;
+  height: 84px;
+  animation: wipe-emblem 520ms cubic-bezier(0.34, 1.56, 0.64, 1) 120ms both;
+}
+
+@keyframes wipe-cover {
+  from {
+    clip-path: circle(0 at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(150vmax at var(--x) var(--y));
+  }
+}
+
+@keyframes wipe-reveal {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes wipe-emblem {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-20deg);
+  }
+}

@@ -1,0 +1,39 @@
+.site-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand__mark {
+  width: 34px;
+  height: 34px;
+}
+
+.brand__name {
+  display: inline-block;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Minimalist has no illustrations, so its mark is hidden */
+[data-theme='minimalist'] .brand__mark {
+  display: none;
+}

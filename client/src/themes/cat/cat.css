@@ -1,0 +1,456 @@
+/* ===========================================================
+   CAT — cream, peach and soft grey. Rounded, squishy shapes,
+   handwritten type, and slow, sleepy motion.
+   =========================================================== */
+
+[data-theme='cat'] {
+  /* Palette */
+  --bg: #fbf4ea;
+  --surface: #fffdf8;
+  --surface-2: #f6eadb;
+  --ink: #3b302a;
+  --ink-muted: #6e625a;
+  --primary: #a9532f; /* terracotta: AA with white text */
+  --primary-ink: #ffffff;
+  --peach: #f6b99a;
+  --fur: #f2b48f;
+  --fur-stripe: #de936a;
+  --soft-grey: #b9b3ad;
+  --paw-pink: #ebc2b5;
+  --line: #d8cbbd;
+  --focus: #a9532f;
+  --selection: #f6b99a;
+
+  /* Type */
+  --font-display: 'Patrick Hand', 'Comic Neue', cursive;
+  --font-body: 'Varela Round', system-ui, sans-serif;
+  --font-digits: 'Patrick Hand', cursive;
+  --font-button: 'Patrick Hand', cursive;
+  --display-weight: 400;
+  --digits-weight: 400;
+  --btn-weight: 400;
+  --btn-size: 1.2rem;
+
+  /* Shape: soft, slightly lopsided blobs */
+  --radius-card: 30px 26px 32px 24px / 26px 32px 24px 30px;
+  --radius-btn: 22px 18px 24px 16px / 18px 24px 16px 22px;
+  --radius-icon-btn: 48% 52% 46% 54% / 52% 46% 54% 48%;
+  --radius-input: 16px;
+  --border-card: 2px solid #e2d3c3;
+  --btn-border: 2px solid var(--ink);
+  --btn-bg: #fffdf8;
+  --btn-ink: var(--ink);
+  --input-border: 2px solid #d8cbbd;
+  --icon-stroke: 2;
+
+  /* Depth: warm, fuzzy shadows */
+  --shadow-card: 0 10px 26px -10px rgba(169, 83, 47, 0.28);
+  --shadow-btn: 0 6px 14px -6px rgba(169, 83, 47, 0.4);
+  --shadow-btn-active: 0 2px 6px -2px rgba(169, 83, 47, 0.4);
+  --shadow-dialog: 0 24px 50px -18px rgba(169, 83, 47, 0.4);
+  --backdrop: rgba(59, 48, 42, 0.32);
+
+  /* Motion: sleepy and soft */
+  --ease: cubic-bezier(0.45, 0, 0.25, 1);
+  --dur: 650ms;
+  --dur-slow: 800ms;
+  --btn-hover-transform: scale(1.04, 0.97);
+  --btn-active-transform: scale(0.95, 1.04);
+  --dialog-from: translateY(20px) scale(0.97);
+
+  /* Details */
+  --scroll-track: #fbf4ea;
+  --scroll-thumb: #e7b898;
+  --grain-opacity: 0.04;
+}
+
+/* Faint paw-print wallpaper */
+[data-theme='cat'] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23A9532F' fill-opacity='0.05'%3E%3Cellipse cx='30' cy='34' rx='7' ry='6'/%3E%3Ccircle cx='22' cy='25' r='3'/%3E%3Ccircle cx='27.5' cy='20' r='3'/%3E%3Ccircle cx='33.5' cy='20' r='3'/%3E%3Ccircle cx='38' cy='25' r='3'/%3E%3Cg transform='translate(56 56) rotate(20)'%3E%3Cellipse cx='14' cy='18' rx='7' ry='6'/%3E%3Ccircle cx='6' cy='9' r='3'/%3E%3Ccircle cx='11.5' cy='4' r='3'/%3E%3Ccircle cx='17.5' cy='4' r='3'/%3E%3Ccircle cx='22' cy='9' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------- Header ---------- */
+[data-theme='cat'] .brand__name {
+  font-size: 2.1rem;
+  color: var(--primary);
+}
+
+/* ---------- Mode tabs: squishy pillows ---------- */
+[data-theme='cat'] .mode-tab {
+  border: 2px solid #e2d3c3;
+  border-radius: var(--radius-btn);
+  background: var(--surface);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+[data-theme='cat'] .mode-tab[aria-pressed='true'] {
+  background: var(--peach);
+  border-color: var(--ink);
+}
+
+/* ---------- Timer face ---------- */
+.cat-plate {
+  fill: #fffdf8;
+  stroke: #ecdfd1;
+  stroke-width: 3;
+  filter: drop-shadow(0 14px 24px rgba(169, 83, 47, 0.18));
+}
+.cat-track {
+  fill: none;
+  stroke: #ece0d3;
+  stroke-width: 2;
+  stroke-dasharray: 2 9;
+  stroke-linecap: round;
+}
+.cat-paw {
+  fill: #ddd5cd;
+  transition: fill 0.9s var(--ease);
+}
+.cat-paw.is-done {
+  fill: var(--primary);
+}
+.cat-paw.is-done:nth-of-type(2n) {
+  fill: #c97a55;
+}
+.cat-tail-pointer {
+  transition: transform 0.9s var(--ease);
+}
+.cat-tail-pointer path {
+  fill: none;
+  stroke: var(--fur);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.cat-tail-pointer .cat-tail-pointer__tip {
+  stroke: var(--fur-stripe);
+}
+.cat-tail-pointer__sway {
+  transform-box: fill-box;
+  transform-origin: 30% 100%;
+  animation: tail-sway 3.6s ease-in-out infinite;
+}
+.cat-face.is-running .cat-tail-pointer__sway {
+  animation-duration: 2.2s;
+}
+[data-theme='cat'] .face__digits {
+  font-size: clamp(3.6rem, 16vw, 5.2rem);
+  color: var(--ink);
+}
+[data-theme='cat'] .face__mode {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+/* ---------- The cat ---------- */
+.cat-mascot {
+  position: absolute;
+  left: -16%;
+  bottom: -10%;
+  width: 50%;
+  transform-origin: 50% 100%;
+}
+.cat-mascot svg {
+  overflow: visible;
+}
+.cat-body {
+  fill: var(--fur);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.cat-stripe {
+  fill: none;
+  stroke: var(--fur-stripe);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.cat-ear-inner {
+  fill: #f7c6c0;
+}
+.cat-ink {
+  fill: var(--ink);
+}
+.cat-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+.cat-line--thin {
+  stroke-width: 2;
+}
+.cat-whisker {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+.cat-blush {
+  fill: #f3a6a0;
+  opacity: 0.55;
+}
+.cat-nose {
+  fill: #e58f8f;
+}
+.cat-tail {
+  fill: none;
+  stroke: var(--fur);
+  stroke-width: 11;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+}
+.cat-heart {
+  fill: #e58f8f;
+  animation: heart-float 2.4s ease-in-out infinite;
+}
+.cat-purr-lines path {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: purr-lines 1.2s ease-in-out infinite;
+}
+.cat-purr-lines path:last-child {
+  animation-delay: 0.3s;
+}
+.cat-z text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  fill: var(--ink-muted);
+  animation: z-drift 3.2s ease-in-out infinite;
+}
+.cat-z text:last-child {
+  font-size: 13px;
+  animation-delay: 1.4s;
+}
+.cat-head {
+  transform-box: fill-box;
+  transform-origin: 70% 90%;
+  transition: transform 0.9s var(--ease);
+}
+
+/* Pose: sleeping (head down, slow breathing) */
+.cat-mascot[data-pose='sleep'] svg {
+  animation: cat-breathe 4.4s ease-in-out infinite;
+}
+.cat-mascot[data-pose='sleep'] .cat-head {
+  transform: translate(8px, 16px) rotate(-12deg);
+}
+/* Pose: awake (blink + tail swish) */
+.cat-mascot[data-pose='awake'] .cat-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cat-blink 5s infinite;
+}
+.cat-mascot[data-pose='awake'] .cat-tail {
+  animation: tail-swish 2.8s ease-in-out infinite;
+}
+/* Pose: the big stretch after pressing start */
+.cat-mascot[data-pose='stretch'] svg {
+  transform-origin: 50% 100%;
+  animation: cat-stretch 1.6s var(--ease);
+}
+/* Pose: purring on a break */
+.cat-mascot[data-pose='purr'] svg {
+  animation: cat-purr 0.18s linear infinite;
+}
+/* Pose: curled up after a finished session */
+.cat-mascot[data-pose='curled'] svg {
+  animation: cat-curl-in 1s var(--ease);
+}
+
+@keyframes cat-breathe {
+  0%, 100% { transform: scale(1, 1); }
+  50% { transform: scale(1.015, 1.04); }
+}
+@keyframes cat-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes tail-swish {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(-14deg); }
+}
+@keyframes tail-sway {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(8deg); }
+}
+@keyframes cat-stretch {
+  0% { transform: scale(1, 1); }
+  35% { transform: scale(1.18, 0.84) translateX(-6px); }
+  70% { transform: scale(0.96, 1.06); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes cat-purr {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(0.5px, -0.4px); }
+  75% { transform: translate(-0.5px, 0.4px); }
+}
+@keyframes cat-curl-in {
+  from { transform: scale(0.85); opacity: 0.4; }
+}
+@keyframes purr-lines {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+@keyframes z-drift {
+  0% { opacity: 0; transform: translate(0, 6px); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translate(8px, -12px); }
+}
+@keyframes heart-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ---------- Session dots become paw prints ---------- */
+[data-theme='cat'] .session-dot {
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 0;
+  background: #ddd5cd;
+  -webkit-mask: var(--paw-mask) center / contain no-repeat;
+  mask: var(--paw-mask) center / contain no-repeat;
+  --paw-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='15' rx='5' ry='4.2'/%3E%3Cellipse cx='5.6' cy='9.4' rx='2' ry='2.6'/%3E%3Cellipse cx='9.6' cy='5.4' rx='2' ry='2.6'/%3E%3Cellipse cx='14.4' cy='5.4' rx='2' ry='2.6'/%3E%3Cellipse cx='18.4' cy='9.4' rx='2' ry='2.6'/%3E%3C/svg%3E");
+}
+[data-theme='cat'] .session-dot:nth-child(2n) {
+  transform: translateY(-5px) rotate(12deg);
+}
+[data-theme='cat'] .session-dot.is-done {
+  background: var(--primary);
+}
+
+/* ---------- Quote card: a note with a paw stamp ---------- */
+[data-theme='cat'] .quote-card {
+  transform: rotate(-1.2deg);
+  background: #fffdf8;
+}
+[data-theme='cat'] .quote-card::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  top: -16px;
+  width: 42px;
+  height: 42px;
+  background: var(--primary);
+  opacity: 0.85;
+  transform: rotate(18deg);
+  -webkit-mask: var(--paw-mask) center / contain no-repeat;
+  mask: var(--paw-mask) center / contain no-repeat;
+  --paw-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='15' rx='5' ry='4.2'/%3E%3Cellipse cx='5.6' cy='9.4' rx='2' ry='2.6'/%3E%3Cellipse cx='9.6' cy='5.4' rx='2' ry='2.6'/%3E%3Cellipse cx='14.4' cy='5.4' rx='2' ry='2.6'/%3E%3Cellipse cx='18.4' cy='9.4' rx='2' ry='2.6'/%3E%3C/svg%3E");
+}
+[data-theme='cat'] .quote-card.is-joke {
+  background: #fdf0e6;
+  transform: rotate(1deg);
+}
+[data-theme='cat'] .quote-card__label {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+[data-theme='cat'] .quote-card__text {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+[data-theme='cat'] .quote-card__text.is-new {
+  animation: cat-settle 0.9s var(--ease);
+}
+@keyframes cat-settle {
+  from { opacity: 0; transform: translateY(8px) rotate(-1deg); }
+}
+
+/* ---------- Backdrop ---------- */
+.cat-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(8px);
+}
+.cat-glow--1 {
+  top: -120px;
+  right: 10%;
+  width: 360px;
+  height: 280px;
+  background: rgba(246, 185, 154, 0.32);
+}
+.cat-glow--2 {
+  bottom: -100px;
+  right: -60px;
+  width: 320px;
+  height: 260px;
+  background: rgba(185, 179, 173, 0.25);
+}
+.cat-trail-paw {
+  position: absolute;
+  width: 28px;
+  fill: rgba(169, 83, 47, 0.14);
+}
+.cat-yarn {
+  position: absolute;
+  right: 3%;
+  bottom: 4%;
+  width: 150px;
+  animation: yarn-roll 9s ease-in-out infinite;
+}
+.cat-yarn__ball {
+  fill: #e7a9a0;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+.cat-yarn__line,
+.cat-yarn__thread {
+  fill: none;
+  stroke: #b9665c;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.cat-yarn__thread {
+  stroke: #e7a9a0;
+  stroke-width: 3;
+}
+@keyframes yarn-roll {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(4deg) translateX(-6px); }
+}
+@media (max-width: 899px) {
+  .cat-yarn {
+    width: 90px;
+    opacity: 0.7;
+  }
+  .cat-trail-paw:nth-child(n + 6) {
+    display: none;
+  }
+}
+
+/* ---------- Celebration ---------- */
+.cat-parade__paw {
+  position: absolute;
+  width: 34px;
+  fill: var(--primary);
+  opacity: 0;
+  transform: rotate(90deg);
+  animation: paw-step 2.8s var(--ease) both;
+}
+.cat-parade__heart {
+  position: absolute;
+  bottom: 18%;
+  width: 26px;
+  fill: #e58f8f;
+  opacity: 0;
+  animation: heart-rise 2.6s ease-out both;
+}
+@keyframes paw-step {
+  0% { opacity: 0; transform: rotate(90deg) scale(0.6); }
+  15% { opacity: 0.9; transform: rotate(90deg) scale(1); }
+  75% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+@keyframes heart-rise {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-40vh) scale(1.1) rotate(10deg); }
+}

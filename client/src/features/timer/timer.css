@@ -1,0 +1,129 @@
+/* Layout and structure of the timer page. Colors, fonts and personality
+   come from the theme files; this file only arranges things. */
+
+.timer-page {
+  display: grid;
+  gap: 48px;
+  padding-top: 16px;
+}
+
+/* Desktop: timer on the left, a narrower card column on the right that
+   starts lower down, so the composition is deliberately off-balance. */
+@media (min-width: 900px) {
+  .timer-page {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.85fr);
+    gap: 64px;
+    align-items: start;
+    padding-top: 28px;
+  }
+  .timer-aside {
+    margin-top: 120px;
+  }
+}
+
+.timer-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mode-tab {
+  min-height: 40px;
+  padding: 6px 16px;
+  color: var(--ink);
+  transition:
+    transform var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.timer-face-wrap {
+  width: min(100%, 380px);
+  /* room for mascots that peek outside the dial */
+  padding: 16px 28px;
+}
+
+.face {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+/* Only the dial itself fills the face; mascots and decorations size themselves. */
+.face__dial {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.face svg {
+  overflow: visible;
+}
+
+.face__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.face__digits {
+  font-family: var(--font-digits);
+  font-weight: var(--digits-weight, 400);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.face__mode {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+}
+
+.session-dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 24px;
+}
+
+.session-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-controls__main {
+  min-width: 170px;
+  min-height: 56px;
+  font-size: 1.15rem;
+}
+
+.timer-status {
+  max-width: 34ch;
+  min-height: 1.6em;
+  text-align: center;
+  color: var(--ink-muted);
+}

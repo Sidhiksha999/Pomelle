@@ -1,0 +1,18 @@
+/* Full-screen layers that sit behind (backdrops) or in front of (celebrations)
+   the app. Neither can be clicked, so they never get in the way. */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  overflow: hidden;
+  pointer-events: none;
+}

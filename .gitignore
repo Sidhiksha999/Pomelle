@@ -19,3 +19,6 @@ Thumbs.db
 # Editor folders
 .vscode/
 .idea/
+
+# Local Claude Code preview config
+.claude/
