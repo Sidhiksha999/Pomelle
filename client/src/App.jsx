@@ -9,6 +9,8 @@ import { useCurrentTheme } from './components/hooks/useCurrentTheme';
 import { useHashRoute } from './components/hooks/useHashRoute';
 import { useThemeEffects } from './themes/useThemeEffects';
 import { useTimerEngine } from './features/timer/useTimerEngine';
+import { useMusicEngine } from './features/music/useMusicEngine';
+import MusicDock from './features/music/MusicDock';
 
 const PAGES = {
   timer: TimerPage,
@@ -17,9 +19,10 @@ const PAGES = {
 };
 
 export default function App() {
-  // These two run for the whole life of the app, whatever page is showing.
+  // These run for the whole life of the app, whatever page is showing.
   useThemeEffects();
   useTimerEngine();
+  useMusicEngine();
 
   const theme = useCurrentTheme();
   const route = useHashRoute();
@@ -58,6 +61,8 @@ export default function App() {
           <Page />
         </main>
       </div>
+      {/* The music player lives outside the pages so it never stops on navigation. */}
+      <MusicDock />
       <CelebrationLayer />
       <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </>

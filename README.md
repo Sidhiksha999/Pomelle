@@ -2,7 +2,7 @@
 
 A Pomodoro study companion with five little worlds to study in: **Jolly**, **Makeup**, **Cat**, **Aesthetic** and **Minimalist**.
 
-> **Build status:** Stages 1–3 of 6 are done: the theme system, the timer, tasks, stats and the AI coach. Music and the study-methods library come in the next stages.
+> **Build status:** Stages 1–4 of 6 are done: the theme system, the timer, tasks, stats, the AI coach and music. The study-methods library and the final polish come next.
 
 ## Features so far
 
@@ -14,6 +14,11 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Goal → mind map.** Describe a goal and get an interactive map of milestones and topics with time estimates. Drag bubbles, pan, zoom, edit, add or delete branches, mark things done, and start a Pomodoro on any bubble. There's also an outline view.
   - **Notes → flashcards.** Paste your notes, choose how many cards and how hard. Study with flip cards and a spaced-repetition schedule, take a multiple-choice quiz, and edit every card.
   - Both also work without the AI: start a blank map or write your own deck.
+- **Music mini-player** in the bottom-right corner that keeps playing while you move between pages:
+  - **YouTube**: paste any video or playlist link, or pick a study stream.
+  - **Spotify**: paste a playlist, album or track link. Full songs play when you're logged in to Spotify in the same browser; otherwise Spotify plays 30-second previews.
+  - **Ambient mixer**: rain, thunder, forest, ocean, café, fireplace, wind, typing, white and brown noise, each with its own volume. Includes ready-made mixes ("Rainy library"…), your own saved mixes and a sleep timer.
+  - **Quieter during breaks** (on by default): sounds and YouTube drop to 30% while a break runs; Spotify pauses and resumes afterwards.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
 - Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
 
@@ -66,6 +71,20 @@ Good to know:
 - **Busy times.** Each request is retried a few times, but never for longer than about 45 seconds. After that the coach shows a friendly "try again in a minute" message.
 - **Saving quota.** Answers are cached on the server and in the browser, so asking for exactly the same map or deck again doesn't use any more of your free quota.
 
+## Ambient sounds (optional real recordings)
+
+Every ambient sound is **generated in your browser** with the Web Audio API, so the mixer works with no downloads. If you'd like real recordings instead, you can swap in your own files at any time:
+
+1. Download a loopable, royalty-free recording. Good free sources:
+   - **Pixabay Sound Effects**: https://pixabay.com/sound-effects/ (no attribution needed)
+   - **Freesound**: https://freesound.org/ (filter by the *Creative Commons 0* license)
+2. Convert it to **MP3** if needed, and name it after the sound's id:
+   `rain.mp3`, `thunder.mp3`, `forest.mp3`, `ocean.mp3`, `cafe.mp3`, `fireplace.mp3`, `wind.mp3`, `keyboard.mp3`, `white.mp3`, `brown.mp3`
+3. Put it in **`client/public/audio/`** (for example `client/public/audio/rain.mp3`).
+4. Reload the page. Pomelle uses your file for that sound and keeps generating the others.
+
+Tips: 30 seconds to 2 minutes is plenty, and recordings without obvious events (a single loud thunderclap, a voice) loop most naturally.
+
 ## Project layout
 
 ```
@@ -74,13 +93,13 @@ pomelle/
 │   ├── index.html
 │   └── src/
 │       ├── components/     shared pieces: header, theme picker, settings, icons, hooks
-│       ├── features/       one folder per feature (timer, tasks, stats, quotes, coach)
+│       ├── features/       one folder per feature (timer, tasks, stats, quotes, coach, music)
 │       ├── themes/         everything that makes each theme its own world
 │       │   ├── index.js    the theme registry (names, voice, cursors, icons)
 │       │   ├── base.css    shared foundations that read the theme variables
 │       │   ├── sounds.js   completion chimes, made with the Web Audio API
 │       │   └── jolly/ makeup/ cat/ aesthetic/ minimalist/
-│       ├── data/           quotes and jokes
+│       ├── data/           quotes and jokes, music suggestions and mixes
 │       └── store/          Redux Toolkit slices + localStorage saving
 └── server/                 the Express API: the only code that talks to Gemini
     ├── index.js            routes, error handling, /api/health
@@ -115,6 +134,10 @@ pomelle/
 ### Add quotes or jokes
 
 Open `client/src/data/quotes.js` and add a line to the theme's `quotes` or `jokes` list. Write jokes as **"Question? Answer."** The card splits them at the first `?` so the answer can be revealed with a button.
+
+### Change the music suggestions or mixes
+
+Open `client/src/data/music.js`. `YOUTUBE_SUGGESTIONS` and `SPOTIFY_SUGGESTIONS` are plain lists of names and links, and `BUILT_IN_PRESETS` are the ready-made mixes (each sound's volume from 0 to 1). Live streams sometimes end; if one stops working, replace its link.
 
 ### Add a new theme
 

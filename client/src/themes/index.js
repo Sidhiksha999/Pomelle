@@ -100,6 +100,12 @@ export const THEMES = [
         clear: 'Wipe the scoreboard',
         clearConfirm: 'Wipe every session from the scoreboard? This can’t be undone.',
       },
+      music: {
+        title: 'Tunes',
+        idle: 'Tunes',
+        playing: 'Jamming!',
+        mixerTitle: 'Sound mixer',
+      },
       coach: {
         title: 'Your study sidekick',
         intro: 'Tell it a goal and get a plan. Paste your notes and get flashcards.',
@@ -184,6 +190,12 @@ export const THEMES = [
         unsorted: 'Nude (no subject)',
         clear: 'Remove all looks',
         clearConfirm: 'Remove your entire glow report? This can’t be undone.',
+      },
+      music: {
+        title: 'Soundtrack',
+        idle: 'Soundtrack',
+        playing: 'Now playing',
+        mixerTitle: 'Ambience',
       },
       coach: {
         title: 'Your beauty consultant',
@@ -270,6 +282,12 @@ export const THEMES = [
         clear: 'Tear out the pages',
         clearConfirm: 'Tear every page out of the cat’s diary? This can’t be undone.',
       },
+      music: {
+        title: 'Cat radio',
+        idle: 'Cat radio',
+        playing: 'Purring along',
+        mixerTitle: 'Cozy sounds',
+      },
       coach: {
         title: 'The wise old cat',
         intro: 'Tell her what you’re hunting for and she’ll map the trail. Give her your notes and she’ll make flashcards.',
@@ -355,6 +373,12 @@ export const THEMES = [
         clear: 'erase the record',
         clearConfirm: 'erase every session from the record? this can’t be undone.',
       },
+      music: {
+        title: 'sounds',
+        idle: 'sounds',
+        playing: 'playing',
+        mixerTitle: 'ambience',
+      },
       coach: {
         title: 'a quiet guide',
         intro: 'write down a goal and see its shape. leave your notes here and they’ll become cards.',
@@ -426,6 +450,12 @@ export const THEMES = [
         unsorted: 'No subject',
         clear: 'Clear history',
         clearConfirm: 'Clear all session history? This cannot be undone.',
+      },
+      music: {
+        title: 'Audio',
+        idle: 'Audio',
+        playing: 'Playing',
+        mixerTitle: 'Ambient',
       },
       coach: {
         title: 'Coach',

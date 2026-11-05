@@ -97,6 +97,76 @@ const PATHS = {
     </>
   ),
   minus: <path d="M5.1 12.1h13.8" />,
+  rain: (
+    <>
+      <path d="M7 14.6a3.9 3.9 0 0 1-.4-7.8 5.2 5.2 0 0 1 10.1 1.3 3.3 3.3 0 0 1 .4 6.5z" strokeLinejoin="round" />
+      <path d="M8.4 17.4l-.9 2.2M12.2 17.4l-.9 2.3M16 17.4l-.9 2.2" />
+    </>
+  ),
+  thunder: (
+    <>
+      <path d="M7 13.8a3.9 3.9 0 0 1-.4-7.8 5.2 5.2 0 0 1 10.1 1.3 3.3 3.3 0 0 1 .4 6.5" strokeLinejoin="round" />
+      <path d="M12.6 12.4l-2.6 4.2h3.4l-2.2 4.2" strokeLinejoin="round" />
+    </>
+  ),
+  tree: (
+    <>
+      <path d="M12 3.6l5.6 8.1h-3l3.6 5h-12.4l3.6-5h-3z" strokeLinejoin="round" />
+      <path d="M12 16.8v3.8" />
+    </>
+  ),
+  wave: (
+    <>
+      <path d="M3.4 9.6c2.2-2 4-2 6 0s4 2 6 0 3.4-2 5.2-.4" />
+      <path d="M3.4 15c2.2-2 4-2 6 0s4 2 6 0 3.4-2 5.2-.4" />
+    </>
+  ),
+  cup: (
+    <>
+      <path d="M5.4 9.4h11v4.8a4.6 4.6 0 0 1-4.6 4.6h-1.8a4.6 4.6 0 0 1-4.6-4.6z" strokeLinejoin="round" />
+      <path d="M16.4 10.6h1.3a2.1 2.1 0 0 1 0 4.2h-1.6" />
+      <path d="M9 3.8c-.8 1.2.8 1.8 0 3M12.6 3.8c-.8 1.2.8 1.8 0 3" />
+    </>
+  ),
+  flame: (
+    <path d="M12 3.4c.6 3-3.8 5.2-3.8 9.6a3.9 3.9 0 0 0 7.8 0c0-1.8-1-3-1.6-3.8-.3 1.4-1 2-1.8 2.2.8-2.6.6-5.6-.6-8z" strokeLinejoin="round" />
+  ),
+  wind: (
+    <>
+      <path d="M3.6 9.2h10.2a2.6 2.6 0 1 0-2.5-3.2" />
+      <path d="M3.6 13.4h14.2a2.7 2.7 0 1 1-2.6 3.4" />
+      <path d="M3.6 17h6" />
+    </>
+  ),
+  keyboard: (
+    <>
+      <rect x="2.8" y="6.6" width="18.4" height="11" rx="2.2" />
+      <path d="M6.4 10.2h.1M9.6 10.2h.1M12.8 10.2h.1M16 10.2h.1M7.6 14.2h8.8" />
+    </>
+  ),
+  noise: <path d="M3 12.4l1.6-3.6 1.8 7 1.8-9.4 1.8 11 1.8-8.6 1.8 6.6 1.8-8.2 1.8 9.6 1.8-6.4 1.4 2" strokeLinejoin="round" />,
+  'noise-low': <path d="M3 12c1.4-3 2.8-3 4.2 0s2.8 3 4.2 0 2.8-3 4.2 0 2.8 3 4.2 0" />,
+  moon: <path d="M15.8 4.6a7.6 7.6 0 1 0 3.8 10.6 6 6 0 0 1-3.8-10.6z" strokeLinejoin="round" />,
+  music: (
+    <>
+      <path d="M9.2 17.2V5.8l9.6-2v11.2" strokeLinejoin="round" />
+      <ellipse cx="6.8" cy="17.4" rx="2.6" ry="2.1" />
+      <ellipse cx="16.4" cy="15.2" rx="2.6" ry="2.1" />
+    </>
+  ),
+  video: (
+    <>
+      <rect x="3" y="5.8" width="18" height="12.6" rx="3.4" />
+      <path d="M10.4 9.4v5.6l4.6-2.8z" strokeLinejoin="round" />
+    </>
+  ),
+  disc: (
+    <>
+      <circle cx="12" cy="12" r="8.6" />
+      <circle cx="12" cy="12" r="2.4" />
+      <path d="M7.2 9.4a5.6 5.6 0 0 1 3-2.8" />
+    </>
+  ),
   sparkle: <path d="M12 3.4c.5 4.5 2.1 7.6 8.6 8.6-6.5 1-8.1 4.1-8.6 8.6-.5-4.5-2.1-7.6-8.6-8.6 6.5-1 8.1-4.1 8.6-8.6z" strokeLinejoin="round" />,
   plus: (
     <>
