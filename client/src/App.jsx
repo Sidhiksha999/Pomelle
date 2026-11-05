@@ -13,6 +13,7 @@ import { useThemeEffects } from './themes/useThemeEffects';
 import { useTimerEngine } from './features/timer/useTimerEngine';
 import { useMusicEngine } from './features/music/useMusicEngine';
 import MusicDock from './features/music/MusicDock';
+import Onboarding from './features/onboarding/Onboarding';
 
 const PAGES = {
   timer: TimerPage,
@@ -70,6 +71,7 @@ export default function App() {
       <MusicDock />
       <CelebrationLayer />
       <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <Onboarding />
     </>
   );
 }

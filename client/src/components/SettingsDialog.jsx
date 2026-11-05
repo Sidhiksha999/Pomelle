@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateSettings } from '../store/timerSlice';
 import {
   setNotificationsOn,
+  setOnboarded,
   setReducedMotion,
   setSoundOn,
   setVolume,
@@ -210,6 +211,22 @@ export default function SettingsDialog({ open, onClose }) {
                 {label}
               </label>
             ))}
+          </div>
+        </fieldset>
+
+        <fieldset className="settings-group">
+          <legend>Welcome tour</legend>
+          <div>
+            <button
+              type="button"
+              className="btn btn--small"
+              onClick={() => {
+                onClose();
+                dispatch(setOnboarded(false));
+              }}
+            >
+              Show the welcome again
+            </button>
           </div>
         </fieldset>
 

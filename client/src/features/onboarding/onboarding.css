@@ -1,0 +1,268 @@
+/* First-run welcome. It sits in a native <dialog>, so focus stays inside it
+   and the page behind can't be clicked until you finish or skip. */
+
+.onboarding {
+  width: min(980px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--shadow-dialog, var(--shadow-card));
+  overflow: auto;
+}
+
+.onboarding::backdrop {
+  background: var(--backdrop);
+  backdrop-filter: blur(3px);
+}
+
+.onboarding[open] {
+  animation: dialog-in var(--dur-slow) var(--ease) both;
+}
+
+.onboarding__inner {
+  display: grid;
+  gap: 22px;
+  padding: 22px;
+}
+
+@media (min-width: 720px) {
+  .onboarding__inner {
+    padding: 32px 40px;
+  }
+}
+
+.onboarding__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.onboarding__progress {
+  display: flex;
+  gap: 6px;
+}
+
+.onboarding__progress span {
+  width: 28px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.onboarding__progress span.is-done {
+  background: var(--primary);
+}
+
+.onboarding__step {
+  display: grid;
+  gap: 14px;
+}
+
+.onboarding__kicker {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.onboarding__step h1 {
+  max-width: 20ch;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+}
+
+.onboarding__lead {
+  max-width: 60ch;
+  color: var(--ink-muted);
+}
+
+.onboarding__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ---------- Theme tiles: each one is a tiny preview of its world ---------- */
+.onboarding__themes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  gap: 14px;
+}
+
+.theme-tile {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  text-align: left;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur) var(--ease),
+    outline-color var(--dur);
+  outline: 3px solid transparent;
+  outline-offset: 4px;
+}
+
+.theme-tile:hover {
+  transform: translateY(-4px);
+}
+
+.theme-tile[aria-checked='true'] {
+  outline-color: var(--focus);
+}
+
+.theme-tile__name {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight, 600);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.theme-tile__tagline {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.theme-tile__swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.theme-tile__swatches span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.theme-tile__sample {
+  margin-top: auto;
+  pointer-events: none;
+}
+
+/* Little tilts so the row of tiles doesn't look stamped out */
+.onboarding__themes li:nth-child(2) .theme-tile { transform: rotate(-1deg); }
+.onboarding__themes li:nth-child(4) .theme-tile { transform: rotate(1deg); }
+.onboarding__themes li:nth-child(5) .theme-tile { transform: none; }
+
+/* ---------- Rhythm choices ---------- */
+.onboarding__rhythms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.rhythm-tile {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  padding: 16px 18px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+}
+
+.rhythm-tile[aria-checked='true'] {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-card);
+}
+
+.rhythm-tile__numbers {
+  font-family: var(--font-digits);
+  font-weight: var(--digits-weight, 400);
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.rhythm-tile__numbers small {
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+}
+
+.rhythm-tile__name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.rhythm-tile__note {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.onboarding__prefs {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.onboarding__prefs label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---------- Tour ---------- */
+.onboarding__tour {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .onboarding__tour {
+    grid-template-columns: 1fr 1fr;
+  }
+  .onboarding__tour li:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.onboarding__tour li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.onboarding__tour strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.onboarding__tour-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--primary);
+}
+
+.onboarding__tour-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+[data-theme='minimalist'] .onboarding__tour-icon {
+  border-radius: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+}

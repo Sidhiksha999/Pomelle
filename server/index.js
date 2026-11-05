@@ -30,7 +30,8 @@ app.use('/api', (req, res) => {
 
 // One place that turns every error into the same JSON shape:
 // { error: 'CODE', message: 'Human-readable explanation' }
-// eslint-disable-next-line no-unused-vars
+// Express recognises an error handler by its four parameters, so `next`
+// must stay in the list even though it isn't used.
 app.use((error, req, res, next) => {
   if (error instanceof AppError) {
     return res.status(error.status).json({ error: error.code, message: error.message });

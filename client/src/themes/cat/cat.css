@@ -160,6 +160,12 @@
 .cat-mascot svg {
   overflow: visible;
 }
+@media (max-width: 480px) {
+  .cat-mascot {
+    left: -10%;
+    width: 44%;
+  }
+}
 .cat-body {
   fill: var(--fur);
   stroke: var(--ink);

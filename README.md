@@ -2,7 +2,7 @@
 
 A Pomodoro study companion with five little worlds to study in: **Jolly**, **Makeup**, **Cat**, **Aesthetic** and **Minimalist**.
 
-> **Build status:** Stages 1–5 of 6 are done: the theme system, the timer, tasks, stats, the AI coach, music and the study-methods library. Final polish and onboarding come next.
+> **Status:** complete. All six build stages are done: themes and timer, tasks and stats, the AI coach, music, the study-methods library, and polish and onboarding.
 
 ## Features so far
 
@@ -33,6 +33,7 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Eisenhower matrix**: sort everything into four boxes (drag and drop or menus) and send items to your tasks.
   - Timed steps in guided sessions count toward your stats.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
+- **A first-run welcome** to pick your theme and focus rhythm, with a short tour. Replay it any time from *Settings → Welcome tour*.
 - Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
 
 ---
@@ -176,7 +177,19 @@ Pages also have a few theme-specific touches in their own stylesheets (look for 
 
 ## Accessibility
 
-- Every theme's text meets WCAG AA contrast.
-- Everything works from the keyboard and focus is always visible. The mind map has an outline view as a list.
-- **Settings → Motion** can reduce animations (or follow your device setting).
+- Every theme's text meets **WCAG AA contrast**. This was checked by measuring every piece of rendered text on every page in all five themes.
+- Every button, link and form field has an accessible name, every page has a main heading, and focus is always visible.
+- Everything works from the keyboard. The mind map has an outline view and arrow-key moving, and flashcards use Space and 1/2/3.
+- **Settings → Motion** can reduce animations (or follow your device setting); the theme switch, confetti and card flips then become simple fades.
 - Finished sessions are announced to screen readers.
+- Layouts are mobile-first and were checked at phone width (375 px) on every page in every theme.
+
+## Troubleshooting
+
+- **The Coach says the server isn't answering.** Start the server in a second terminal: `cd server`, then `npm run dev`.
+- **The Coach says it needs a key.** Follow *Setting up the Gemini API key* above, then restart the server.
+- **"Gemini is busy".** Free-tier models are sometimes overloaded. Wait a minute and press *Try again*; the server already retries and switches between Flash models by itself.
+- **No sound.** Browsers only allow sound after you click something on the page. Press Start once, and check *Settings → Sound*.
+- **A YouTube video won't play.** Some owners don't allow their videos to be embedded on other sites. Try another link.
+- **Spotify only plays 30 seconds.** Log in to Spotify in the same browser.
+- **Start completely fresh.** In your browser's developer tools, under Application → Local Storage, delete the `pomelle:v1` entry and reload.

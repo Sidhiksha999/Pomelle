@@ -48,6 +48,22 @@ textarea {
   color: inherit;
 }
 
+/* ---------- Defaults for optional theme settings ----------
+   Some themes set these, some don't. Resetting them on every [data-theme]
+   element (theme files load after this and override) means a theme preview
+   inside another theme, like the welcome tiles, never inherits the wrong look. */
+[data-theme] {
+  --btn-case: none;
+  --btn-tracking: 0;
+  --btn-size: 1rem;
+  --font-label: var(--font-body);
+  --radius-icon-btn: 50%;
+  --primary-border: var(--ink);
+  --focus-radius: 6px;
+  --scroll-radius: 999px;
+  --display-tracking: 0;
+}
+
 /* ---------- Page ---------- */
 html {
   -webkit-text-size-adjust: 100%;

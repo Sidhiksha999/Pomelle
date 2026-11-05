@@ -103,7 +103,11 @@ export default function TimerPage() {
   const Face = theme.Face;
 
   return (
-    <section className="timer-page" aria-label="Pomodoro timer">
+    <section className="timer-page" aria-labelledby="timer-heading">
+      {/* Screen-reader users jump between pages by their main heading. */}
+      <h1 id="timer-heading" className="visually-hidden">
+        Timer
+      </h1>
       <div className="timer-stage">
         <div className="mode-tabs" role="group" aria-label="Session type">
           {MODE_ORDER.map((m) => (

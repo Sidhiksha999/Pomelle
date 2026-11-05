@@ -9,6 +9,7 @@ export const themeInitialState = {
   volume: 0.7, // 0 to 1
   notificationsOn: false,
   favorites: [], // [{ themeId, kind: 'quote' | 'joke', text, savedAt }]
+  onboarded: false, // has the first-run welcome been shown?
 };
 
 const themeSlice = createSlice({
@@ -29,6 +30,9 @@ const themeSlice = createSlice({
     },
     setNotificationsOn(state, action) {
       state.notificationsOn = action.payload;
+    },
+    setOnboarded(state, action) {
+      state.onboarded = action.payload;
     },
     toggleFavorite: {
       reducer(state, action) {
@@ -54,6 +58,7 @@ export const {
   setSoundOn,
   setVolume,
   setNotificationsOn,
+  setOnboarded,
   toggleFavorite,
 } = themeSlice.actions;
 
