@@ -2,6 +2,13 @@
 // the server). Also keeps a small cache in localStorage so asking for the
 // exact same thing twice doesn't use up any more of the free Gemini quota.
 
+// Where the Pomelle server lives. Set VITE_API_URL when building for the web
+// (see client/.env.production); during local development it falls back to the
+// server on your own computer. Vite bakes this in at build time, so changing
+// it needs a new build/deploy. Any trailing slash is removed.
+const LOCAL_SERVER = 'http://localhost:8787';
+export const API_URL = (import.meta.env.VITE_API_URL || LOCAL_SERVER).replace(/\/+$/, '');
+
 const CACHE_KEY = 'pomelle:ai-cache';
 const CACHE_SIZE = 30;
 
@@ -50,7 +57,7 @@ export async function postCoach(path, body) {
 
   let response;
   try {
-    response = await fetch(`/api${path}`, {
+    response = await fetch(`${API_URL}/api${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -63,7 +70,7 @@ export async function postCoach(path, body) {
   try {
     data = await response.json();
   } catch {
-    // The dev proxy answers with an empty page when the server isn't running.
+    // Something answered, but not with JSON (e.g. a host's error page): treat it as unreachable.
     throw new CoachError('OFFLINE', 'Could not reach the Pomelle server.');
   }
 
@@ -78,7 +85,7 @@ export async function postCoach(path, body) {
 /** { reachable, hasKey } — whether the server is running and has a Gemini key. */
 export async function checkHealth() {
   try {
-    const response = await fetch('/api/health');
+    const response = await fetch(`${API_URL}/api/health`);
     const data = await response.json();
     return { reachable: Boolean(data?.ok), hasKey: Boolean(data?.hasKey) };
   } catch {

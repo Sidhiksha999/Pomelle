@@ -99,6 +99,23 @@ Every ambient sound is **generated in your browser** with the Web Audio API, so 
 
 Tips: 30 seconds to 2 minutes is plenty, and recordings without obvious events (a single loud thunderclap, a voice) loop most naturally.
 
+## Deploying (Vercel + Render)
+
+The live app is two pieces: the client on **Vercel** and the API server on **Render**.
+
+| Where | Setting | Value |
+|---|---|---|
+| Vercel (client) | `VITE_API_URL` | `https://pomelle.onrender.com` (also in `client/.env.production`; a value set in Vercel wins) |
+| Render (server) | `GEMINI_API_KEY` | your key (only here, never in the repo) |
+| Render | `CLIENT_URL` | `https://pomellee.vercel.app` (the site allowed to call the API; separate several with commas) |
+| Render | `GEMINI_MODEL` | optional, defaults to `gemini-3.5-flash` |
+
+Good to know:
+
+- `VITE_API_URL` is baked in when the client is **built**, so after changing it, redeploy on Vercel.
+- To check the server, open `https://pomelle.onrender.com/api/health`. It should say `"ok":true` and `"hasKey":true`.
+- On Render's free plan the server sleeps after about 15 minutes without use. The first request afterwards can take up to a minute while it wakes; the Coach shows "isn't answering" until then, and *Check again* fixes it.
+
 ## Project layout
 
 ```

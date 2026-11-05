@@ -11,8 +11,26 @@ import feynmanRoute from './routes/feynman.js';
 const app = express();
 const PORT = Number(process.env.PORT) || 8787;
 
-// Only the Pomelle client (Vite dev server and preview) may call this API.
-app.use(cors({ origin: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/] }));
+// CORS: which websites may call this API from a browser.
+// - the deployed client, from CLIENT_URL (e.g. https://pomellee.vercel.app;
+//   several can be listed, separated by commas)
+// - any localhost port, for local development
+const clientUrls = (process.env.CLIENT_URL || '')
+  .split(',')
+  .map((url) => url.trim().replace(/\/+$/, '')) // "https://x.app/" → "https://x.app"
+  .filter(Boolean);
+
+const corsOptions = {
+  origin: [...clientUrls, /^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  maxAge: 86400, // browsers may cache the preflight answer for a day
+};
+
+// Before a cross-site POST with JSON, browsers send an OPTIONS "preflight"
+// request. This middleware answers it (204 + the Access-Control-* headers)
+// and adds the right headers to every other response too.
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '100kb' }));
 
 // Lets the client know whether the AI coach is ready. Never reveals the key.
