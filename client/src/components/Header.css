@@ -1,14 +1,28 @@
 .site-header {
   position: relative;
   z-index: 20;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    'brand actions'
+    'nav nav';
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 18px 0;
 }
 
+/* From tablet width the nav sits in the header row, nudged off-center. */
+@media (min-width: 720px) {
+  .site-header {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'brand nav actions';
+    gap: 24px;
+  }
+}
+
 .brand {
+  grid-area: brand;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -27,7 +41,51 @@
   line-height: 1;
 }
 
+.site-nav {
+  grid-area: nav;
+  display: flex;
+  gap: 6px;
+}
+
+@media (min-width: 720px) {
+  .site-nav {
+    padding-left: 24px;
+  }
+}
+
+.site-nav__link {
+  position: relative;
+  padding: 8px 14px;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-decoration: none;
+  border-radius: var(--radius-btn);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.site-nav__link:hover {
+  color: var(--ink);
+}
+
+.site-nav__link[aria-current='page'] {
+  color: var(--ink);
+}
+
+/* The current page gets an underline drawn in each theme's own way. */
+.site-nav__link[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
+  height: var(--nav-mark-height, 3px);
+  background: var(--nav-mark, var(--primary));
+  border-radius: 3px;
+}
+
 .site-header__actions {
+  grid-area: actions;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -36,4 +94,39 @@
 /* Minimalist has no illustrations, so its mark is hidden */
 [data-theme='minimalist'] .brand__mark {
   display: none;
+}
+
+[data-theme='jolly'] .site-nav__link[aria-current='page']::after {
+  height: 8px;
+  bottom: 4px;
+  background: var(--sunny);
+  z-index: -1;
+  transform: rotate(-2deg);
+}
+
+[data-theme='cat'] .site-nav__link {
+  font-size: 1.25rem;
+}
+
+[data-theme='aesthetic'] .site-nav__link,
+[data-theme='minimalist'] .site-nav__link {
+  font-family: var(--font-label, var(--font-body));
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+[data-theme='aesthetic'] .site-nav__link[aria-current='page']::after {
+  height: 1px;
+  background: var(--ink);
+}
+
+[data-theme='minimalist'] .site-nav__link {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+}
+
+[data-theme='minimalist'] .site-nav__link[aria-current='page']::after {
+  height: 1px;
+  background: var(--accent);
 }

@@ -39,13 +39,17 @@ export function useTimerEngine() {
       }
       finished = true;
 
-      const { timer, theme: themeState } = store.getState();
+      const { timer, theme: themeState, tasks } = store.getState();
       const finishedMode = timer.mode;
+      // Credit the session to the task being worked on (if any) and its subject.
+      const activeTask = tasks.items.find((t) => t.id === tasks.activeId);
       dispatch(
         completeSession({
           now,
           finishedMode,
           durationMs: durationFor(finishedMode, timer.settings),
+          taskId: activeTask?.id ?? null,
+          subject: activeTask?.subject ?? '',
         }),
       );
 

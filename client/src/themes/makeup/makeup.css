@@ -61,6 +61,13 @@
   --scroll-track: #fbefea;
   --scroll-thumb: #d79aa5;
   --grain-opacity: 0.03;
+  /* Six-color series for charts and task swatches */
+  --series-1: #b76e79;
+  --series-2: #8c2f4e;
+  --series-3: #e6c3ae;
+  --series-4: #f2b8c6;
+  --series-5: #c98a6b;
+  --series-6: #f3dfc1;
 }
 
 [data-theme='makeup'] body {
@@ -459,4 +466,106 @@
   0% { opacity: 0; transform: scale(0) rotate(0); }
   40% { opacity: 1; transform: scale(1.1) rotate(60deg); }
   100% { opacity: 0; transform: scale(0.4) rotate(120deg); }
+}
+
+/* ---------- Tasks: pans in an eyeshadow palette ---------- */
+[data-theme='makeup'] .task-list__items {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px 12px;
+  padding: 18px 14px;
+  background: linear-gradient(160deg, #4d2a35, #3a1f27 60%, #2f1820);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 30px -16px rgba(58, 31, 39, 0.7);
+}
+[data-theme='makeup'] .task {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 8px;
+  padding: 4px 2px;
+  background: transparent;
+  text-align: center;
+  color: #fbefea;
+}
+[data-theme='makeup'] .task__actions {
+  grid-column: auto;
+}
+[data-theme='makeup'] .task__check {
+  width: 66px;
+  height: 66px;
+  border: 3px solid #e9bcae;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), transparent 38%),
+    var(--task-color);
+  box-shadow:
+    inset 0 -5px 10px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(0, 0, 0, 0.25);
+  color: #3a1f27;
+}
+[data-theme='makeup'] .task__check:hover {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.75), transparent 42%),
+    var(--task-color);
+}
+/* A swatched pan has a little dent where the brush went in. */
+[data-theme='makeup'] .task__check[aria-pressed='true'] {
+  background:
+    radial-gradient(ellipse at 50% 58%, rgba(0, 0, 0, 0.28), transparent 52%),
+    var(--task-color);
+}
+[data-theme='makeup'] .task__check svg {
+  width: 22px;
+  height: 22px;
+  color: #fff8f4;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+}
+[data-theme='makeup'] .task.is-active .task__check {
+  outline: 2px solid #f2b8c6;
+  outline-offset: 4px;
+}
+[data-theme='makeup'] .task__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.98rem;
+  color: #fbefea;
+}
+[data-theme='makeup'] .task.is-done .task__title {
+  color: #cbaaa8;
+}
+[data-theme='makeup'] .task__meta {
+  justify-content: center;
+  color: #e6c3ae;
+}
+[data-theme='makeup'] .task__subject {
+  background: rgba(243, 223, 193, 0.16);
+  color: #f3dfc1;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+[data-theme='makeup'] .task__pom {
+  border-color: #c99197;
+}
+[data-theme='makeup'] .task__pom.is-filled {
+  border-color: #f3dfc1;
+}
+[data-theme='makeup'] .task__now {
+  color: #f2b8c6;
+}
+[data-theme='makeup'] .task__btn {
+  width: 30px;
+  height: 30px;
+  color: #e6c3ae;
+}
+[data-theme='makeup'] .task__btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+[data-theme='makeup'] .task__btn[aria-pressed='true'] {
+  color: #f2b8c6;
+}
+[data-theme='makeup'] .task-list__head h2 {
+  font-style: italic;
 }

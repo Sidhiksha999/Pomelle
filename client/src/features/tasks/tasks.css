@@ -1,0 +1,235 @@
+/* Structure of the task list. Each theme restyles it in its own file. */
+
+.task-list {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+.task-list__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.task-list__head h2 {
+  font-size: 1.5rem;
+}
+
+.task-list__count {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+.task-form {
+  display: grid;
+  gap: 8px;
+}
+
+.task-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-form__subject {
+  flex: 1 1 140px;
+  width: auto;
+}
+
+.task-form__estimate {
+  position: relative;
+  flex: none;
+  width: 88px;
+}
+
+.task-form__estimate .input {
+  padding-left: 34px;
+}
+
+.task-form__hint {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  display: grid;
+  color: var(--ink-muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.task-form__hint svg {
+  width: 18px;
+  height: 18px;
+}
+
+.task-list__empty {
+  color: var(--ink-muted);
+}
+
+.task-list__items {
+  display: grid;
+  gap: 10px;
+}
+
+.task-list__clear {
+  justify-self: start;
+}
+
+/* ---------- One task ---------- */
+.task {
+  --task-color: var(--series-1);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border-radius: calc(var(--radius-card) * 0.6);
+  transition:
+    background-color var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.task[data-swatch='2'] { --task-color: var(--series-2); }
+.task[data-swatch='3'] { --task-color: var(--series-3); }
+.task[data-swatch='4'] { --task-color: var(--series-4); }
+.task[data-swatch='5'] { --task-color: var(--series-5); }
+.task[data-swatch='6'] { --task-color: var(--series-6); }
+
+.task__check {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  transition:
+    background-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.task__check:hover {
+  background: color-mix(in srgb, var(--task-color) 35%, transparent);
+}
+
+.task__check[aria-pressed='true'] {
+  background: var(--task-color);
+}
+
+.task__check svg {
+  width: 16px;
+  height: 16px;
+  --icon-stroke: 3;
+}
+
+.task__body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.task__title {
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.task.is-done .task__title {
+  text-decoration: line-through;
+  color: var(--ink-muted);
+}
+
+.task__edit {
+  min-height: 36px;
+  padding: 4px 8px;
+}
+
+.task__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.task__subject {
+  padding: 0 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--task-color) 30%, transparent);
+  color: var(--ink);
+}
+
+.task__poms {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.task__pom {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--ink-muted);
+  border-radius: 50%;
+}
+
+.task__pom.is-filled {
+  background: var(--task-color);
+  border-color: var(--ink);
+}
+
+.task__now {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.task__actions {
+  display: flex;
+  gap: 2px;
+}
+
+.task__btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-muted);
+  transition:
+    color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.task__btn:hover {
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.task__btn[aria-pressed='true'] {
+  color: var(--primary);
+}
+
+.task__btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* On small screens the action buttons drop below the task name. */
+@media (max-width: 420px) {
+  .task {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .task__actions {
+    grid-column: 2;
+  }
+}

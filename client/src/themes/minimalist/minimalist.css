@@ -63,6 +63,13 @@
   --scroll-thumb: #2a2a2a;
   --scroll-radius: 0;
   --grain-opacity: 0;
+  /* Six-color series for charts and task swatches */
+  --series-1: #edeae4;
+  --series-2: #8a877f;
+  --series-3: #5a5852;
+  --series-4: #bdbab3;
+  --series-5: #ff4d1a;
+  --series-6: #3a3935;
 }
 
 [data-theme='minimalist'] body {
@@ -101,8 +108,15 @@
   gap: 40px;
 }
 @media (min-width: 900px) {
+  [data-theme='minimalist'] .timer-page {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
   [data-theme='minimalist'] .timer-stage {
     margin-left: 8%;
+  }
+  [data-theme='minimalist'] .timer-aside {
+    margin-top: 0;
+    padding-top: 64px;
   }
 }
 
@@ -176,4 +190,71 @@
 @keyframes min-fade {
   0%, 100% { opacity: 0; }
   30%, 70% { opacity: 1; }
+}
+
+/* ---------- Tasks: plain lines ---------- */
+[data-theme='minimalist'] .task-list {
+  max-width: 420px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+[data-theme='minimalist'] .task-list__head h2 {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+[data-theme='minimalist'] .task {
+  padding: 10px 0;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid var(--line);
+}
+[data-theme='minimalist'] .task.is-active {
+  box-shadow: inset 1px 0 0 var(--accent);
+  padding-left: 12px;
+}
+[data-theme='minimalist'] .task__check {
+  width: 16px;
+  height: 16px;
+  border-width: 1px;
+  border-radius: 0;
+}
+[data-theme='minimalist'] .task__check[aria-pressed='true'] {
+  background: var(--ink);
+  color: #000;
+}
+[data-theme='minimalist'] .task__check svg {
+  width: 12px;
+  height: 12px;
+}
+[data-theme='minimalist'] .task__title {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+[data-theme='minimalist'] .task__subject {
+  padding: 0;
+  background: none;
+  color: var(--ink-muted);
+}
+[data-theme='minimalist'] .task__pom {
+  width: 10px;
+  height: 1px;
+  border: none;
+  border-radius: 0;
+  background: var(--line);
+}
+[data-theme='minimalist'] .task__pom.is-filled {
+  background: var(--ink);
+}
+[data-theme='minimalist'] .task__now {
+  font-weight: 400;
+  color: var(--ink);
+}
+[data-theme='minimalist'] .task__btn {
+  border-radius: 0;
+}
+[data-theme='minimalist'] .task__btn:hover {
+  background: transparent;
 }

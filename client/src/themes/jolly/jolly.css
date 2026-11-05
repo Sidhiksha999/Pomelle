@@ -60,6 +60,13 @@
   --scroll-track: #fff6dc;
   --scroll-thumb: #e8432c;
   --grain-opacity: 0.05;
+  /* Six-color series for charts and task swatches */
+  --series-1: #e8432c;
+  --series-2: #4fb3f6;
+  --series-3: #7fd8b4;
+  --series-4: #ffc93c;
+  --series-5: #ff9eb0;
+  --series-6: #f28c38;
 }
 
 /* Soft dotted paper under everything */
@@ -419,4 +426,42 @@
   0% { transform: translate(0, 0) rotate(0); opacity: 1; }
   85% { opacity: 1; }
   100% { transform: translate(var(--drift), 105vh) rotate(var(--spin)); opacity: 0; }
+}
+
+/* ---------- Tasks: a row of stickers ---------- */
+[data-theme='jolly'] .task-list {
+  transform: rotate(-1deg);
+}
+[data-theme='jolly'] .task {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 3px 4px 0 var(--ink);
+}
+[data-theme='jolly'] .task:nth-child(2n) {
+  transform: rotate(0.8deg);
+}
+[data-theme='jolly'] .task:nth-child(3n) {
+  transform: rotate(-0.6deg);
+}
+[data-theme='jolly'] .task.is-active {
+  background: #fff3c4;
+}
+[data-theme='jolly'] .task__check {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+}
+[data-theme='jolly'] .task__check[aria-pressed='true'] {
+  animation: dot-pop 0.5s var(--ease);
+}
+[data-theme='jolly'] .task__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+[data-theme='jolly'] .task__subject {
+  border: 2px solid var(--ink);
+  background: var(--task-color);
+  font-weight: 700;
 }

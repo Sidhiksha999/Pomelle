@@ -2,7 +2,16 @@
 
 A Pomodoro study companion with five little worlds to study in: **Jolly**, **Makeup**, **Cat**, **Aesthetic** and **Minimalist**.
 
-> **Build status:** Stage 1 of 6 (theme system + timer) is done. Tasks and stats, the AI coach, music and the study-methods library come in the next stages.
+> **Build status:** Stages 1–2 of 6 are done: the theme system, the timer, tasks and stats. The AI coach, music and the study-methods library come in the next stages.
+
+## Features so far
+
+- **Five themes**, each with its own timer face, mascot or decorations, fonts, sounds, cursor and voice.
+- **Pomodoro timer** with custom lengths, long breaks every N sessions, auto-start, sounds and notifications.
+- **Tasks** next to the timer. Press the target button on a task to work on it; every focus session you finish is credited to that task and its subject.
+- **Stats** (the *Stats* link in the header): day streak, total focus hours, a weekly bar chart and a subject breakdown, all drawn in the active theme's style.
+- **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
+- Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
 
 ---
 
@@ -39,7 +48,7 @@ pomelle/
 │   ├── index.html
 │   └── src/
 │       ├── components/     shared pieces: header, theme picker, settings, icons, hooks
-│       ├── features/       one folder per feature (timer, quotes, …)
+│       ├── features/       one folder per feature (timer, tasks, stats, quotes)
 │       ├── themes/         everything that makes each theme its own world
 │       │   ├── index.js    the theme registry (names, voice, cursors, icons)
 │       │   ├── base.css    shared foundations that read the theme variables
@@ -76,7 +85,8 @@ Open `client/src/data/quotes.js` and add a line to the theme's `quotes` or `joke
    - Optional: `OceanBackdrop.jsx` (decorations behind the page) and `OceanCelebration.jsx` (what plays when a focus session ends).
 2. Import `ocean.css` in `client/src/main.jsx`.
 3. Add a sound recipe called `ocean` in `client/src/themes/sounds.js`.
-4. Add an entry to the `THEMES` list in `client/src/themes/index.js`, including the `voice` texts.
+4. Add an entry to the `THEMES` list in `client/src/themes/index.js`, including the `voice` texts (timer, tasks and stats wording) and a `chart` bar style (`chunky`, `lipstick`, `paws`, `hatched` or `line`).
+   Define `--series-1` to `--series-6` in your CSS; tasks and charts use them for colors.
 5. If `hasQuotes` is `true`, add an `ocean` section to `client/src/data/quotes.js`.
 
 ## Accessibility

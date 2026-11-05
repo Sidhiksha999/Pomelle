@@ -75,6 +75,33 @@ const PATHS = {
       <path d="M19.5 5.6c-2.6-.9-5.2-.6-7.5 1v12.6c2.3-1.6 4.9-1.9 7.5-1z" strokeLinejoin="round" />
     </>
   ),
+  pencil: (
+    <>
+      <path d="M15.6 4.8l3.6 3.6L8.7 18.9l-4.5 1 1-4.6z" strokeLinejoin="round" />
+      <path d="M13.4 7l3.6 3.6" />
+    </>
+  ),
+  trash: (
+    <>
+      <path d="M4.6 6.8h14.8" />
+      <path d="M9.4 6.6V4.8h5.2v1.8" />
+      <path d="M6.4 7l.9 12.2c.1.9.7 1.4 1.5 1.4h6.4c.8 0 1.4-.5 1.5-1.4L17.6 7" strokeLinejoin="round" />
+      <path d="M10.2 10.6v6.2M13.8 10.6v6.2" />
+    </>
+  ),
+  target: (
+    <>
+      <circle cx="12" cy="12" r="7.8" />
+      <circle cx="12" cy="12" r="3.6" />
+      <circle cx="12" cy="12" r="0.6" fill="currentColor" />
+    </>
+  ),
+  plus: (
+    <>
+      <path d="M12 5.2v13.7" />
+      <path d="M5.1 12.1h13.8" />
+    </>
+  ),
   bell: (
     <>
       <path d="M6.4 16.6V11a5.6 5.6 0 0 1 11.2 0v5.6l1.4 1.6H5z" strokeLinejoin="round" />

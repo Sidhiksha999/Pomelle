@@ -124,8 +124,8 @@ const timerSlice = createSlice({
 
     /**
      * Called by the timer engine when the clock reaches zero.
-     * Payload: { now, finishedMode, durationMs } — the extra fields let other
-     * slices (like stats, later) record what was just finished.
+     * Payload: { now, finishedMode, durationMs, taskId, subject } — the extra
+     * fields let the tasks and stats slices record what was just finished.
      */
     completeSession(state, action) {
       const { now } = action.payload;

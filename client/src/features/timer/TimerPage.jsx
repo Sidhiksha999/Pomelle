@@ -16,6 +16,7 @@ import { useNow } from '../../components/hooks/useNow';
 import { unlockAudio } from '../../themes/sounds';
 import Icon from '../../components/Icon';
 import QuoteCard from '../quotes/QuoteCard';
+import TaskList from '../tasks/TaskList';
 import { formatTime, useFocusCelebration, useJustStarted } from './useTimerMoments';
 import './timer.css';
 
@@ -36,6 +37,7 @@ export default function TimerPage() {
   const theme = useCurrentTheme();
   const timer = useSelector((s) => s.timer);
   const { mode, status, settings, cycleCount } = timer;
+  const activeTask = useSelector((s) => s.tasks.items.find((t) => t.id === s.tasks.activeId));
 
   // Re-render 4× a second while running. The time itself always comes from timestamps.
   const now = useNow(status === STATUS.RUNNING ? 250 : null);
@@ -155,13 +157,18 @@ export default function TimerPage() {
         </div>
 
         <p className="timer-status">{statusLine}</p>
+        {activeTask && (
+          <p className="timer-active-task">
+            <span className="timer-active-task__label">{voice.tasks.activeLabel}</span>
+            <span className="timer-active-task__title">{activeTask.title}</span>
+          </p>
+        )}
       </div>
 
-      {theme.hasQuotes && (
-        <aside className="timer-aside">
-          <QuoteCard />
-        </aside>
-      )}
+      <aside className="timer-aside">
+        {theme.hasQuotes && <QuoteCard />}
+        <TaskList />
+      </aside>
     </section>
   );
 }
