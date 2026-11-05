@@ -49,10 +49,6 @@
   font-size: 1.15rem;
 }
 
-[data-theme='minimalist'] .timer-active-task {
-  justify-content: flex-start;
-  text-align: left;
-}
 
 .timer-stage {
   display: flex;

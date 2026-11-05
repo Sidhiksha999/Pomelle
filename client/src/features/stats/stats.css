@@ -469,7 +469,7 @@
   text-align: left;
 }
 [data-theme='minimalist'] .stats-streak__number {
-  font-weight: 100;
+  font-weight: 300;
   font-size: clamp(5rem, 18vw, 8rem);
   letter-spacing: -0.05em;
 }
@@ -480,7 +480,7 @@
   text-transform: uppercase;
 }
 [data-theme='minimalist'] .stats-figure dd {
-  font-weight: 200;
+  font-weight: 400;
 }
 [data-theme='minimalist'] .stats-card {
   border: none;

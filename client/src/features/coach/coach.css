@@ -1062,7 +1062,7 @@ code {
   background: #000;
 }
 [data-theme='minimalist'] .flashcard__text {
-  font-weight: 200;
+  font-weight: 300;
 }
 [data-theme='minimalist'] .coach-tab[aria-selected='true']::after {
   height: 1px;
