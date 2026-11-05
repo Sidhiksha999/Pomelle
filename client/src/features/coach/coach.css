@@ -1,0 +1,1073 @@
+/* =========================================================
+   AI coach: layout first, then the mind map, then flashcards,
+   then each theme's personality.
+   ========================================================= */
+
+.coach-page {
+  display: grid;
+  gap: 24px;
+  padding-top: 16px;
+}
+
+.coach-hero h1 {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+}
+
+.coach-hero__intro {
+  max-width: 52ch;
+  margin-top: 6px;
+  color: var(--ink-muted);
+}
+
+/* ---------- Notice when the AI isn't available ---------- */
+.coach-notice {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  max-width: 640px;
+  border-left: 6px solid var(--primary);
+}
+
+.coach-notice__lead {
+  font-weight: 600;
+}
+
+.coach-notice__steps {
+  display: grid;
+  gap: 4px;
+  padding-left: 1.3em;
+  list-style: decimal;
+  color: var(--ink-muted);
+}
+
+.coach-notice code,
+.coach-notice a {
+  color: var(--ink);
+}
+
+code {
+  padding: 0 4px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  font-size: 0.9em;
+}
+
+/* ---------- Tabs ---------- */
+.coach-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.coach-tab {
+  position: relative;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.coach-tab[aria-selected='true'] {
+  color: var(--ink);
+}
+
+.coach-tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px 3px 0 0;
+}
+
+/* ---------- Two-column workspace: tools on the left, work on the right ---------- */
+.coach-workspace {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 980px) {
+  .coach-workspace {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: 32px;
+  }
+}
+
+.coach-side,
+.coach-main {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+
+.coach-form {
+  display: grid;
+  gap: 12px;
+}
+
+.coach-form textarea {
+  resize: vertical;
+}
+
+.coach-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.coach-form__difficulty {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* A row of joined buttons (view switchers, difficulty) */
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-btn);
+  overflow: hidden;
+}
+
+.segmented > button,
+.segmented__option span {
+  display: inline-block;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--ink-muted);
+  font: inherit;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.segmented > button + button,
+.segmented__option + .segmented__option span {
+  border-left: 1px solid var(--line);
+}
+
+.segmented > button[aria-pressed='true'],
+.segmented__option input:checked + span {
+  background: var(--primary);
+  color: var(--primary-ink);
+}
+
+.segmented__option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented__option input:focus-visible + span {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+
+/* Saved maps / decks */
+.coach-list {
+  display: grid;
+  gap: 8px;
+}
+
+.coach-list__title {
+  font-size: 1.15rem;
+}
+
+.coach-list ul {
+  display: grid;
+  gap: 6px;
+}
+
+.coach-list__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: calc(var(--radius-card) * 0.5);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.coach-list__item.is-active {
+  background: var(--surface-2);
+}
+
+.coach-list__open {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+}
+
+.coach-list__name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-list__meta {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.coach-empty {
+  max-width: 44ch;
+  padding: 40px 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink-muted);
+}
+
+/* ---------- Errors ---------- */
+.coach-error {
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px;
+  border: 2px dashed var(--primary);
+  border-radius: calc(var(--radius-card) * 0.6);
+  background: var(--surface);
+}
+
+.coach-error p {
+  font-weight: 600;
+}
+
+.coach-error__actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- Loading skeleton ---------- */
+.coach-skeleton {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  padding: 24px 0;
+}
+
+.coach-skeleton__shapes {
+  position: relative;
+  width: min(100%, 520px);
+  height: 300px;
+}
+
+.coach-skeleton__label {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+}
+
+.sk {
+  position: absolute;
+  display: block;
+  border-radius: var(--radius-card);
+  background: linear-gradient(100deg, var(--surface-2) 30%, var(--surface) 50%, var(--surface-2) 70%) 0 0 / 300% 100%;
+  animation: sk-shimmer 1.6s linear infinite;
+}
+
+.sk--root { left: 36%; top: 40%; width: 28%; height: 20%; }
+.sk--b1 { left: 8%; top: 8%; width: 22%; height: 14%; animation-delay: 0.1s; }
+.sk--b2 { left: 70%; top: 6%; width: 22%; height: 14%; animation-delay: 0.2s; }
+.sk--b3 { left: 74%; top: 70%; width: 22%; height: 14%; animation-delay: 0.3s; }
+.sk--b4 { left: 6%; top: 74%; width: 22%; height: 14%; animation-delay: 0.4s; }
+.sk--b5 { left: 40%; top: 84%; width: 20%; height: 12%; animation-delay: 0.5s; }
+
+.coach-skeleton--cards .coach-skeleton__shapes {
+  height: 240px;
+}
+.sk--card { width: 70%; height: 72%; left: 15%; top: 14%; }
+.sk--c1 { transform: rotate(-5deg) translate(-12px, 6px); opacity: 0.6; }
+.sk--c2 { transform: rotate(3deg) translate(10px, 2px); opacity: 0.8; animation-delay: 0.2s; }
+.sk--c3 { animation-delay: 0.4s; }
+
+@keyframes sk-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+/* ---------- Map / deck header ---------- */
+.map-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.map-head__title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.map-head__summary {
+  max-width: 60ch;
+  color: var(--ink-muted);
+}
+
+.map-head__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.map-head__pct {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.coach-progress {
+  width: 140px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.coach-progress__bar {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  border-radius: inherit;
+  transition: width var(--dur-slow) var(--ease);
+}
+
+/* ---------- Mind map ---------- */
+.map-body {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 1180px) {
+  .map-body {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+}
+
+.mindmap-canvas {
+  position: relative;
+  height: clamp(420px, 66vh, 680px);
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.mindmap-canvas__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none; /* we handle panning and pinching ourselves */
+  cursor: grab;
+}
+
+.mindmap-canvas__svg:active {
+  cursor: grabbing;
+}
+
+.mindmap-canvas__controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.mindmap-canvas__controls .icon-btn {
+  width: 38px;
+  height: 38px;
+}
+
+.mindmap-canvas__hint {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  max-width: 55%;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+
+/* The links between bubbles */
+.mm-link {
+  fill: none;
+  stroke: var(--link-color, var(--series-1));
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+.mm-link.is-main { stroke-width: 4; }
+.series-1 { --link-color: var(--series-1); --node-color: var(--series-1); }
+.series-2 { --link-color: var(--series-2); --node-color: var(--series-2); }
+.series-3 { --link-color: var(--series-3); --node-color: var(--series-3); }
+.series-4 { --link-color: var(--series-4); --node-color: var(--series-4); }
+.series-5 { --link-color: var(--series-5); --node-color: var(--series-5); }
+.series-6 { --link-color: var(--series-6); --node-color: var(--series-6); }
+
+/* foreignObject lets us use normal HTML (with text wrapping) inside the SVG.
+   Only the bubble itself catches the mouse, not the empty box around it. */
+.mm-fo {
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mm-node-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mm-node {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  max-width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: center;
+  pointer-events: auto;
+  cursor: var(--cursor-pointer, pointer);
+  user-select: none;
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.mm-node:hover {
+  transform: translateY(-2px);
+}
+
+.mm-node:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.mm-node.is-selected {
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+.mm-node__text {
+  font-size: 0.92rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.mm-node.depth-0 .mm-node__text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.mm-node.depth-1 .mm-node__text {
+  font-weight: 700;
+}
+
+.mm-node.is-done .mm-node__text {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.mm-node__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.mm-node__done {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-ink);
+}
+
+.mm-node__done svg {
+  width: 12px;
+  height: 12px;
+  --icon-stroke: 3;
+}
+
+/* Inspector */
+.node-inspector {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.node-inspector--empty {
+  color: var(--ink-muted);
+}
+
+.node-inspector__title {
+  font-size: 1.1rem;
+}
+
+.node-inspector__text {
+  resize: vertical;
+}
+
+.node-inspector__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.node-inspector__row .field {
+  flex: 1;
+}
+
+.node-inspector__done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.node-inspector__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Outline view */
+.map-outline-card {
+  max-height: 66vh;
+  overflow: auto;
+}
+
+.mm-outline,
+.mm-outline ul {
+  display: grid;
+  gap: 4px;
+}
+
+.mm-outline ul {
+  margin-left: 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--node-color, var(--line));
+}
+
+.mm-outline__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.mm-outline__name {
+  padding: 4px 6px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+}
+
+.mm-outline__name[aria-pressed='true'] {
+  background: var(--surface-2);
+  font-weight: 700;
+}
+
+.mm-outline__name.is-done {
+  text-decoration: line-through;
+  color: var(--ink-muted);
+}
+
+.mm-outline__hours {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+/* ---------- Flashcards ---------- */
+.deck-view {
+  display: grid;
+  gap: 20px;
+}
+
+.study,
+.quiz {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+}
+
+.study__count {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+
+/* The flip card. The two faces sit on top of each other; flipping turns the
+   inner layer 180° so the back face (pre-turned 180°) shows. */
+.flashcard {
+  width: min(100%, 560px);
+  height: 300px;
+  padding: 0;
+  border: none;
+  background: none;
+  perspective: 1200px;
+}
+
+.flashcard__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s var(--ease);
+}
+
+.flashcard.is-flipped .flashcard__inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 28px;
+  border: var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flashcard__face--back {
+  transform: rotateY(180deg);
+  background: var(--surface-2);
+}
+
+.flashcard__kind {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.flashcard__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3.4vw, 1.6rem);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.flashcard__hint {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+/* With reduced motion (or Minimalist), cross-fade instead of flipping. */
+[data-motion='reduced'] .flashcard__inner,
+[data-theme='minimalist'] .flashcard__inner {
+  transform: none !important;
+}
+[data-motion='reduced'] .flashcard__face,
+[data-theme='minimalist'] .flashcard__face {
+  transform: none;
+  transition: opacity 0.2s linear;
+}
+[data-motion='reduced'] .flashcard__face--back,
+[data-theme='minimalist'] .flashcard__face--back,
+[data-motion='reduced'] .flashcard.is-flipped .flashcard__face--front,
+[data-theme='minimalist'] .flashcard.is-flipped .flashcard__face--front {
+  opacity: 0;
+}
+[data-motion='reduced'] .flashcard.is-flipped .flashcard__face--back,
+[data-theme='minimalist'] .flashcard.is-flipped .flashcard__face--back {
+  opacity: 1;
+}
+
+.study__grades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.grade kbd {
+  margin-left: 4px;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.study-empty,
+.study-done {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  max-width: 560px;
+}
+
+.study-done__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.study-done__tally {
+  color: var(--ink-muted);
+}
+
+/* Quiz */
+.quiz__question {
+  width: min(100%, 620px);
+  text-align: center;
+}
+
+.quiz__options {
+  display: grid;
+  gap: 10px;
+  width: min(100%, 620px);
+}
+
+.quiz__option {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 2px solid var(--line);
+  border-radius: calc(var(--radius-card) * 0.6);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  transition:
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.quiz__option:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.quiz__option.is-right {
+  border-color: #2f7d4f;
+  background: color-mix(in srgb, #2f7d4f 14%, var(--surface));
+}
+
+.quiz__option.is-wrong {
+  border-color: #b3261e;
+  background: color-mix(in srgb, #b3261e 12%, var(--surface));
+}
+
+.quiz__option:disabled {
+  opacity: 0.55;
+}
+
+.quiz__feedback {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.quiz-score {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+}
+
+.quiz-missed {
+  display: grid;
+  gap: 8px;
+}
+
+.quiz-missed ul {
+  display: grid;
+  gap: 8px;
+}
+
+.quiz-missed li {
+  display: grid;
+}
+
+.quiz-missed__a {
+  color: var(--ink-muted);
+}
+
+/* Deck editor */
+.deck-editor {
+  display: grid;
+  gap: 16px;
+}
+
+.deck-editor__cards {
+  display: grid;
+  gap: 12px;
+}
+
+.deck-editor__card {
+  display: grid;
+  gap: 10px;
+  padding: 16px 52px 16px 44px;
+}
+
+@media (min-width: 720px) {
+  .deck-editor__card {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.deck-editor__card textarea {
+  resize: vertical;
+}
+
+.deck-editor__number {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: var(--font-display);
+  color: var(--ink-muted);
+}
+
+.deck-editor__delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.deck-editor__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* =========================================================
+   Theme personalities
+   ========================================================= */
+
+/* Jolly: chunky stickers with a hard shadow, tilted a little */
+[data-theme='jolly'] .mm-node {
+  border-width: 3px;
+  background: var(--node-color);
+  box-shadow: 3px 4px 0 var(--ink);
+}
+[data-theme='jolly'] .mm-node.depth-0 {
+  padding: 16px 22px;
+  border-radius: 999px;
+  background: var(--sunny);
+  transform: rotate(-3deg);
+}
+[data-theme='jolly'] .mm-node.depth-2 {
+  background: #fff;
+  border-color: var(--ink);
+  box-shadow: 3px 4px 0 var(--node-color);
+}
+[data-theme='jolly'] .mm-node.is-selected {
+  box-shadow: 0 0 0 4px var(--focus), 3px 4px 0 var(--ink);
+}
+[data-theme='jolly'] .mm-link {
+  stroke-dasharray: 2 9;
+  stroke-width: 4;
+  opacity: 1;
+}
+[data-theme='jolly'] .flashcard__face {
+  box-shadow: 6px 7px 0 var(--ink);
+}
+[data-theme='jolly'] .flashcard__face--back {
+  background: #e6f5ff;
+}
+
+/* Makeup: glossy round pans for topics, a compact for the goal */
+[data-theme='makeup'] .mm-node {
+  border: 2px solid #e9bcae;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.65), transparent 45%),
+    color-mix(in srgb, var(--node-color) 55%, #fff8f4);
+  box-shadow: 0 8px 18px -10px rgba(140, 47, 78, 0.5);
+}
+[data-theme='makeup'] .mm-node.depth-0 {
+  padding: 22px 26px;
+  border: 5px solid #e9bcae;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fffbf8, #f8e3dc 70%);
+  color: var(--primary);
+}
+[data-theme='makeup'] .mm-node.depth-0 .mm-node__text {
+  font-style: italic;
+}
+[data-theme='makeup'] .mm-node.depth-1 {
+  border-radius: 999px;
+}
+[data-theme='makeup'] .mm-node.depth-2 {
+  border-radius: 22px;
+  background: #fff8f4;
+}
+[data-theme='makeup'] .mm-link {
+  stroke-width: 2;
+}
+[data-theme='makeup'] .flashcard__face {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff8f4, #fff8f4) padding-box,
+    linear-gradient(135deg, #e9bcae, #b76e79, #f3d3c4) border-box;
+}
+[data-theme='makeup'] .flashcard__face--back {
+  background:
+    linear-gradient(#fbe8e0, #fbe8e0) padding-box,
+    linear-gradient(135deg, #e9bcae, #b76e79, #f3d3c4) border-box;
+}
+[data-theme='makeup'] .flashcard__text {
+  font-style: italic;
+}
+
+/* Cat: paw-print bubbles */
+[data-theme='cat'] .mm-node {
+  border: 2px solid #e2d3c3;
+  border-radius: 26px 22px 28px 20px / 22px 28px 20px 26px;
+  background: #fffdf8;
+  padding-top: 26px;
+}
+[data-theme='cat'] .mm-node::before {
+  /* the paw stamp on top of each bubble */
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--node-color);
+  transform: translateX(-50%);
+  -webkit-mask: var(--paw-mask) center / contain no-repeat;
+  mask: var(--paw-mask) center / contain no-repeat;
+  --paw-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='15' rx='5' ry='4.2'/%3E%3Cellipse cx='5.6' cy='9.4' rx='2' ry='2.6'/%3E%3Cellipse cx='9.6' cy='5.4' rx='2' ry='2.6'/%3E%3Cellipse cx='14.4' cy='5.4' rx='2' ry='2.6'/%3E%3Cellipse cx='18.4' cy='9.4' rx='2' ry='2.6'/%3E%3C/svg%3E");
+}
+[data-theme='cat'] .mm-node.depth-0 {
+  padding: 34px 24px 18px;
+  background: #fdeee2;
+  border-color: var(--primary);
+}
+[data-theme='cat'] .mm-node.depth-0::before {
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+}
+[data-theme='cat'] .mm-node__text {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+[data-theme='cat'] .mm-link {
+  stroke-dasharray: 1 10;
+  stroke-width: 5;
+}
+[data-theme='cat'] .flashcard__face--back {
+  background: #fdf0e6;
+}
+
+/* Aesthetic: polaroids with washi tape, pencil links */
+[data-theme='aesthetic'] .mm-node {
+  padding: 10px 10px 18px;
+  border: none;
+  border-radius: 2px;
+  background: #fbf8f3;
+  box-shadow: 0 10px 18px -12px rgba(58, 53, 48, 0.55);
+}
+[data-theme='aesthetic'] .mm-node::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 54px;
+  height: 14px;
+  background: color-mix(in srgb, var(--node-color) 70%, transparent);
+  transform: translateX(-50%) rotate(-4deg);
+  clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 2% 96%, 0 50%);
+}
+[data-theme='aesthetic'] .mm-node.series-2 { transform: rotate(1.5deg); }
+[data-theme='aesthetic'] .mm-node.series-3 { transform: rotate(-1.5deg); }
+[data-theme='aesthetic'] .mm-node.series-5 { transform: rotate(2deg); }
+[data-theme='aesthetic'] .mm-node.depth-0 {
+  padding: 16px 16px 26px;
+  transform: rotate(-1deg);
+}
+[data-theme='aesthetic'] .mm-node.depth-0 .mm-node__text {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+[data-theme='aesthetic'] .mm-node__text {
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+}
+[data-theme='aesthetic'] .mm-link {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  opacity: 0.45;
+}
+[data-theme='aesthetic'] .flashcard__face {
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(transparent 0 31px, rgba(110, 85, 96, 0.12) 31px 32px),
+    #fbf8f3;
+}
+[data-theme='aesthetic'] .flashcard__text {
+  font-size: clamp(1.6rem, 4.4vw, 2.2rem);
+}
+
+/* Minimalist: thin outlines, no fills, no tilt */
+[data-theme='minimalist'] .mm-node {
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #000;
+}
+[data-theme='minimalist'] .mm-node:hover {
+  transform: none;
+  border-color: var(--ink);
+}
+[data-theme='minimalist'] .mm-node.depth-0 {
+  border-color: var(--ink);
+}
+[data-theme='minimalist'] .mm-node.depth-0 .mm-node__text {
+  font-weight: 400;
+}
+[data-theme='minimalist'] .mm-node.depth-1 .mm-node__text {
+  font-weight: 500;
+}
+[data-theme='minimalist'] .mm-node.is-selected {
+  box-shadow: none;
+  border-color: var(--accent);
+}
+[data-theme='minimalist'] .mm-link {
+  stroke: #3a3a3a;
+  stroke-width: 1;
+  opacity: 1;
+}
+[data-theme='minimalist'] .mm-node__done {
+  background: none;
+  color: var(--ink);
+}
+[data-theme='minimalist'] .flashcard__face {
+  background: #000;
+}
+[data-theme='minimalist'] .flashcard__text {
+  font-weight: 200;
+}
+[data-theme='minimalist'] .coach-tab[aria-selected='true']::after {
+  height: 1px;
+  background: var(--accent);
+}
+[data-theme='minimalist'] .coach-notice {
+  border-left: 1px solid var(--accent);
+}

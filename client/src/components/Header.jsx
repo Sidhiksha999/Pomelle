@@ -7,6 +7,7 @@ import './Header.css';
 
 const NAV = [
   { route: 'timer', label: 'Timer' },
+  { route: 'coach', label: 'Coach' },
   { route: 'stats', label: 'Stats' },
 ];
 

@@ -4,6 +4,7 @@ import SettingsDialog from './components/SettingsDialog';
 import CelebrationLayer from './components/CelebrationLayer';
 import TimerPage from './features/timer/TimerPage';
 import StatsPage from './features/stats/StatsPage';
+import CoachPage from './features/coach/CoachPage';
 import { useCurrentTheme } from './components/hooks/useCurrentTheme';
 import { useHashRoute } from './components/hooks/useHashRoute';
 import { useThemeEffects } from './themes/useThemeEffects';
@@ -11,6 +12,7 @@ import { useTimerEngine } from './features/timer/useTimerEngine';
 
 const PAGES = {
   timer: TimerPage,
+  coach: CoachPage,
   stats: StatsPage,
 };
 

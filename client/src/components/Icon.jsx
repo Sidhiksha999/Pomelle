@@ -96,6 +96,8 @@ const PATHS = {
       <circle cx="12" cy="12" r="0.6" fill="currentColor" />
     </>
   ),
+  minus: <path d="M5.1 12.1h13.8" />,
+  sparkle: <path d="M12 3.4c.5 4.5 2.1 7.6 8.6 8.6-6.5 1-8.1 4.1-8.6 8.6-.5-4.5-2.1-7.6-8.6-8.6 6.5-1 8.1-4.1 8.6-8.6z" strokeLinejoin="round" />,
   plus: (
     <>
       <path d="M12 5.2v13.7" />

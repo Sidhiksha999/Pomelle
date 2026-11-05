@@ -3,6 +3,8 @@ import timerReducer, { timerInitialState } from './timerSlice';
 import themeReducer, { themeInitialState } from './themeSlice';
 import tasksReducer, { tasksInitialState } from './tasksSlice';
 import statsReducer, { statsInitialState } from './statsSlice';
+import coachReducer, { coachInitialState } from './coachSlice';
+import flashcardsReducer, { flashcardsInitialState } from './flashcardsSlice';
 import { loadState, saveState, mergeSaved } from './persist';
 
 // Load whatever was saved last time and merge it over the defaults.
@@ -13,6 +15,8 @@ const preloadedState = {
   theme: mergeSaved(themeInitialState, saved?.theme),
   tasks: mergeSaved(tasksInitialState, saved?.tasks),
   stats: mergeSaved(statsInitialState, saved?.stats),
+  coach: mergeSaved(coachInitialState, saved?.coach),
+  flashcards: mergeSaved(flashcardsInitialState, saved?.flashcards),
 };
 
 export const store = configureStore({
@@ -21,12 +25,14 @@ export const store = configureStore({
     theme: themeReducer,
     tasks: tasksReducer,
     stats: statsReducer,
+    coach: coachReducer,
+    flashcards: flashcardsReducer,
   },
   preloadedState,
 });
 
-// Pick what gets written to localStorage.
-// `lastEvent` is a one-off signal (sound, confetti), so it is not saved.
+// Pick what gets written to localStorage. One-off signals (`lastEvent`) and
+// request states (loading, errors) are not saved.
 function snapshot() {
   const state = store.getState();
   return {
@@ -34,6 +40,8 @@ function snapshot() {
     theme: state.theme,
     tasks: state.tasks,
     stats: state.stats,
+    coach: { maps: state.coach.maps, activeMapId: state.coach.activeMapId },
+    flashcards: { decks: state.flashcards.decks, activeDeckId: state.flashcards.activeDeckId },
   };
 }
 

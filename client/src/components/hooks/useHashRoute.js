@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // A tiny router built on the URL hash (#/timer, #/stats …), so no routing
 // package is needed. The hash also makes the browser back button work.
 
-export const ROUTES = ['timer', 'stats'];
+export const ROUTES = ['timer', 'coach', 'stats'];
 const DEFAULT_ROUTE = 'timer';
 
 /** "#/stats" → "stats". Anything unknown falls back to the timer. */
