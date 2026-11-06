@@ -32,7 +32,11 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Time-blocking**: plan today on a timeline and start any block as a focus session.
   - **Eisenhower matrix**: sort everything into four boxes (drag and drop or menus) and send items to your tasks.
   - Timed steps in guided sessions count toward your stats.
-- **Night look** (*Settings → Night look*: Day, Night or Match my device). So far **Cat** has one: the same cosy room after dark, lit by a warm lamp, with a crescent moon and slow stars. Other themes stay as they are until they get theirs.
+- **Night look** (*Settings → Night look*: Day, Night or Match my device). So far two themes have one:
+  - **Cat**: the same cosy room after dark, lit by a warm lamp, with a crescent moon and slow stars.
+  - **Aesthetic**: dusk. Dim polaroids on a plum-charcoal wall, and the window shows a moon rising over dark hills.
+
+  Other themes stay as they are until they get theirs.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
 - **A first-run welcome** to pick your theme and focus rhythm, with a short tour. Replay it any time from *Settings → Welcome tour*.
 - Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
@@ -195,7 +199,7 @@ Pages also have a few theme-specific touches in their own stylesheets (look for 
 
 ### Give a theme a night look
 
-Cat is the example to copy (the "CAT AT NIGHT" section at the end of `themes/cat/cat.css`).
+Cat and Aesthetic are the examples to copy (the "CAT AT NIGHT" and "AESTHETIC AT DUSK" sections at the end of their CSS files; Aesthetic keeps all its night overrides, including other pages', in that one section).
 
 1. In the theme's CSS, redefine its variables under `:root[data-theme='ocean'][data-mode='dark'] { … }`, and override any fixed light colors it uses (search the theme file and `features/*/*.css` for hex colors in `[data-theme='ocean']` rules).
 2. Add a `dark` entry to the theme in `client/src/themes/index.js` with the browser bar color and cursors for night: `dark: { themeColor: '#…', cursor: { … } }`. This entry is what makes *Settings → Night look* apply to the theme.

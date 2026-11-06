@@ -499,3 +499,173 @@
 [data-theme='aesthetic'] .task-list__head h2 {
   font-size: 2rem;
 }
+
+/* ===========================================================
+   AESTHETIC AT DUSK: the same room after the sun goes down.
+   Plum-charcoal walls, oat-colored ink, dim polaroids, and a
+   window that shows a moon rising over dark hills.
+   Switched on by data-mode="dark" on <html> (Settings > Night look).
+   The page-specific polaroids (mind map, methods, stats, music)
+   are at the end of this section so the whole look lives in one place.
+   =========================================================== */
+
+:root[data-theme='aesthetic'][data-mode='dark'] {
+  color-scheme: dark;
+
+  /* Palette */
+  --bg: #221e24;
+  --surface: #2d282f;
+  --surface-2: #27232a;
+  --paper: #332d34; /* polaroids and index cards */
+  --ink: #ece4d8;
+  --ink-muted: #b8ada5;
+  --primary: #d9b6bf; /* dusty rose, light enough for dark text */
+  --primary-ink: #2a1f25;
+  --sage: #a7bba1;
+  --mauve: #c7a3ad;
+  --lavender-grey: #a29eb3;
+  --golden: #e3c08d;
+  --line: #4d454c;
+  --focus: #e3c08d;
+  --selection: #5a4650;
+
+  /* Shape */
+  --border-card: 1px solid rgba(236, 228, 216, 0.08);
+  --input-border: 1px solid #6c6166;
+
+  /* Depth: paper lifts off a dark wall */
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03), 0 16px 30px -14px rgba(0, 0, 0, 0.75);
+  --shadow-dialog: 0 26px 60px -20px rgba(0, 0, 0, 0.85);
+  --backdrop: rgba(12, 9, 14, 0.62);
+
+  /* Details */
+  --scroll-track: #221e24;
+  --scroll-thumb: #5c5157;
+  --grain-opacity: 0.09;
+  --series-1: #a7bba1;
+  --series-2: #c7a3ad;
+  --series-3: #a29eb3;
+  --series-4: #e3c08d;
+  --series-5: #d8b0b8;
+  --series-6: #93a3a7;
+}
+
+:root[data-mode='dark'][data-theme='aesthetic'] .btn--primary:hover {
+  background: #e7cbd2;
+}
+
+/* Polaroid timer face: dim paper, a dusk photo */
+:root[data-mode='dark'] .face.aesthetic-face {
+  background: var(--paper);
+}
+:root[data-mode='dark'] .aesthetic-face__photo {
+  background:
+    radial-gradient(circle at 70% 25%, rgba(236, 228, 216, 0.14), transparent 55%),
+    linear-gradient(170deg, #3d3540, #342e38 60%, #2c2830);
+}
+:root[data-mode='dark'] .ae-track {
+  stroke: rgba(236, 228, 216, 0.5);
+}
+:root[data-mode='dark'] .aesthetic-face.is-break .ae-progress {
+  stroke: var(--sage);
+}
+:root[data-mode='dark'] .ae-moon__disc {
+  fill: rgba(236, 228, 216, 0.1);
+  stroke: rgba(236, 228, 216, 0.5);
+}
+:root[data-mode='dark'] .ae-moon__light {
+  fill: rgba(236, 228, 216, 0.3);
+}
+:root[data-mode='dark'] .ae-moon.is-lit .ae-moon__disc {
+  fill: #f7ecd6;
+  stroke: #f7ecd6;
+}
+
+/* Paper: quote card and task index card */
+:root[data-mode='dark'][data-theme='aesthetic'] .quote-card {
+  background: var(--paper);
+}
+:root[data-mode='dark'][data-theme='aesthetic'] .task-list {
+  background:
+    repeating-linear-gradient(transparent 0 31px, rgba(217, 182, 191, 0.12) 31px 32px),
+    var(--paper);
+}
+:root[data-mode='dark'][data-theme='aesthetic'] .task {
+  border-bottom-color: rgba(236, 228, 216, 0.2);
+}
+/* The marker highlight is softer so the light text stays readable. */
+:root[data-mode='dark'][data-theme='aesthetic'] .task.is-active .task__title {
+  background: linear-gradient(transparent 55%, rgba(227, 192, 141, 0.28) 55%);
+}
+
+/* The window at dusk: moonlight instead of a sunbeam */
+:root[data-mode='dark'] .ae-beam {
+  background: linear-gradient(100deg, transparent 20%, rgba(214, 214, 232, 0.07) 40%, rgba(214, 214, 232, 0.03) 55%, transparent 70%);
+}
+:root[data-mode='dark'] .ae-sky {
+  /* a few stars, then plum fading to the last warm light on the horizon */
+  background:
+    radial-gradient(1.5px 1.5px at 18% 14%, rgba(247, 236, 214, 0.9), transparent),
+    radial-gradient(1px 1px at 42% 8%, rgba(247, 236, 214, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 76% 18%, rgba(247, 236, 214, 0.85), transparent),
+    radial-gradient(1px 1px at 88% 34%, rgba(247, 236, 214, 0.7), transparent),
+    radial-gradient(1px 1px at 10% 36%, rgba(247, 236, 214, 0.7), transparent),
+    linear-gradient(180deg, #2b2636 0%, #3f3242 40%, #6b4f58 72%, #a07468 100%);
+}
+:root[data-mode='dark'] .ae-sun {
+  /* the sun becomes a rising moon */
+  background: radial-gradient(circle, rgba(247, 236, 214, 0.95) 0 30%, rgba(247, 236, 214, 0.18) 34%, rgba(247, 236, 214, 0) 70%);
+}
+:root[data-mode='dark'] .ae-hills--far path {
+  fill: rgba(70, 78, 72, 0.85);
+}
+:root[data-mode='dark'] .ae-hills--near path {
+  fill: #343f35;
+}
+:root[data-mode='dark'] .ae-fog {
+  background: linear-gradient(180deg, rgba(34, 30, 36, 0.2), rgba(34, 30, 36, 0.05) 60%, rgba(34, 30, 36, 0.35));
+}
+:root[data-mode='dark'] .ae-bead,
+:root[data-mode='dark'] .ae-drop {
+  opacity: 0.55;
+}
+:root[data-mode='dark'] .ae-window__frame {
+  border-color: #5c4e43;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+    0 20px 40px -20px rgba(0, 0, 0, 0.7);
+  background:
+    linear-gradient(#5c4e43, #5c4e43) center / 8px 100% no-repeat,
+    linear-gradient(#5c4e43, #5c4e43) center / 100% 8px no-repeat;
+}
+:root[data-mode='dark'] .ae-window__sill {
+  background: #4f4238;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.7);
+}
+:root[data-mode='dark'] .ae-plant {
+  fill: #61765d;
+  stroke: #3e4d3b;
+}
+:root[data-mode='dark'] .ae-plant__pot {
+  fill: #8a6a5a;
+  stroke: #5a4438;
+}
+
+/* Polaroids on other pages */
+:root[data-mode='dark'][data-theme='aesthetic'] .mm-node {
+  background: var(--paper);
+  box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.8);
+}
+:root[data-mode='dark'][data-theme='aesthetic'] .flashcard__face {
+  background:
+    repeating-linear-gradient(transparent 0 31px, rgba(217, 182, 191, 0.1) 31px 32px),
+    var(--paper);
+}
+:root[data-mode='dark'][data-theme='aesthetic'] .method-card__link,
+:root[data-mode='dark'][data-theme='aesthetic'] .music-now,
+:root[data-mode='dark'][data-theme='aesthetic'] .stats-streak {
+  background: var(--paper);
+}
+:root[data-mode='dark'][data-theme='aesthetic'] .subject-row__track {
+  background: rgba(236, 228, 216, 0.08);
+}

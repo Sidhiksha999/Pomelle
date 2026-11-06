@@ -338,6 +338,11 @@ export const THEMES = [
     tagline: 'Rain on the window, golden hour, slow pages.',
     hasQuotes: true,
     themeColor: '#ECE6DA',
+    // The night look ("Aesthetic at dusk"); its colors live in aesthetic.css under [data-mode='dark'].
+    dark: {
+      themeColor: '#221E24',
+      cursor: { default: arrowCursor('#ECE4D8', '#221E24'), pointer: arrowCursor('#D9B6BF', '#221E24') },
+    },
     Face: AestheticFace,
     Backdrop: AestheticBackdrop,
     Celebration: AestheticCelebration,

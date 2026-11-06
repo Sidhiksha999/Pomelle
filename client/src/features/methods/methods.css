@@ -120,15 +120,19 @@
   margin-bottom: 6px;
 }
 
-.method-card--0 .method-card__link {
-  grid-template-columns: 180px 1fr;
-  grid-template-rows: auto auto auto 1fr;
-  column-gap: 20px;
-}
+/* The wide card (art beside the text) only once it really is two columns wide;
+   on narrower screens it would squeeze the text into a tiny strip. */
+@media (min-width: 900px) {
+  .method-card--0 .method-card__link {
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: 20px;
+  }
 
-.method-card--0 .method-card__art {
-  grid-row: 1 / span 4;
-  max-width: none;
+  .method-card--0 .method-card__art {
+    grid-row: 1 / span 4;
+    max-width: none;
+  }
 }
 
 .method-card--3 .method-card__art {
@@ -155,8 +159,10 @@
 
 .difficulty {
   display: inline-flex;
+  flex-wrap: wrap; /* in a narrow card the label drops below the marks instead of sticking out */
+  max-width: 100%;
   align-items: center;
-  gap: 8px;
+  gap: 2px 8px;
   margin-top: 6px;
   font-size: 0.82rem;
   color: var(--ink-muted);
