@@ -13,7 +13,11 @@ const BULB_COLORS = ['tomato', 'sunny', 'sky', 'mint', 'pink'];
 
 export default function JollyBackdrop() {
   return (
-    <div className="backdrop jolly-backdrop" aria-hidden="true">
+    <>
+      {/* The lights hang from the top of the PAGE (they scroll away with it),
+          unlike the rest of the backdrop, which stays fixed behind everything.
+          Otherwise they would sit on top of whatever text is scrolled under them. */}
+      <div className="jolly-lights-wrap" aria-hidden="true">
       <svg className="jolly-lights" viewBox="0 0 1200 120">
         {/* the wire: two lazy dips across the page */}
         <path className="jolly-lights__wire" d="M0 18C200 90 450 90 600 30S1000 90 1200 20" />
@@ -31,6 +35,8 @@ export default function JollyBackdrop() {
           </g>
         ))}
       </svg>
+      </div>
+      <div className="backdrop jolly-backdrop" aria-hidden="true">
       <svg className="jolly-blob jolly-blob--sky" viewBox="0 0 200 200">
         <path d="M108 8c40 4 78 34 84 76 6 44-24 92-70 106-46 13-98-8-114-52C-8 94 14 46 46 24 64 12 86 6 108 8z" />
       </svg>
@@ -54,6 +60,7 @@ export default function JollyBackdrop() {
       <span className="jolly-dot jolly-dot--2" />
       <span className="jolly-dot jolly-dot--3" />
       <span className="jolly-dot jolly-dot--4" />
-    </div>
+      </div>
+    </>
   );
 }

@@ -642,15 +642,28 @@
 }
 
 /* ---------- Fairy lights (night only) ---------- */
-.jolly-lights {
+/* The wrapper is pinned to the top of the page, not the window, so the
+   lights scroll away instead of sitting over text further down. */
+.jolly-lights-wrap {
   display: none;
 }
-:root[data-mode='dark'] .jolly-lights {
+:root[data-mode='dark'] .jolly-lights-wrap {
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 260px;
+  overflow: hidden; /* the extra-wide phone version must not cause sideways scrolling */
+  pointer-events: none;
+  z-index: 0;
+}
+.jolly-lights {
   position: absolute;
   top: 84px;
   left: 0;
   width: 100%;
+  max-width: none; /* the global "svg { max-width: 100% }" would undo the phone width below */
   height: auto;
   overflow: visible;
 }
@@ -678,11 +691,10 @@
 /* On phones: below the two-row header, and wider than the screen so the
    bulbs stay a readable size (the ends simply hang off the edges). */
 @media (max-width: 719px) {
-  :root[data-mode='dark'] .jolly-lights {
+  .jolly-lights {
     top: 96px;
     left: -60%;
     width: 220%;
-    max-width: none; /* the global "svg { max-width: 100% }" would undo the extra width */
   }
 }
 @keyframes bulb-twinkle {

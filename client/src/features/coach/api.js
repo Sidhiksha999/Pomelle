@@ -46,15 +46,8 @@ function writeCache(entries) {
   }
 }
 
-/**
- * POST to /api/<path> and return the parsed JSON.
- * Throws CoachError on any problem.
- */
-export async function postCoach(path, body) {
-  const key = hash(path + JSON.stringify(body));
-  const hit = readCache().find((entry) => entry.key === key);
-  if (hit) return hit.data;
-
+/** One POST to the server. Returns the parsed JSON, or throws CoachError. */
+async function sendOnce(path, body) {
   let response;
   try {
     response = await fetch(`${API_URL}/api${path}`, {
@@ -70,12 +63,37 @@ export async function postCoach(path, body) {
   try {
     data = await response.json();
   } catch {
-    // Something answered, but not with JSON (e.g. a host's error page): treat it as unreachable.
+    // Something answered, but not with JSON (e.g. the host's "starting up"
+    // page while the server wakes): treat it as unreachable.
     throw new CoachError('OFFLINE', 'Could not reach the Pomelle server.');
   }
 
   if (!response.ok) {
     throw new CoachError(data?.error || 'SERVER_ERROR', data?.message || 'Something went wrong.');
+  }
+  return data;
+}
+
+/**
+ * POST to /api/<path> and return the parsed JSON.
+ * If the server can't be reached (for example it's asleep on the free plan),
+ * waits for it to wake up (about a minute at most) and tries once more,
+ * so pressing a button during the wake-up doesn't fail straight away.
+ * Throws CoachError on any problem.
+ */
+export async function postCoach(path, body) {
+  const key = hash(path + JSON.stringify(body));
+  const hit = readCache().find((entry) => entry.key === key);
+  if (hit) return hit.data;
+
+  let data;
+  try {
+    data = await sendOnce(path, body);
+  } catch (error) {
+    if (error.code !== 'OFFLINE') throw error;
+    const health = await checkHealth();
+    if (!health.reachable) throw error;
+    data = await sendOnce(path, body);
   }
 
   writeCache([...readCache().filter((entry) => entry.key !== key), { key, data }]);
