@@ -32,9 +32,10 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Time-blocking**: plan today on a timeline and start any block as a focus session.
   - **Eisenhower matrix**: sort everything into four boxes (drag and drop or menus) and send items to your tasks.
   - Timed steps in guided sessions count toward your stats.
-- **Night look** (*Settings → Night look*: Day, Night or Match my device). So far two themes have one:
+- **Night look** (*Settings → Night look*: Day, Night or Match my device). So far three themes have one:
   - **Cat**: the same cosy room after dark, lit by a warm lamp, with a crescent moon and slow stars.
   - **Aesthetic**: dusk. Dim polaroids on a plum-charcoal wall, and the window shows a moon rising over dark hills.
+  - **Makeup**: a glossy evening look. Deep berry-black, champagne text, a smoky mirror in a rose-gold compact, and sparkles that glow.
 
   Other themes stay as they are until they get theirs.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.

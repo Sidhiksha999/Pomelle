@@ -569,3 +569,206 @@
 [data-theme='makeup'] .task-list__head h2 {
   font-style: italic;
 }
+
+/* ===========================================================
+   MAKEUP AT NIGHT: a glossy evening look. Deep berry-black,
+   champagne text, rose-gold that catches the light, a smoky
+   mirror, and sparkles that glow against the dark.
+   Switched on by data-mode="dark" on <html> (Settings > Night look).
+   The page-specific pieces (mind map, flashcards, music, stats)
+   are at the end of this section so the whole look lives in one place.
+   =========================================================== */
+
+:root[data-theme='makeup'][data-mode='dark'] {
+  color-scheme: dark;
+
+  /* Palette */
+  --bg: #1d1217;
+  --surface: #2a1a21;
+  --surface-2: #24161c;
+  --ink: #f6e6dc;
+  --ink-muted: #cba9b0;
+  --primary: #f2a8bd; /* evening rose: AA with the dark text below */
+  --primary-ink: #2e111b;
+  --blush: #f2b8c6;
+  --rose-gold: #d4919b;
+  --champagne: #f3dfc1;
+  --nude: #e6c3ae;
+  --line: #5a3a45;
+  --focus: #f3dfc1;
+  --selection: #6e3349;
+
+  /* Shape */
+  --border-card: 1px solid #553742;
+  --btn-border: 1px solid #8e6470;
+  --btn-bg: #2a1a21;
+  --primary-border: #f6c3d1;
+  --input-border: 1px solid #7a5560;
+
+  /* Depth: a soft rose glow under things, a faint gloss on top */
+  --shadow-card: 0 16px 36px -16px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-btn: 0 8px 20px -10px rgba(242, 168, 189, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --shadow-btn-active: 0 3px 8px -4px rgba(0, 0, 0, 0.6);
+  --shadow-dialog: 0 30px 70px -20px rgba(0, 0, 0, 0.9);
+  --backdrop: rgba(12, 6, 9, 0.65);
+
+  /* Details */
+  --scroll-track: #1d1217;
+  --scroll-thumb: #6e4655;
+  --grain-opacity: 0.04;
+  --series-1: #d4919b;
+  --series-2: #f2a8bd;
+  --series-3: #e6c3ae;
+  --series-4: #c4567a;
+  --series-5: #d99a7a;
+  --series-6: #f3dfc1;
+}
+
+:root[data-mode='dark'][data-theme='makeup'] body {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(196, 86, 122, 0.16), transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(243, 223, 193, 0.08), transparent 44%);
+}
+
+/* Primary buttons: a light glossy rose lipstick with dark text */
+:root[data-mode='dark'][data-theme='makeup'] .btn--primary {
+  background: linear-gradient(160deg, #f8c3d1, #f2a8bd 55%, #e48aa5);
+  color: var(--primary-ink);
+}
+
+/* Mode tabs */
+:root[data-mode='dark'][data-theme='makeup'] .mode-tab {
+  border-color: #6b4652;
+}
+:root[data-mode='dark'][data-theme='makeup'] .mode-tab[aria-pressed='true'] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
+}
+
+/* Compact mirror: smoky glass inside the rose-gold case */
+:root[data-mode='dark'] #mk-mirror stop:nth-child(1) { stop-color: #4a3039; }
+:root[data-mode='dark'] #mk-mirror stop:nth-child(2) { stop-color: #33212a; }
+:root[data-mode='dark'] #mk-mirror stop:nth-child(3) { stop-color: #281920; }
+:root[data-mode='dark'] #mk-gloss stop:nth-child(1) { stop-color: #c4567a; }
+:root[data-mode='dark'] #mk-gloss stop:nth-child(3) { stop-color: #f6c3d1; }
+:root[data-mode='dark'] .mk-outline {
+  stroke: #b97b86;
+}
+:root[data-mode='dark'] .mk-case-ring {
+  filter: drop-shadow(0 0 22px rgba(242, 168, 189, 0.18)) drop-shadow(0 16px 22px rgba(0, 0, 0, 0.6));
+}
+:root[data-mode='dark'] .mk-inner-rim {
+  fill: #3d2730;
+  stroke: rgba(212, 145, 155, 0.45);
+}
+:root[data-mode='dark'] .mk-reflection {
+  fill: rgba(255, 255, 255, 0.1);
+}
+:root[data-mode='dark'] .mk-track {
+  stroke: #4e3440;
+}
+:root[data-mode='dark'] .makeup-face__lipstick {
+  filter: drop-shadow(4px 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+/* Sparkles glow at night */
+:root[data-mode='dark'] .mk-sparkle path {
+  stroke: #f3dfc1;
+}
+:root[data-mode='dark'] .mk-sparkle {
+  filter: drop-shadow(0 0 6px rgba(255, 236, 220, 0.75));
+}
+
+/* Vanity items: dark parts get a little lighter so they don't vanish */
+:root[data-mode='dark'] .mk-handle,
+:root[data-mode='dark'] .mk-polish-cap {
+  fill: #5a3442;
+}
+:root[data-mode='dark'] .mk-palette-case {
+  fill: #4a2a36;
+}
+:root[data-mode='dark'] .mk-deco {
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.55));
+}
+:root[data-mode='dark'] .mk-blush-glow--1 {
+  background: rgba(196, 86, 122, 0.14);
+  filter: blur(30px);
+}
+:root[data-mode='dark'] .mk-blush-glow--2 {
+  background: rgba(243, 223, 193, 0.07);
+  filter: blur(30px);
+}
+
+/* Quote card: dark card, rose-gold edge, a lighter kiss mark */
+:root[data-mode='dark'][data-theme='makeup'] .quote-card {
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, #e9bcae, #b76e79, #f3d3c4) border-box;
+}
+:root[data-mode='dark'][data-theme='makeup'] .quote-card::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 26'%3E%3Cpath d='M2 12C8 2 16 2 22 8c6-6 14-6 20 4-6 10-14 13-20 13S8 22 2 12z' fill='%23F2A8BD'/%3E%3Cpath d='M4 12q18 4 36 0' stroke='%232A1A21' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Session dots: empty eyeshadow pans */
+:root[data-mode='dark'][data-theme='makeup'] .session-dot {
+  border-color: #a77a82;
+  background: #3a2630;
+}
+:root[data-mode='dark'][data-theme='makeup'] .session-dot.is-done {
+  background: radial-gradient(circle at 35% 30%, #f8c3d1, #d4919b 70%);
+}
+
+/* The task palette is already dark; a rose-gold edge keeps it off the wall */
+:root[data-mode='dark'][data-theme='makeup'] .task-list__items {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 0 1px rgba(212, 145, 155, 0.3),
+    0 18px 30px -16px rgba(0, 0, 0, 0.8);
+}
+
+/* ---------- Other pages ---------- */
+:root[data-mode='dark'][data-theme='makeup'] .mm-node {
+  border-color: #a77a82;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.12), transparent 45%),
+    color-mix(in srgb, var(--node-color) 28%, #2a1a21);
+  box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.7);
+}
+:root[data-mode='dark'][data-theme='makeup'] .mm-node.depth-0 {
+  border-color: #d4919b;
+  background: radial-gradient(circle at 40% 35%, #4a3039, #2a1a21 70%);
+}
+:root[data-mode='dark'][data-theme='makeup'] .mm-node.depth-2 {
+  background: var(--surface);
+}
+:root[data-mode='dark'][data-theme='makeup'] .flashcard__face {
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, #e9bcae, #b76e79, #f3d3c4) border-box;
+}
+:root[data-mode='dark'][data-theme='makeup'] .flashcard__face--back {
+  background:
+    linear-gradient(#33212a, #33212a) padding-box,
+    linear-gradient(135deg, #e9bcae, #b76e79, #f3d3c4) border-box;
+}
+:root[data-mode='dark'][data-theme='makeup'] .music-pill {
+  background: linear-gradient(160deg, #f8c3d1, #f2a8bd 55%, #e48aa5);
+  color: var(--primary-ink);
+  border-color: #f6c3d1;
+}
+:root[data-mode='dark'][data-theme='makeup'] .ambient-sound.is-on {
+  background: #3d2730;
+  border-color: #d4919b;
+}
+:root[data-mode='dark'][data-theme='makeup'] .stats-streak {
+  background: radial-gradient(circle at 40% 35%, #4a3039, #2a1a21 70%);
+  border-color: #c98a8f;
+  box-shadow: 0 0 0 1px #e9bcae, var(--shadow-card);
+}
+:root[data-mode='dark'][data-theme='makeup'] .stats-figure {
+  border-left-color: #6b4652;
+}
+:root[data-mode='dark'][data-theme='makeup'] .subject-row__track {
+  background: #3d2730;
+}

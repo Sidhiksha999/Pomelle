@@ -138,6 +138,11 @@ export const THEMES = [
     tagline: 'Blush, gloss and a little rose-gold glamour.',
     hasQuotes: true,
     themeColor: '#FBEFEA',
+    // The night look ("Makeup at night"); its colors live in makeup.css under [data-mode='dark'].
+    dark: {
+      themeColor: '#1D1217',
+      cursor: { default: arrowCursor('#F2B8C6', '#1D1217'), pointer: arrowCursor('#F6E6DC', '#1D1217') },
+    },
     Face: MakeupFace,
     Backdrop: MakeupBackdrop,
     Celebration: MakeupCelebration,
