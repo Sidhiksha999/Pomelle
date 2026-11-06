@@ -68,8 +68,14 @@ export default function JollySun({ status, isBreak, celebrating }) {
             />
           ))}
         </g>
+        {/* At night (Settings → Night look) jolly.css hides the rays and shows
+            this glow and the craters, so the sun becomes a smiling moon. */}
+        <circle cx="60" cy="60" r="44" className="sun-moon-glow" />
         <g className="jolly-sun__body">
           <circle cx="60" cy="60" r="31" className="sun-disc" />
+          <circle cx="74" cy="44" r="4.5" className="sun-crater" />
+          <circle cx="44" cy="78" r="3" className="sun-crater" />
+          <circle cx="82" cy="56" r="2.2" className="sun-crater" />
           <ellipse cx="42" cy="66" rx="5.5" ry="3.5" className="sun-cheek" />
           <ellipse cx="78" cy="66" rx="5.5" ry="3.5" className="sun-cheek" />
           <Face mood={mood} />

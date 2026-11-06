@@ -41,6 +41,11 @@ export const THEMES = [
     tagline: 'Bright, bouncy and a little bit silly.',
     hasQuotes: true,
     themeColor: '#FFF6DC',
+    // The night look ("Jolly at night"); its colors live in jolly.css under [data-mode='dark'].
+    dark: {
+      themeColor: '#1A1D33',
+      cursor: { default: arrowCursor('#FFC93C', '#0B0D1C'), pointer: arrowCursor('#FF7A59', '#0B0D1C') },
+    },
     Face: JollyFace,
     Backdrop: JollyBackdrop,
     Celebration: JollyCelebration,

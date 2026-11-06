@@ -465,3 +465,268 @@
   background: var(--task-color);
   font-weight: 700;
 }
+
+/* ===========================================================
+   JOLLY AT NIGHT: a festive, cosy night. Deep navy paper, warm
+   cream text, the same bright stickers with dark outlines, a
+   smiling moon instead of the sun, and twinkling fairy lights.
+   Switched on by data-mode="dark" on <html> (Settings > Night look).
+   Jolly draws outlines and sticker shadows with --ink; at night the
+   text turns cream, so outlines use --outline instead and text that
+   sits on bright stickers uses --sticker-ink.
+   The page-specific pieces are at the end of this section.
+   =========================================================== */
+
+:root[data-theme='jolly'][data-mode='dark'] {
+  color-scheme: dark;
+
+  /* Palette */
+  --bg: #1a1d33;
+  --surface: #272c4c;
+  --surface-2: #30365b;
+  --ink: #fff3dc;
+  --ink-muted: #c9c3d8;
+  --outline: #0b0d1c; /* sticker outlines and hard shadows */
+  --sticker-ink: #1d1428; /* text on bright stickers */
+  --primary: #ff7a59; /* bright tomato: AA with the dark text below */
+  --primary-ink: #1d1428;
+  --line: #4b5282;
+  --focus: #ffc93c;
+  --selection: #4b5282;
+  /* the first series color is a touch brighter so dark text on it passes AA */
+  --series-1: #ff7a59;
+
+  /* Shape: the same chunky stickers, outlined in night ink */
+  --border-card: 3px solid var(--outline);
+  --btn-border: 3px solid var(--outline);
+  --btn-bg: #323862;
+  --input-border: 3px solid var(--outline);
+  --primary-border: var(--outline);
+
+  /* Depth: hard sticker shadows, now in deep night ink */
+  --shadow-card: 5px 6px 0 var(--outline);
+  --shadow-btn: 0 5px 0 var(--outline);
+  --shadow-btn-active: 0 1px 0 var(--outline);
+  --shadow-dialog: 8px 10px 0 var(--outline);
+  --backdrop: rgba(8, 9, 20, 0.6);
+
+  /* Details */
+  --scroll-track: #1a1d33;
+  --scroll-thumb: #ff7a59;
+  --grain-opacity: 0.05;
+}
+
+/* Dotted paper, now faint cream dots */
+:root[data-mode='dark'][data-theme='jolly'] body {
+  background-image: radial-gradient(rgba(255, 243, 220, 0.08) 1.2px, transparent 1.4px);
+}
+
+/* Logo keeps its sunny shadow */
+:root[data-mode='dark'][data-theme='jolly'] .brand__name {
+  color: var(--primary);
+  text-shadow: 2px 2px 0 var(--outline);
+}
+
+/* Mode tabs: stickers on the dark */
+:root[data-mode='dark'][data-theme='jolly'] .mode-tab {
+  border-color: var(--outline);
+  background: var(--surface-2);
+  box-shadow: 0 3px 0 var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .mode-tab[aria-pressed='true'] {
+  background: var(--sunny);
+  color: var(--sticker-ink);
+}
+
+/* Timer face: a navy plate with the candy track dimmed */
+:root[data-mode='dark'] .jolly-face__shadow {
+  fill: var(--outline);
+}
+:root[data-mode='dark'] .jolly-face__plate {
+  fill: #272c4c;
+  stroke: var(--outline);
+}
+:root[data-mode='dark'] .jolly-face__track {
+  stroke: #3d4472;
+}
+:root[data-mode='dark'][data-theme='jolly'] .face__mode {
+  border-color: var(--outline);
+  color: var(--sticker-ink);
+}
+
+/* The sun goes to bed and a smiling moon comes out */
+:root[data-mode='dark'] .jolly-sun__rays {
+  display: none;
+}
+.sun-moon-glow,
+.sun-crater {
+  display: none;
+}
+:root[data-mode='dark'] .sun-moon-glow {
+  display: block;
+  fill: rgba(255, 233, 166, 0.14);
+}
+:root[data-mode='dark'] .sun-crater {
+  display: block;
+  fill: #ead38a;
+}
+:root[data-mode='dark'] .sun-disc {
+  fill: #ffe9a6;
+  stroke: var(--outline);
+}
+:root[data-mode='dark'] .sun-ink {
+  fill: var(--outline);
+}
+:root[data-mode='dark'] .sun-line,
+:root[data-mode='dark'] .sun-mouth {
+  stroke: var(--outline);
+}
+:root[data-mode='dark'] .jolly-sun__z text {
+  fill: var(--ink);
+}
+
+/* Session dots, doodles, dots and confetti: outlined in night ink */
+:root[data-mode='dark'][data-theme='jolly'] .session-dot {
+  border-color: var(--outline);
+  background: var(--surface-2);
+}
+:root[data-mode='dark'][data-theme='jolly'] .session-dot.is-done {
+  background: var(--tomato);
+}
+:root[data-mode='dark'][data-theme='jolly'] .session-dot.is-done:nth-child(2n) {
+  background: var(--sky);
+}
+:root[data-mode='dark'] .jolly-doodle,
+:root[data-mode='dark'] .jolly-dot,
+:root[data-mode='dark'] .confetti {
+  border-color: var(--outline);
+}
+:root[data-mode='dark'] .jolly-doodle--star1,
+:root[data-mode='dark'] .jolly-doodle--star2 {
+  stroke: var(--outline);
+}
+:root[data-mode='dark'] .jolly-blob--sky {
+  color: rgba(79, 179, 246, 0.1);
+}
+:root[data-mode='dark'] .jolly-blob--mint {
+  color: rgba(127, 216, 180, 0.08);
+}
+
+/* Quote card: a sticker on the dark, with its tape */
+:root[data-mode='dark'][data-theme='jolly'] .quote-card {
+  background: var(--surface);
+}
+:root[data-mode='dark'][data-theme='jolly'] .quote-card.is-joke {
+  background: #233a52;
+}
+:root[data-mode='dark'][data-theme='jolly'] .quote-card::before {
+  border-color: var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .quote-card__label {
+  border-color: var(--outline);
+  color: var(--sticker-ink);
+}
+
+/* Tasks */
+:root[data-mode='dark'][data-theme='jolly'] .task {
+  background: var(--surface);
+  border-color: var(--outline);
+  box-shadow: 3px 4px 0 var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .task.is-active {
+  background: #3a3a5c;
+}
+:root[data-mode='dark'][data-theme='jolly'] .task__subject {
+  border-color: var(--outline);
+  color: var(--sticker-ink);
+}
+
+/* ---------- Fairy lights (night only) ---------- */
+.jolly-lights {
+  display: none;
+}
+:root[data-mode='dark'] .jolly-lights {
+  display: block;
+  position: absolute;
+  top: 84px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.jolly-lights__wire {
+  fill: none;
+  stroke: #0b0d1c;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.jolly-lights__cap {
+  fill: #4b5282;
+  stroke: #0b0d1c;
+  stroke-width: 2;
+}
+.jolly-lights__bulb {
+  stroke: #0b0d1c;
+  stroke-width: 2.5;
+  animation: bulb-twinkle 1.8s ease-in-out infinite;
+}
+.jolly-lights__bulb--tomato { fill: #ff7a59; filter: drop-shadow(0 0 8px rgba(255, 122, 89, 0.85)); }
+.jolly-lights__bulb--sunny { fill: #ffc93c; filter: drop-shadow(0 0 8px rgba(255, 201, 60, 0.85)); }
+.jolly-lights__bulb--sky { fill: #6cc2ff; filter: drop-shadow(0 0 8px rgba(108, 194, 255, 0.85)); }
+.jolly-lights__bulb--mint { fill: #7fd8b4; filter: drop-shadow(0 0 8px rgba(127, 216, 180, 0.85)); }
+.jolly-lights__bulb--pink { fill: #ff9eb0; filter: drop-shadow(0 0 8px rgba(255, 158, 176, 0.85)); }
+/* On phones: below the two-row header, and wider than the screen so the
+   bulbs stay a readable size (the ends simply hang off the edges). */
+@media (max-width: 719px) {
+  :root[data-mode='dark'] .jolly-lights {
+    top: 96px;
+    left: -60%;
+    width: 220%;
+    max-width: none; /* the global "svg { max-width: 100% }" would undo the extra width */
+  }
+}
+@keyframes bulb-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* ---------- Other pages ---------- */
+:root[data-mode='dark'][data-theme='jolly'] .site-nav__link[aria-current='page']::after {
+  background: var(--primary);
+  opacity: 0.6;
+}
+/* Mind map: bright sticker bubbles keep dark text */
+:root[data-mode='dark'][data-theme='jolly'] .mm-node {
+  border-color: var(--outline);
+  color: var(--sticker-ink);
+  box-shadow: 3px 4px 0 var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .mm-node.depth-2 {
+  background: var(--surface);
+  color: var(--ink);
+}
+:root[data-mode='dark'][data-theme='jolly'] .mm-node.is-selected {
+  box-shadow: 0 0 0 4px var(--focus), 3px 4px 0 var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .flashcard__face {
+  box-shadow: 6px 7px 0 var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .flashcard__face--back {
+  background: #233a52;
+}
+:root[data-mode='dark'][data-theme='jolly'] .ambient-sound {
+  border-color: var(--outline);
+}
+:root[data-mode='dark'][data-theme='jolly'] .ambient-sound.is-on {
+  background: #3a3a5c;
+}
+/* Stats: the streak sun sticker */
+:root[data-mode='dark'][data-theme='jolly'] .stats-streak {
+  border-color: var(--outline);
+  box-shadow: 5px 6px 0 var(--outline);
+  color: var(--sticker-ink);
+}
+:root[data-mode='dark'][data-theme='jolly'] .subject-row__track {
+  border-color: var(--outline);
+  background: var(--surface-2);
+}

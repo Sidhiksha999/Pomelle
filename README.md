@@ -32,12 +32,11 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Time-blocking**: plan today on a timeline and start any block as a focus session.
   - **Eisenhower matrix**: sort everything into four boxes (drag and drop or menus) and send items to your tasks.
   - Timed steps in guided sessions count toward your stats.
-- **Night look** (*Settings → Night look*: Day, Night or Match my device). So far three themes have one:
+- **Night look** (*Settings → Night look*: Day, Night or Match my device). Every theme except Minimalist (which is already black) has one:
+  - **Jolly**: a festive, cosy night. Deep navy, the same bright stickers with dark outlines, a smiling moon instead of the sun, and twinkling fairy lights.
   - **Cat**: the same cosy room after dark, lit by a warm lamp, with a crescent moon and slow stars.
   - **Aesthetic**: dusk. Dim polaroids on a plum-charcoal wall, and the window shows a moon rising over dark hills.
   - **Makeup**: a glossy evening look. Deep berry-black, champagne text, a smoky mirror in a rose-gold compact, and sparkles that glow.
-
-  Other themes stay as they are until they get theirs.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
 - **A first-run welcome** to pick your theme and focus rhythm, with a short tour. Replay it any time from *Settings → Welcome tour*.
 - Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
@@ -210,7 +209,7 @@ Cat and Aesthetic are the examples to copy (the "CAT AT NIGHT" and "AESTHETIC AT
 
 ## Accessibility
 
-- Every theme's text meets **WCAG AA contrast**. This was checked by measuring every piece of rendered text on every page in all five themes.
+- Every theme's text meets **WCAG AA contrast**. This was checked by measuring every piece of rendered text on every page in all five themes, and again in each of the four night looks.
 - Every button, link and form field has an accessible name, every page has a main heading, and focus is always visible.
 - Everything works from the keyboard. The mind map has an outline view and arrow-key moving, and flashcards use Space and 1/2/3.
 - **Settings → Motion** can reduce animations (or follow your device setting); the theme switch, confetti and card flips then become simple fades.

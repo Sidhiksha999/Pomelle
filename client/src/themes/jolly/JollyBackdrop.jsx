@@ -1,10 +1,36 @@
 // Jolly background doodles: two big soft blobs and a scatter of stars,
 // squiggles and dots. Placed off-balance on purpose so the page never
 // feels perfectly symmetric.
+// At night (Settings → Night look) a string of fairy lights hangs across
+// the top. It is always rendered; jolly.css shows it only at night.
+
+// Bulbs along the drooping wire, as [x, y] points in the 1200×120 drawing.
+const BULBS = [
+  [40, 30], [140, 52], [240, 66], [340, 70], [440, 62], [540, 44],
+  [640, 34], [740, 46], [840, 62], [940, 68], [1040, 58], [1140, 38],
+];
+const BULB_COLORS = ['tomato', 'sunny', 'sky', 'mint', 'pink'];
 
 export default function JollyBackdrop() {
   return (
     <div className="backdrop jolly-backdrop" aria-hidden="true">
+      <svg className="jolly-lights" viewBox="0 0 1200 120">
+        {/* the wire: two lazy dips across the page */}
+        <path className="jolly-lights__wire" d="M0 18C200 90 450 90 600 30S1000 90 1200 20" />
+        {BULBS.map(([x, y], i) => (
+          <g key={i} transform={`translate(${x} ${y})`}>
+            <rect className="jolly-lights__cap" x="-5" y="-4" width="10" height="8" rx="2" />
+            <ellipse
+              className={`jolly-lights__bulb jolly-lights__bulb--${BULB_COLORS[i % BULB_COLORS.length]}`}
+              cx="0"
+              cy="13"
+              rx="8"
+              ry="11"
+              style={{ animationDelay: `${(i % 4) * 0.45}s` }}
+            />
+          </g>
+        ))}
+      </svg>
       <svg className="jolly-blob jolly-blob--sky" viewBox="0 0 200 200">
         <path d="M108 8c40 4 78 34 84 76 6 44-24 92-70 106-46 13-98-8-114-52C-8 94 14 46 46 24 64 12 86 6 108 8z" />
       </svg>
