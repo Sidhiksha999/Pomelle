@@ -5,6 +5,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const themeInitialState = {
   current: 'jolly',
   reducedMotion: 'system', // 'system' follows the OS setting, 'on' or 'off' override it
+  // Night look for themes that have one: 'light', 'dark', or 'system' (follow the device).
+  colorMode: 'light',
   soundOn: true,
   volume: 0.7, // 0 to 1
   notificationsOn: false,
@@ -21,6 +23,9 @@ const themeSlice = createSlice({
     },
     setReducedMotion(state, action) {
       state.reducedMotion = action.payload;
+    },
+    setColorMode(state, action) {
+      state.colorMode = action.payload;
     },
     setSoundOn(state, action) {
       state.soundOn = action.payload;
@@ -55,6 +60,7 @@ const themeSlice = createSlice({
 export const {
   setTheme,
   setReducedMotion,
+  setColorMode,
   setSoundOn,
   setVolume,
   setNotificationsOn,

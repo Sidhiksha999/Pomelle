@@ -235,6 +235,12 @@ export const THEMES = [
     tagline: 'Warm blankets, soft paws and a sleepy study buddy.',
     hasQuotes: true,
     themeColor: '#FBF4EA',
+    // The night look ("Cat at night": a dim room lit by a warm lamp).
+    // Its colors live in cat.css under [data-mode='dark']; these are the bits CSS can't reach.
+    dark: {
+      themeColor: '#1C1714',
+      cursor: { default: pawCursor('#F6B99A'), pointer: pawCursor('#F4B183') },
+    },
     Face: CatFace,
     Backdrop: CatBackdrop,
     Celebration: CatCelebration,

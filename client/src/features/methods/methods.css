@@ -1198,6 +1198,7 @@
   background: #ddd5cd;
 }
 [data-theme='cat'] .difficulty__marks span.is-on { background: var(--primary); }
+:root[data-mode='dark'][data-theme='cat'] .difficulty__marks span:not(.is-on) { background: #54463c; }
 
 [data-theme='aesthetic'] .method-card__link {
   padding: 14px 14px 26px;

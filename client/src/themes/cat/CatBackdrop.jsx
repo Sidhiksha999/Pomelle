@@ -13,6 +13,26 @@ function Paw({ style }) {
   );
 }
 
+// At night (Settings → Night look) a crescent moon and a few slow stars
+// appear too. They are always rendered; cat.css shows them only at night.
+function Star({ style }) {
+  return (
+    <svg className="cat-star" style={style} viewBox="0 0 20 20">
+      {/* a soft four-point twinkle */}
+      <path d="M10 0c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10z" />
+    </svg>
+  );
+}
+
+const STARS = [
+  { left: '12%', top: '14%' },
+  { left: '30%', top: '9%' },
+  { left: '55%', top: '6%' },
+  { left: '88%', top: '22%' },
+  { left: '72%', top: '48%' },
+  { left: '6%', top: '42%' },
+];
+
 // Positions along a lazy S-curve, alternating left and right feet.
 const TRAIL = [
   { left: '4%', top: '78%', r: 40 },
@@ -28,6 +48,22 @@ export default function CatBackdrop() {
     <div className="backdrop cat-backdrop" aria-hidden="true">
       <span className="cat-glow cat-glow--1" />
       <span className="cat-glow cat-glow--2" />
+      <div className="cat-night">
+        <svg className="cat-moon" viewBox="0 0 80 80">
+          <circle className="cat-moon__glow" cx="40" cy="40" r="38" />
+          {/* a crescent: a full circle with a bite taken out by a mask */}
+          <mask id="cat-moon-bite">
+            <rect width="80" height="80" fill="#fff" />
+            <circle cx="52" cy="30" r="20" fill="#000" />
+          </mask>
+          <circle className="cat-moon__body" cx="40" cy="40" r="22" mask="url(#cat-moon-bite)" />
+          <circle className="cat-moon__crater" cx="30" cy="48" r="3" />
+          <circle className="cat-moon__crater" cx="25" cy="38" r="2" />
+        </svg>
+        {STARS.map((p, i) => (
+          <Star key={i} style={p} />
+        ))}
+      </div>
       {TRAIL.map((p, i) => (
         <Paw key={i} style={{ left: p.left, top: p.top, transform: `rotate(${p.r}deg)` }} />
       ))}

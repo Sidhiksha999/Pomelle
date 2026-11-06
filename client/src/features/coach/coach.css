@@ -976,6 +976,18 @@ code {
 [data-theme='cat'] .flashcard__face--back {
   background: #fdf0e6;
 }
+/* Cat at night */
+:root[data-mode='dark'][data-theme='cat'] .mm-node {
+  border-color: #43372f;
+  background: var(--surface);
+}
+:root[data-mode='dark'][data-theme='cat'] .mm-node.depth-0 {
+  background: #33271f;
+  border-color: var(--primary);
+}
+:root[data-mode='dark'][data-theme='cat'] .flashcard__face--back {
+  background: #2f251f;
+}
 
 /* Aesthetic: polaroids with washi tape, pencil links */
 [data-theme='aesthetic'] .mm-node {

@@ -412,6 +412,10 @@
 [data-theme='cat'] .subject-row__track {
   height: 14px;
 }
+/* Cat at night: dark text on the lamp-lit paw */
+:root[data-mode='dark'][data-theme='cat'] .stats-streak {
+  color: var(--primary-ink);
+}
 
 /* Aesthetic: a handwritten number on a little tag */
 [data-theme='aesthetic'] .stats-hero h1 {

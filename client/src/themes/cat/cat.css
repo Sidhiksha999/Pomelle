@@ -20,6 +20,7 @@
   --line: #d8cbbd;
   --focus: #a9532f;
   --selection: #f6b99a;
+  --art-ink: #3b302a; /* outlines of the drawn cat and yarn */
 
   /* Type */
   --font-display: 'Patrick Hand', 'Comic Neue', cursive;
@@ -168,7 +169,7 @@
 }
 .cat-body {
   fill: var(--fur);
-  stroke: var(--ink);
+  stroke: var(--art-ink);
   stroke-width: 2.5;
   stroke-linejoin: round;
 }
@@ -182,11 +183,11 @@
   fill: #f7c6c0;
 }
 .cat-ink {
-  fill: var(--ink);
+  fill: var(--art-ink);
 }
 .cat-line {
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--art-ink);
   stroke-width: 2.6;
   stroke-linecap: round;
 }
@@ -195,7 +196,7 @@
 }
 .cat-whisker {
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--art-ink);
   stroke-width: 1.4;
   stroke-linecap: round;
   opacity: 0.7;
@@ -411,7 +412,7 @@
 }
 .cat-yarn__ball {
   fill: #e7a9a0;
-  stroke: var(--ink);
+  stroke: var(--art-ink);
   stroke-width: 2.5;
 }
 .cat-yarn__line,
@@ -502,4 +503,176 @@
 }
 [data-theme='cat'] .task__pom.is-filled {
   background: var(--primary);
+}
+
+/* ===========================================================
+   CAT AT NIGHT: the same cosy room after dark. Lamp-lit peach
+   on warm brown-black, a crescent moon, a few slow stars.
+   Switched on by data-mode="dark" on <html> (Settings > Night look).
+   Only <html> gets data-mode, so theme previews elsewhere stay in daylight.
+   =========================================================== */
+
+:root[data-theme='cat'][data-mode='dark'] {
+  color-scheme: dark;
+
+  /* Palette */
+  --bg: #1c1714;
+  --surface: #28201b;
+  --surface-2: #221b17;
+  --ink: #f4e7d9;
+  --ink-muted: #c2b1a1;
+  --primary: #f4a77f; /* lamp-lit peach: AA with the dark text below */
+  --primary-ink: #2a1a12;
+  --peach: #f4a77f;
+  --fur: #eaa57f;
+  --fur-stripe: #c97c55;
+  --soft-grey: #7d726a;
+  --line: #4a3d34;
+  --focus: #f6c3a3;
+  --selection: #6b4532;
+  --art-ink: #2e231d; /* the cat stays drawn with dark lines */
+
+  /* Shape */
+  --border-card: 2px solid #43372f;
+  --btn-border: 2px solid #a8907c;
+  --btn-bg: #2c231e;
+  --input-border: 2px solid #54463c;
+
+  /* Depth: shadows sink into the dark */
+  --shadow-card: 0 12px 28px -12px rgba(0, 0, 0, 0.7);
+  --shadow-btn: 0 6px 16px -6px rgba(0, 0, 0, 0.7);
+  --shadow-btn-active: 0 2px 6px -2px rgba(0, 0, 0, 0.7);
+  --shadow-dialog: 0 24px 60px -18px rgba(0, 0, 0, 0.85);
+  --backdrop: rgba(10, 7, 5, 0.62);
+
+  /* Details */
+  --scroll-track: #1c1714;
+  --scroll-thumb: #5e4636;
+  --grain-opacity: 0.06;
+  --series-1: #f2b48f;
+  --series-2: #d9785a;
+  --series-3: #9a8f86;
+  --series-4: #e3b3a5;
+  --series-5: #d9a066;
+  --series-6: #9aa88a;
+}
+
+/* Paw-print wallpaper, now in faint lamplight */
+:root[data-mode='dark'][data-theme='cat'] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23F4A77F' fill-opacity='0.045'%3E%3Cellipse cx='30' cy='34' rx='7' ry='6'/%3E%3Ccircle cx='22' cy='25' r='3'/%3E%3Ccircle cx='27.5' cy='20' r='3'/%3E%3Ccircle cx='33.5' cy='20' r='3'/%3E%3Ccircle cx='38' cy='25' r='3'/%3E%3Cg transform='translate(56 56) rotate(20)'%3E%3Cellipse cx='14' cy='18' rx='7' ry='6'/%3E%3Ccircle cx='6' cy='9' r='3'/%3E%3Ccircle cx='11.5' cy='4' r='3'/%3E%3Ccircle cx='17.5' cy='4' r='3'/%3E%3Ccircle cx='22' cy='9' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Mode tabs */
+:root[data-mode='dark'][data-theme='cat'] .mode-tab {
+  border-color: #43372f;
+}
+:root[data-mode='dark'][data-theme='cat'] .mode-tab[aria-pressed='true'] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
+}
+
+/* Timer face: a dim plate with a soft lamp halo */
+:root[data-mode='dark'] .cat-plate {
+  fill: #261e19;
+  stroke: #3d3129;
+  filter: drop-shadow(0 0 34px rgba(244, 167, 127, 0.12)) drop-shadow(0 16px 26px rgba(0, 0, 0, 0.6));
+}
+:root[data-mode='dark'] .cat-track {
+  stroke: #4a3c33;
+}
+:root[data-mode='dark'] .cat-paw {
+  fill: #463a32;
+}
+:root[data-mode='dark'] .cat-paw.is-done {
+  fill: var(--primary);
+}
+:root[data-mode='dark'] .cat-paw.is-done:nth-of-type(2n) {
+  fill: #d98a63;
+}
+:root[data-mode='dark'][data-theme='cat'] .session-dot,
+:root[data-mode='dark'][data-theme='cat'] .task__pom {
+  background: #54463c;
+}
+:root[data-mode='dark'][data-theme='cat'] .session-dot.is-done,
+:root[data-mode='dark'][data-theme='cat'] .task__pom.is-filled {
+  background: var(--primary);
+}
+
+/* Notes and cushions */
+:root[data-mode='dark'][data-theme='cat'] .quote-card {
+  background: var(--surface);
+}
+:root[data-mode='dark'][data-theme='cat'] .quote-card.is-joke {
+  background: #2f251f;
+}
+:root[data-mode='dark'][data-theme='cat'] .task {
+  background: #261e19;
+  border-color: #43372f;
+}
+:root[data-mode='dark'][data-theme='cat'] .task.is-active {
+  background: #33271f;
+  border-color: var(--primary);
+}
+
+/* Backdrop: the warm glow becomes a lamp, plus a cool hint of moonlight */
+:root[data-mode='dark'] .cat-glow--1 {
+  background: rgba(244, 167, 127, 0.13);
+  filter: blur(40px);
+}
+:root[data-mode='dark'] .cat-glow--2 {
+  background: rgba(150, 160, 205, 0.08);
+  filter: blur(40px);
+}
+:root[data-mode='dark'] .cat-trail-paw {
+  fill: rgba(244, 167, 127, 0.1);
+}
+
+/* Night-only drawings (hidden in daylight) */
+.cat-night {
+  display: none;
+}
+:root[data-mode='dark'] .cat-night {
+  display: block;
+}
+.cat-moon {
+  position: absolute;
+  top: 96px;
+  left: 4%;
+  width: 70px;
+}
+.cat-moon__body {
+  fill: #f6e3c4;
+}
+.cat-moon__crater {
+  fill: #e2c9a4;
+}
+.cat-moon__glow {
+  fill: rgba(246, 227, 196, 0.08);
+}
+.cat-star {
+  position: absolute;
+  width: 14px;
+  fill: #f6e3c4;
+  opacity: 0.5;
+  animation: cat-twinkle 6s ease-in-out infinite;
+}
+.cat-star:nth-of-type(2n) {
+  width: 10px;
+  animation-delay: 2.4s;
+}
+.cat-star:nth-of-type(3n) {
+  animation-delay: 4.1s;
+}
+@keyframes cat-twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.75; }
+}
+@media (max-width: 899px) {
+  .cat-moon {
+    top: auto;
+    bottom: 3%;
+    width: 46px;
+    opacity: 0.8;
+  }
 }

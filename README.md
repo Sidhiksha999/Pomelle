@@ -32,6 +32,7 @@ A Pomodoro study companion with five little worlds to study in: **Jolly**, **Mak
   - **Time-blocking**: plan today on a timeline and start any block as a focus session.
   - **Eisenhower matrix**: sort everything into four boxes (drag and drop or menus) and send items to your tasks.
   - Timed steps in guided sessions count toward your stats.
+- **Night look** (*Settings → Night look*: Day, Night or Match my device). So far **Cat** has one: the same cosy room after dark, lit by a warm lamp, with a crescent moon and slow stars. Other themes stay as they are until they get theirs.
 - **Quotes and jokes** in each theme's voice (except Minimalist), with favorites.
 - **A first-run welcome** to pick your theme and focus rhythm, with a short tour. Replay it any time from *Settings → Welcome tour*.
 - Everything is saved in your browser (`localStorage`), so nothing is lost on refresh.
@@ -191,6 +192,16 @@ Open `client/src/data/music.js`. `YOUTUBE_SUGGESTIONS` and `SPOTIFY_SUGGESTIONS`
 5. If `hasQuotes` is `true`, add an `ocean` section to `client/src/data/quotes.js`.
 
 Pages also have a few theme-specific touches in their own stylesheets (look for `[data-theme='…']` in `features/*/*.css`).
+
+### Give a theme a night look
+
+Cat is the example to copy (the "CAT AT NIGHT" section at the end of `themes/cat/cat.css`).
+
+1. In the theme's CSS, redefine its variables under `:root[data-theme='ocean'][data-mode='dark'] { … }`, and override any fixed light colors it uses (search the theme file and `features/*/*.css` for hex colors in `[data-theme='ocean']` rules).
+2. Add a `dark` entry to the theme in `client/src/themes/index.js` with the browser bar color and cursors for night: `dark: { themeColor: '#…', cursor: { … } }`. This entry is what makes *Settings → Night look* apply to the theme.
+3. Check contrast on every page with the night look on.
+
+`data-mode` is only ever set on `<html>`, so theme previews inside the page (like the welcome tiles) always show the day look.
 
 ## Accessibility
 

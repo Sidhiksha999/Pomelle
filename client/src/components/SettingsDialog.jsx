@@ -4,6 +4,7 @@ import { updateSettings } from '../store/timerSlice';
 import {
   setNotificationsOn,
   setOnboarded,
+  setColorMode,
   setReducedMotion,
   setSoundOn,
   setVolume,
@@ -11,8 +12,12 @@ import {
 import { playChime, unlockAudio } from '../themes/sounds';
 import { requestNotificationPermission, notificationsSupported } from '../features/timer/notify';
 import { useCurrentTheme } from './hooks/useCurrentTheme';
+import { THEMES } from '../themes';
 import Icon from './Icon';
 import './SettingsDialog.css';
+
+// Names of the themes that have a night look, e.g. "Cat".
+const NIGHT_THEMES = THEMES.filter((t) => t.dark).map((t) => t.name).join(', ');
 
 /**
  * A number box that lets you type freely and only saves when you leave the
@@ -212,6 +217,33 @@ export default function SettingsDialog({ open, onClose }) {
               </label>
             ))}
           </div>
+        </fieldset>
+
+        <fieldset className="settings-group">
+          <legend>Night look</legend>
+          <div className="radio-row" role="radiogroup" aria-label="Night look">
+            {[
+              ['light', 'Day'],
+              ['dark', 'Night'],
+              ['system', 'Match my device'],
+            ].map(([value, label]) => (
+              <label key={value} className="radio-pill">
+                <input
+                  type="radio"
+                  name="color-mode"
+                  value={value}
+                  checked={prefs.colorMode === value}
+                  onChange={() => dispatch(setColorMode(value))}
+                />
+                {label}
+              </label>
+            ))}
+          </div>
+          <p className="field__hint">
+            {theme.dark
+              ? `${theme.name} has a night look: a darker, softer version of the same world.`
+              : `${theme.name} stays as it is. Themes with a night look: ${NIGHT_THEMES}.`}
+          </p>
         </fieldset>
 
         <fieldset className="settings-group">
